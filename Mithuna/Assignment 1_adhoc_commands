@@ -1,5 +1,5 @@
 Program 1 – Write a Ansible Adhoc Commands to create a group called “deploy
-
+------------------------------------------------------------------------------
 [root@ip-172-31-15-243 ~]# ansible localhost -m group -a"name=deploy state=present"
 localhost | CHANGED => {
     "changed": true,
@@ -10,3 +10,34 @@ localhost | CHANGED => {
 }
 [root@ip-172-31-15-243 ~]# more /etc/group | grep deploy
 deploy:x:1001:
+
+Program 2 – Write a Ansible Adhoc Commands to create a user called “deploy-user” which is part of group called “deploy” and with /bin/bash shell.
+-------------------------------------------------------------------------------------------
+[root@ip-172-31-15-243 ~]# ansible localhost -m copy -a"dest=/var/www/html src=index.html"
+localhost | CHANGED => {
+    "changed": true,
+    "checksum": "4fcbf6353843a862f468ce80beb514c6d0e58d67",
+    "dest": "/var/www/html/index.html",
+    "gid": 0,
+    "group": "root",
+    "md5sum": "65d0f34d58d751a8abc962f53501b280",
+    "mode": "0644",
+    "owner": "root",
+    "secontext": "system_u:object_r:httpd_sys_content_t:s0",
+    "size": 35,
+    "src": "/root/.ansible/tmp/ansible-tmp-1572865752.37-278764838648208/source",
+    "state": "file",
+    "uid": 0
+
+[root@ip-172-31-15-243 ~]# more /etc/passwd | grep deploy_user
+deploy_user:x:1001:1001::/home/deploy_user:/bin/bash
+
+Program 3 – Write a Ansible Adhoc commands install package named “httpd” in RHEL/centos.
+---------------------------------------------------------------
+ansible localhost -m service -a"name=httpd state=started"
+[root@ip-172-31-15-243 ~]# which httpd
+/sbin/httpd
+
+Program 4 – Write a Ansible Adhoc commands to start and enable the service named “httpd”
+--------------------------------------------------------------------------
+
