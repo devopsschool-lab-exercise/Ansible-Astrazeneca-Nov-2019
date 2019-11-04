@@ -1,1 +1,21 @@
-myfile
+sudo ansible localhost -m group -a"name=deploy state=present"
+
+sudo ansible localhost -m user -a"name=deploy-user shell=/bin/bash group=deploy state=present"
+
+sudo ansible localhost -m yum -a"name=httpd state=present"
+
+sudo ansible localhost -m service -a"name=httpd state=started"
+
+sudo ansible localhost -m file -a"state=touch path=/var/www/html/index.html"
+sudo ansible localhost -m copy -a"dest=/var/www/html/index.html content='<html><body><h1>My First Heading</h1><p>My first paragraph</p></body></html>'"
+
+sudo ansible localhost -m copy -a"dest=/var/www/html/second.html src=/var/www/html/index.html"
+
+sudo ansible localhost -m yum -a"name=wget state=present"
+sudo ansible localhost -m yum -a"name=git state=present"
+
+
+sudo ansible localhost -m git -a"dest=/home/ec2-user/repo_dir repo=https://github.com/scmgalaxy/ansible-role-template"
+
+
+sudo ansible localhost -m file -a"state=touch path=/opt/devopsschool.txt"
