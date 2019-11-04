@@ -1,0 +1,10 @@
+ansible localhost -m git -a "dest=/ansible repo=https://github.com/scmgalaxy/ansible-role-template"
+
+
+localhost | CHANGED => {
+    "after": "d3eefe03c1bb6c9b0e1574347523174a26d015ff",
+    "before": null,
+    "changed": true
+}
+
+
