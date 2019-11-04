@@ -1,0 +1,21 @@
+ ansible localhost -m copy -a "dest=/var/www/html/second.html src=second.html"
+ 
+ 
+ 
+localhost | CHANGED => {
+    "changed": true,
+    "checksum": "36bb0ad90cadc7071da8c485be5a978eb2ea636f",
+    "dest": "/var/www/html/second.html",
+    "gid": 0,
+    "group": "root",
+    "md5sum": "9eea5d710e811de21c48d07e6a61c83a",
+    "mode": "0644",
+    "owner": "root",
+    "secontext": "system_u:object_r:httpd_sys_content_t:s0",
+    "size": 21,
+    "src": "/root/.ansible/tmp/ansible-tmp-1572867929.3-162547614550936/source",
+    "state": "file",
+    "uid": 0
+}
+
+this is a dummy html
