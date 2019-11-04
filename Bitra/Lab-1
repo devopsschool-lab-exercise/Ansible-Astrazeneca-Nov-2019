@@ -1,0 +1,154 @@
+[root@ip-172-31-7-153 ~]# ansible localhost -m group  -a"name=deploy state=present"
+localhost | CHANGED => {
+    "changed": true,
+    "gid": 1001,
+    "name": "deploy",
+    "state": "present",
+    "system": false
+}
+[root@ip-172-31-7-153 ~]# more /etc/group | grep deploy
+deploy:x:1001:
+[root@ip-172-31-7-153 ~]#
+
+
+[root@ip-172-31-7-153 ~]# ansible localhost -m user  -a"name=deploy-user group=deploy password=passwd123"
+ [WARNING]: The input password appears not to have been hashed. The 'password' argument must be encrypted for this module to work properly.
+
+localhost | CHANGED => {
+    "changed": true,
+    "comment": "",
+    "create_home": true,
+    "group": 1001,
+    "home": "/home/deploy-user",
+    "name": "deploy-user",
+    "password": "NOT_LOGGING_PASSWORD",
+    "shell": "/bin/bash",
+    "state": "present",
+    "system": false,
+    "uid": 1001
+}
+[root@ip-172-31-7-153 ~]# more /etc/passwd | grep deploy-user
+deploy-user:x:1001:1001::/home/deploy-user:/bin/bash
+[root@ip-172-31-7
+
+
+[root@ip-172-31-7-153 html]# ansible localhost -m file   -a"path=/var/www/html/index.html state=file"
+localhost | SUCCESS => {
+    "changed": false,
+    "gid": 0,
+    "group": "root",
+    "mode": "0644",
+    "owner": "root",
+    "path": "/var/www/html/index.html",
+    "secontext": "system_u:object_r:httpd_sys_content_t:s0",
+    "size": 9,
+    "state": "file",
+    "uid": 0
+}
+[root@ip-172-31-7-153 html]#
+
+[root@ip-172-31-7-153 html]# ansible localhost -m yum -a"name=wget state=present"
+localhost | SUCCESS => {
+    "ansible_facts": {
+        "pkg_mgr": "yum"
+    },
+    "changed": false,
+    "msg": "",
+    "rc": 0,
+    "results": [
+        "wget-1.14-18.el7_6.1.x86_64 providing wget is already installed"
+    ]
+}
+[root@ip-172-31-7-153 html]#
+
+
+[root@ip-172-31-7-153 html]#  ansible localhost -m yum -a"name=git state=present"
+localhost | CHANGED => {
+    "ansible_facts": {
+        "pkg_mgr": "yum"
+    },
+    "changed": true,
+    "changes": {
+        "installed": [
+            "git"
+        ]
+    },
+    "msg": "",
+    "rc": 0,
+
+
+[root@ip-172-31-7-153 html]# which git
+/bin/git
+[root@ip-172-31-7-153 html]# which wget
+/bin/wget
+[root@ip-172-31-7-153 html]#
+
+
+
+[root@ip-172-31-7-153 ~]# ansible localhost -m get_url -a"dest=/root url=https://github.com/scmgalaxy/ansible-role-template"
+localhost | CHANGED => {
+    "changed": true,
+    "checksum_dest": null,
+    "checksum_src": "f21bed55275b14ae072399e473cec6f4d27b1af2",
+    "dest": "/root/ansible-role-template",
+    "elapsed": 1,
+    "gid": 0,
+    "group": "root",
+    "md5sum": "200ac35531072d20dae6092fbc12a00e",
+    "mode": "0644",
+    "msg": "OK (unknown bytes)",
+    "owner": "root",
+    "secontext": "system_u:object_r:admin_home_t:s0",
+    "size": 77239,
+    "src": "/root/.ansible/tmp/ansible-tmp-1572867403.98-78048849491932/tmpbnUEvy",
+    "state": "file",
+    "status_code": 200,
+    "uid": 0,
+    "url": "https://github.com/scmgalaxy/ansible-role-template"
+}
+
+
+[root@ip-172-31-7-153 ~]# ls -ltr
+total 112
+-rw-------. 1 root root  7080 Mar 23  2018 original-ks.cfg
+-rw-------. 1 root root  7752 Mar 23  2018 anaconda-ks.cfg
+-rw-r--r--. 1 root root 15264 Sep 18 12:56 epel-release-latest-7.noarch.rpm
+-rw-r--r--. 1 root root     9 Nov  4 11:06 index.html
+-rw-r--r--. 1 root root 77239 Nov  4 11:36 ansible-role-template
+[root@ip-172-31-7-153 ~]#
+
+
+9. ansible localhost -m reboot  -a"search_paths=/sbin msg=Reboot initiated by Ansible"
+
+
+[root@ip-172-31-7-153 ~]# ansible localhost -m file   -a"path=/opt/devopsschool.txt  state=touch"
+localhost | CHANGED => {
+    "changed": true,
+    "dest": "/opt/devopsschool.txt",
+    "gid": 0,
+    "group": "root",
+    "mode": "0644",
+    "owner": "root",
+    "secontext": "unconfined_u:object_r:usr_t:s0",
+    "size": 0,
+    "state": "file",
+    "uid": 0
+}
+[root@ip-172-31-7-153 ~]#
+
+
+[root@ip-172-31-7-153 ~]# ls -ltr /opt/devopsschool.txt
+-rw-r--r--. 1 root root 0 Nov  4 11:39 /opt/devopsschool.txt
+[root@ip-172-31-7-153 ~]#
+
+
+
+[root@ip-172-31-7-153 ~]# ansible localhost -m file   -a"path=/opt/devopsschool.txt  state=absent"
+localhost | CHANGED => {
+    "changed": true,
+    "path": "/opt/devopsschool.txt",
+    "state": "absent"
+}
+[root@ip-172-31-7-153 ~]# ls -ltr /opt/devopsschool.txt
+ls: cannot access /opt/devopsschool.txt: No such file or directory
+[root@ip-172-31-7-153 ~]#
