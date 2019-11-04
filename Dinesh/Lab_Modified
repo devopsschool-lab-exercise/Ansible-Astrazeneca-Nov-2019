@@ -210,4 +210,12 @@ ansible localhost -m yum -s"name=git name=wget state=present"
 
 Program 8 – Write a Ansible Adhoc commands to clone git repo. https://github.com/scmgalaxy/ansible-role-template.
 
+ansible localhost -m git -s"dest=/var/clone/ repo=https://github.com/scmgalaxy/ansible-role-template. clone=yes"
+
+Program 9 – Write a Ansible commands to reboot a self machine.
+
+ansible localhost -m reboot -a"reboot_timeout=200"
+
+Program 10 – Write a Ansible commands to touch a file called “devopsschool.txt” in /opt/ and delete after using ansible adhoc command.
+
 
