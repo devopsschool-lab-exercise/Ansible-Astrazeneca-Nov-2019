@@ -7,6 +7,8 @@ www.github.com
 Task 3 - http://bit.ly/2oKNzyD
 Setting up a Team
 
+Please find the below link and share it with participants tomorrow, So that they can register them-self for assessment & training.
+https://tinyurl.com/y3am3w69
 ===================================
 
 What is Ansible?
@@ -135,8 +137,126 @@ Which tool?
             Perforce -  NewRelic, AppDyn
         =========================================
 Conclusion = https://www.devopsschool.com/path/
-      
+===============================================
+What is a Architecture of Ansible?
+=====================================
+Ansible Control Server(ACS)             Ansible Remote Server(ARS)
+    - LINUX                                 ANY
+    - 64 BIT                                ANY
+    - PYTHON                                PYTHON
 
+    LINUX                                LINUX - SSH - 22
+    LINUX                                WINDOWS - WINRM - HTTP - 5986/87 
+
+-------------
+ACS
+    ANSIBLE CMD  ---- Software need to installed.
+        Core Module  --- Each Module would ONE thing
+    Inventory --- List of IP Address
+    Playbook ------> Come from Humen
+-----------------
+
+Roles you are going to play Ansible?
+=======================================
+- Dev - Would write a Playbooks/Roles in Ansible.
+- Ops - Infra mgm/evn mgmt and apply a Playbooks/Roles in servers.
+
+
+How to become JAVA/C++?
+-------------------------
+Install JDK->.JAVA      --> .Class --> JAR --> WAR
+            ----------
+            Main function
+                --VARIABLES
+                --Operators
+                --Conditioing
+                --Looping
+
+How to become a Ansible Dev?
+---------------------------
+Ansible --> .YAML(PLAYBOOk) -> ROLES -->OPS --> APPLY - SERVRS.
+                --VARIABLES
+                --Operators
+                --Conditioing
+                --Looping
+WHY YAML?
+------------------
+DSL -----> 
+======================================
+Demo  - LAB
+--------------------
+15 mins - 30 mins.
+-----------------------
+FLOW
+----------------------
+
+	using ADHOC command 
+		Do one task in ONE MACHINE(localhost)
+		Do one task in ONE REMOTE MACHINE
+		Do one task in MULTIPLE REMOTE MACHINES using Inventory
+		Do one task in MULTIPLE REMOTE MACHINES using group in Inventory
+	using Playbook(Program)
+		Do Multiple tasks(Playbook) in ONE MACHINE(localhost)
+		Do Multiple tasks(Playbook) in ONE REMOTE MACHINE
+		Do Multiple tasks(Playbook) in MULTIPLE REMOTE MACHINE using Inventory
+		Do Multiple tasks(Playbook) in MULTIPLE REMOTE MACHINE using group in Inventory
+		Do Multiple tasks(Playbook) in MULTIPLE REMOTE MACHINE using group of group in Inventory
+		Do Multiple tasks(Playbook) in MULTIPLE REMOTE MACHINE using environment directory Inventory 
+	using Role(Program)
+		Do One Role in in ONE MACHINE(localhost)
+		Do Multiple Roles in ONE REMOTE MACHINE
+		Do Multiple Roles in MULTIPLE REMOTE MACHINE using Inventory
+		Do Multiple Roles in MULTIPLE REMOTE MACHINE using group in Inventory
+		Do Multiple Roles in MULTIPLE REMOTE MACHINE using group of group in Inventory
+		Do Multiple Roles in MULTIPLE REMOTE MACHINE using environment directory Inventory
+
+======================
+
+	using ADHOC command 
+		Do one task in ONE MACHINE(localhost)
+		Do one task in ONE REMOTE MACHINE
+		Do one task in MULTIPLE REMOTE MACHINES using Inventory
+		Do one task in MULTIPLE REMOTE MACHINES using group in Inventory
+
+How to install Ansible?
+-------------------------------------
+https://www.devopsschool.com/blog/how-to-install-ansible-in-centos-7-rhel-7/
+
+13.235.70.45
+
+$ sudo yum install wget -y
+$ wget https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+$ yum install https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+$ sudo rpm -i epel-release-latest-7.noarch.rpm
+$ sudo yum install ansible -y
+
+1 13.127.178.209
+2 13.235.79.150
+3 13.233.76.240
+4 35.154.195.198
+5 13.126.153.247
+6 13.233.49.166
+7 13.233.98.232
+8 52.66.250.199
+9 13.233.155.105
+10 13.233.201.190
+11 13.126.29.82
+12 13.233.81.175
+13 13.232.196.109
+14 13.126.40.10
+15 13.235.69.224
+16 35.154.254.238
+17 13.126.247.32
+18 13.234.67.170
+19 13.233.255.34
+20 13.233.194.31
+
+user Name - ec2-user
+PPK & PEM
+https://www.devopsschool.com/notes/ansible/2019/
+
+ 	rajesh-mumbai.pem	2019-08-28 13:30	1.6K	 
+ 	rajesh-mumbai.ppk	2019-08-28 13:30	1.4K	 
 
 
 
