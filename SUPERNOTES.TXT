@@ -29,12 +29,13 @@ What is Ansible?
             
 
 What is there in SERVER?
-    SOFTWARE
-            package
-            bash
+    SOFTWARE                PROPERTY(Parameters)           (ACTION)state
+            package                             I R U
+            bash            
             ps
-            file
+            file                                C D 
             dir
+            service                             S S E D R
     hyperviosr ----> hardware
                         RAM
                         HDDD
@@ -191,7 +192,7 @@ FLOW
 ----------------------
 
 	using ADHOC command 
-		Do one task in ONE MACHINE(localhost)
+		Do one task in ONE MACHINE(localhost)    DONE
 		Do one task in ONE REMOTE MACHINE
 		Do one task in MULTIPLE REMOTE MACHINES using Inventory
 		Do one task in MULTIPLE REMOTE MACHINES using group in Inventory
@@ -212,11 +213,6 @@ FLOW
 
 ======================
 
-	using ADHOC command 
-		Do one task in ONE MACHINE(localhost)
-		Do one task in ONE REMOTE MACHINE
-		Do one task in MULTIPLE REMOTE MACHINES using Inventory
-		Do one task in MULTIPLE REMOTE MACHINES using group in Inventory
 
 How to install Ansible?
 -------------------------------------
@@ -262,9 +258,50 @@ https://www.devopsschool.com/notes/ansible/2019/
 
 
 
+Project - Setup a webserver using Ansible.
+
+Psucode - 
+1. Install httpd servers    - yum
+2. Copy or create a file (index.html) into webserver /var/www/html with a content " Welcome to Ansibe class" Copy
+3. start a webserver - service
 
 
+What is Module?
+-----------------------
+Perforce ONE task.
+            Such as
+                    Copy
+                    delete
+                    run
+                    start
+                    stop
+                    install
+                    unish
 
+Ansible has more than 2000+ mdoules
+
+"Ansible Module for 
+
+=======================
+	using ADHOC command 
+		Do one task in ONE MACHINE(localhost)
+		Do one task in ONE REMOTE MACHINE
+		Do one task in MULTIPLE REMOTE MACHINES using Inventory
+		Do one task in MULTIPLE REMOTE MACHINES using group in Inventory
+
+ansible -m yum
+
+ -m MODULE_NAME, --module-name=MODULE_NAME
+                        module name to execute (default=command)
+
+  -a MODULE_ARGS, --args=MODULE_ARGS
+                        module arguments
+
+ansible localhost -m yum -a"name=httpd state=present"
+ansible localhost -m copy -a"dest=/var/www/html src=index.html"
+ansible localhost -m service -a"name=httpd state=started"
+
+Lab1 - https://www.devopsschool.com/blog/ansible-adhoc-commands-lab-excercise-part-1/
 
 
 
