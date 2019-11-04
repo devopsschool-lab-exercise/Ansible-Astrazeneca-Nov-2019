@@ -17,6 +17,12 @@ Write a Ansible commands to create a file called “index.html” in /var/www/ht
   
 Write a Ansible commands to copy a file called “second.html” in /var/www/html/second.html with some dummy html contents.
   ansible localhost -m copy -a"dest=/var/www/html/index.html content='This is my second hand"
+
+Write a Ansible commands to install a package called “git”, “wget”.
+  ansible localhost -m yum -a"name=git,wget state=present"
+
+Write a Ansible Adhoc commands to clone git repo. https://github.com/scmgalaxy/ansible-role-template.
+   sudo ansible localhost -m git -a"repo=https://github.com/scmgalaxy/ansible-role-template dest=/home/ec2-user/repo_file"
   
 
 
