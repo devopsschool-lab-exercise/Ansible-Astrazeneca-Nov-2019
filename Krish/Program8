@@ -1,10 +1,11 @@
-ansible localhost -m git -a "dest=/ansible repo=https://github.com/scmgalaxy/ansible-role-template"
-
+ ansible localhost -m git -a "dest=/home/ec2-user/ansiblegit repo=https://github.com/scmgalaxy/ansible-role-template"
 
 localhost | CHANGED => {
     "after": "d3eefe03c1bb6c9b0e1574347523174a26d015ff",
     "before": null,
     "changed": true
 }
-
-
+[root@ip-172-31-2-161 ansiblegit]#
+[root@ip-172-31-2-161 ansiblegit]# ls
+bennojoy.mysql  inventory  node.pem  rajesh.role1  README.md  site.retry  site.yaml
+[root@ip-172-31-2-161 ansiblegit]#
