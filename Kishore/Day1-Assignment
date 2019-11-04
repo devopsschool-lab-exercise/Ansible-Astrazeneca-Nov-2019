@@ -88,3 +88,11 @@ ansible localhost -m copy -a"content='Hello World 2' dest=/var/www/html/second.h
 
 http://13.233.194.31/second.html
 
+
+Program 7 – Write a Ansible commands to install a package called “git”, “wget”.
+
+ansible localhost -m yum -a"name=wget state=present"
+
+ansible localhost -m yum -a"name=git state=present"
+
+
