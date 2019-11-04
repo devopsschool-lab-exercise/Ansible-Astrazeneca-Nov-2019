@@ -1,0 +1,1 @@
+ ansible localhots -m file -a "dest=/home/ec2-user/test/dummy state=touch,absent"
