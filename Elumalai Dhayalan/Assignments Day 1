@@ -6,5 +6,6 @@ sudo ansible localhost -m service -a"name=httpd state=started"
 sudo ansible localhost -m yum -a"name=git"
 sudo ansible localhost -m yum -a"name=wget"
 sudo ansible localhost -m git -a "repo=https://github.com/ansible/ansible-examples.git dest=/home/ec2-user/git clone=yes"
+sudo ansible localhost -m file -a "path=/opt/touch.txt state=touch"
 sudo ansible localhost -m file -a "name=devopsschool.txt state=absent"
 sudo ansible localhost -m reboot
