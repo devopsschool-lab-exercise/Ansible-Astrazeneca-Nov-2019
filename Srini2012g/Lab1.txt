@@ -1,0 +1,60 @@
+ansible localhost -m user -a"user=wls"
+ansible localhost -m group -a"name=wls"
+
+more /etc/passwd | grep wls
+
+ansible localhost -m yum -a"name=git state=present"
+
+[root@ip-172-31-14-30 Ansible]# cd ..
+[root@ip-172-31-14-30 ec2-user]# ansible localhost -m git -a"repo=https://github.com/devopsschool-lab-exercise/Ansible-Astrazeneca-Nov-2019 clone=yes dest=/home/ec2-user/Ansible"
+localhost | CHANGED => {
+    "after": "4d6621e1a85587c80956ed18d991c7376fd27f34",
+    "before": null,
+    "changed": true
+}
+[root@ip-172-31-14-30 ec2-user]# cd Ansible/
+[root@ip-172-31-14-30 Ansible]# pwd
+/home/ec2-user/Ansible
+[root@ip-172-31-14-30 Ansible]# ls -ltr
+total 16
+drwxr-xr-x. 2 root root   22 Nov  4 11:56 Bitra
+drwxr-xr-x. 2 root root   30 Nov  4 11:56 Aravindakshan
+drwxr-xr-x. 2 root root   47 Nov  4 11:56 Kishore
+drwxr-xr-x. 2 root root   36 Nov  4 11:56 Kanna
+drwxr-xr-x. 2 root root   23 Nov  4 11:56 Kamesh
+drwxr-xr-x. 2 root root   27 Nov  4 11:56 Ganesan
+drwxr-xr-x. 2 root root   18 Nov  4 11:56 Elumalai Dhayalan
+-rw-r--r--. 1 root root 8796 Nov  4 11:56 SUPERNOTES.TXT
+drwxr-xr-x. 2 root root   26 Nov  4 11:56 Srini2012g
+drwxr-xr-x. 2 root root   21 Nov  4 11:56 Sravan
+-rw-r--r--. 1 root root    1 Nov  4 11:56 SARAVANAN TS
+drwxr-xr-x. 2 root root   27 Nov  4 11:56 Saravanan T
+drwxr-xr-x. 2 root root   42 Nov  4 11:56 Sakthi
+drwxr-xr-x. 2 root root   25 Nov  4 11:56 RajeshKumar
+drwxr-xr-x. 2 root root   18 Nov  4 11:56 Raja
+drwxr-xr-x. 2 root root   61 Nov  4 11:56 Mithuna
+drwxr-xr-x. 2 root root  152 Nov  4 11:56 Krish
+drwxr-xr-x. 2 root root   27 Nov  4 11:56 Vimalv
+drwxr-xr-x. 2 root root   18 Nov  4 11:56 Vignesh
+drwxr-xr-x. 2 root root   24 Nov  4 11:56 nags
+drwxr-xr-x. 2 root root   25 Nov  4 11:56 ganapathe
+drwxr-xr-x. 2 root root   19 Nov  4 11:56 bala
+[root@ip-172-31-14-30 Ansible]# cd Srini2012g
+[root@ip-172-31-14-30 Srini2012g]# ls -ltr
+total 4
+-rw-r--r--. 1 root root 3 Nov  4 11:56 mynotest.txt
+[root@ip-172-31-14-30 Srini2012g]#
+
+
+
+Program 9 – Write a Ansible commands to reboot a self machine.
+reboot_timeout
+ansible localhost -m service -a"name=reboot_timeout"
+
+
+Program 10 – Write a Ansible commands to touch a file called “devopsschool.txt” in /opt/ and delete after using ansible adhoc command.
+[root@ip-172-31-14-30 Srini2012g]# ls -ltr
+total 8
+-rw-r--r--. 1 root root  3 Nov  4 11:56 mynotest.txt
+-rw-r--r--. 1 root root 30 Nov  4 12:02 test.txt
+[root@ip-172-31-14-30 Srini2012g]#
