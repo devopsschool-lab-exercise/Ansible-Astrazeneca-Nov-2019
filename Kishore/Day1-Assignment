@@ -1,1 +1,21 @@
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Program 1 – Write a Ansible Adhoc Commands to create a group called “deploy"
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
+[ec2-user@ip-172-31-11-15 ~]$ sudo ansible localhost -m group -a"state=present name=deploy"
+localhost | CHANGED => {
+    "changed": true,
+    "gid": 1001,
+    "name": "deploy",
+    "state": "present",
+    "system": false
+}
+
+[ec2-user@ip-172-31-11-15 ~]$ sudo ansible localhost -m group -a"state=present name=deploy"
+localhost | SUCCESS => {
+    "changed": false,
+    "gid": 1001,
+    "name": "deploy",
+    "state": "present",
+    "system": false
+}
