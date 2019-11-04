@@ -194,3 +194,20 @@ localhost | CHANGED => {
         "WatchdogUSec": "0"
     }
 }
+
+
+Program 5 – Write a Ansible commands to create a file called “index.html” in /var/www/html with some dummy html contents.
+
+ansible localhoat -m file -a"path=/var/www/html name=index.html state=touch"
+
+Program 6 – Write a Ansible commands to copy a file called “second.html” in /var/www/html/second.html with some dummy html contents.
+
+ansible localhost -m file -a"src /var/www/html/second.html dest=/etc/second.html"
+
+Program 7 – Write a Ansible commands to install a package called “git”, “wget”.
+
+ansible localhost -m yum -s"name=git name=wget state=present"
+
+Program 8 – Write a Ansible Adhoc commands to clone git repo. https://github.com/scmgalaxy/ansible-role-template.
+
+
