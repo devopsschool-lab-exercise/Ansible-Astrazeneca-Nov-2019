@@ -1,0 +1,12 @@
+Program 1 – Write a Ansible Adhoc Commands to create a group called “deploy
+
+[root@ip-172-31-15-243 ~]# ansible localhost -m group -a"name=deploy state=present"
+localhost | CHANGED => {
+    "changed": true,
+    "gid": 1001,
+    "name": "deploy",
+    "state": "present",
+    "system": false
+}
+[root@ip-172-31-15-243 ~]# more /etc/group | grep deploy
+deploy:x:1001:
