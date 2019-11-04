@@ -252,8 +252,10 @@ localhost | SUCCESS => {
 [root@ip-172-31-15-243 ~]# which wget
 /bin/wget
 
-Program 8 – Write a Ansible Adhoc commands to clone git repo. https://github.com/scmgalaxy/ansible-role-templa
+Program 8 – Write a Ansible Adhoc commands to clone git repo. https://github.com/scmgalaxy/ansible-role-template
 -------------------------------------------------------------------------
+sudo ansible localhost -m git -a"dest=/home/ec2-user/repo_clone repo=https://github.com/scmgalaxy/ansible-role-template"
+
 
 
 
