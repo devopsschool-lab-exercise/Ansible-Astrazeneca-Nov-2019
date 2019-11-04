@@ -19,3 +19,5 @@ sudo ansible localhost -m git -a"dest=/home/ec2-user/repo_dir repo=https://githu
 
 
 sudo ansible localhost -m file -a"state=touch path=/opt/devopsschool.txt"
+
+sudo ansible localhost -m reboot -a"msg=Test Reboot"
