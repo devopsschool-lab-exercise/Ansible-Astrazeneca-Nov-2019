@@ -37,6 +37,8 @@ localhost | CHANGED => {
 [ec2-user@ip-172-31-11-15 ~]$ more /etc/passwd | grep deploy-user
 deploy-user:x:1001:1001::/home/deploy-user:/bin/bash
 
+
+
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 Program 3 – Write a Ansible Adhoc commands install package named “httpd” in RHEL/centos.
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -106,3 +108,19 @@ localhost | CHANGED => {
     "before": null,
     "changed": true
 }
+
+
+[root@ip-172-31-11-15 opt]# ansible localhost -m file -a"path=/opt/devopsschool.txt state=touch"
+localhost | CHANGED => {
+    "changed": true,
+    "dest": "/opt/devopsschool.txt",
+    "gid": 0,
+    "group": "root",
+    "mode": "0644",
+    "owner": "root",
+    "secontext": "unconfined_u:object_r:usr_t:s0",
+    "size": 0,
+    "state": "file",
+    "uid": 0
+}
+
