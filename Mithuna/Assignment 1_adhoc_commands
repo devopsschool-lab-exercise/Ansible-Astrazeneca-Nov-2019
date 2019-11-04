@@ -230,8 +230,30 @@ localhost | CHANGED => {
     "src": "/root/.ansible/tmp/ansible-tmp-1572869422.75-258189143984211/source",
     "state": "file",
     "uid": 0
+    
+    
+7 -  Write a Ansible commands to install a package called “git”, “wget”.
+ ----------------------------------------------------------------
+ ansible localhost -m yum -a"name=git state=present"
+[root@ip-172-31-15-243 ~]# which git
+/bin/git
+[root@ip-172-31-15-243 ~]# ansible localhost -m yum -a"name=wget state=present"
+localhost | SUCCESS => {
+    "ansible_facts": {
+        "pkg_mgr": "yum"
+    },
+    "changed": false,
+    "msg": "",
+    "rc": 0,
+    "results": [
+        "wget-1.14-18.el7_6.1.x86_64 providing wget is already installed"
+    ]
+}
+[root@ip-172-31-15-243 ~]# which wget
+/bin/wget
 
-
+Program 8 – Write a Ansible Adhoc commands to clone git repo. https://github.com/scmgalaxy/ansible-role-templa
+-------------------------------------------------------------------------
 
 
 
