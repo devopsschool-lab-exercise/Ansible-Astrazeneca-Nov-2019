@@ -1,0 +1,10 @@
+1.	ansible localhost -m group -a "name=deploy state=present"
+2.	ansible localhost -m user -a"name=deploy-user shell=/bin/bash group=deploy"
+3.	ansible localhost -m yum -a"name=httpd state=present"
+4.	ansible localhost -m service -a"name=httpd state=started"
+5.	ansible localhost -m blockinfile -a"name=index1.html path=/var/www/html state=present”
+6.	1
+7.	ansible localhost -m yum -a"name=git,wget state=present"
+8.	l
+9.	ansible localhost -m reboot -a"reboot_timeout=300"
+10.	1
