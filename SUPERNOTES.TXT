@@ -1,1 +1,164 @@
-Welcome to Ansible Class
+Task 1 - Pre Test
+https://www.devopsschool.com/lms
+
+Task 2  - Get a GIT Hub Account
+www.github.com
+
+Task 3 - http://bit.ly/2oKNzyD
+Setting up a Team
+
+===================================
+
+What is Ansible?
+    - its devops tool.
+        - Reduce Release cycle.
+        - Reducing a cost
+        - Quality Redefined.
+    - is Config mgmt tool.
+            -- SERVER(S)
+    - Release 
+            Open Source - Ansible - CMD tool
+                            GUI - AWX by Community
+            Paid - Ansible Tower - CMD tool + GUI
+
+    - By  - Redhat
+    - Written in? Python
+    - AGENTLESS (Cond Apply)
+            
+
+What is there in SERVER?
+    SOFTWARE
+            package
+            bash
+            ps
+            file
+            dir
+    hyperviosr ----> hardware
+                        RAM
+                        HDDD
+                        CPU
+    PEOPLE
+            users
+            group
+    PROCESS
+            policy
+            permission
+ 
+
+
+What is DevOps - 
+https://www.youtube.com/watch?v=-VaVmb_UOC8
+
+Why we need it?
+=====================
+- Parrel Dep
+- Easy to LEARN - WRITE - DEBUG - TEST - SHARE - EXTEND
+- Cross Platform
+- Idempotent
+    1 Dep - 10 Steps --- Each Step 1 min ---> 10 mins
+    2 Dep - 3 Steps --- 3 mins 
+
+
+Where it stands in SDLC?
+=====================
+Prod - AstraX
+Mgmt - Mgrx
+-------------------------
+    Dev AstraX
+        - Reduce Release cycle.
+                --- EVERY COMMIT MUST BE ELIGIBLE TO PROD
+        - Reducing a cost
+                --- 10 FEA - 1 MONTH - 10 PEOPLE
+                --- 20 FEA - 1 MONTH - 10 PEOPLE
+                    ==== AVOID A WASTE
+        - Quality Redefined
+Hiring - -
+Plan - Artchitect  - Jira - Confluence
+Code - 10 - DEV - 10 MS
+        Code Integ -> github
+        Code Review
+            PEER Code Review    - Gerrit 
+            Static Code Review - SonarQube
+            UT - Junit - NUNIT
+        Build - Maven
+        Package 
+                SYSTEM -- 
+                APP - 
+        Repo mgt = Artifactory - NEXUS - ARCHIVA
+        -------------------------------------------
+        Dep 2 DEV
+        Dep 2 QA
+        Dep 2 PRE PROD
+        Dep 2 PROD
+        -----------------------------
+        Dep 2 QA
+        ------------------------------
+        AstraX5.50 ---> 100 BOX
+        -------------------------------
+        25 RHEL 25 UB 25 WIN200 25 WIN 2016
+        50 APCHE 50 NGIX
+        25 JBS 25 TOM 25 WL 25 IIS
+        25 MYSQL 25 MS 25 OR 25 ps
+        100 DIFF
+        -----------------------------
+        1 DEP - TAKES 9 mins.
+        100 Dep - 9 mins?
+            --------------------
+            HOW?
+            Parrell Dep....
+Which tool?
+        SCCM -> SALT --> Cfengin --> Chef -> Puppet -> Ansible
+        ===================
+        10 mins ---
+        9 mins dep + 
+        1 min - 
+                PUBLIC - AWS, GC, AZure
+                PVT - OpenStake, VMSph
+        ----------------------------------
+        1 SECOND -
+                Container - Docker - Kubernet
+
+        AT
+
+        Code Coverage/TEST Cover - 
+
+        WHEN ONE IS FAILED - REPEAT - CI(Continous Intg)
+        WHEN ALL IS PASSED  - RELEASE (Contnous Delivery)
+        ====================================================
+
+        POST PROD
+        ===================
+        Dep 2 Prod  - Ansible 
+        Monitor - 
+            INFRA - Nagios 
+            LOG - Splunk - Elastic
+            Perforce -  NewRelic, AppDyn
+        =========================================
+Conclusion = https://www.devopsschool.com/path/
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
