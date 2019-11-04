@@ -23,7 +23,7 @@ ansible localhost -m package -a "name=wget,git state=present"
 ansible localhost -m git -a "repo=https://github.com/scmgalaxy/ansible-role-template clone=yes dest=/etc/ansible/html"
 
 9.
-ansible localhost -m reboot
+ansible 13.232.196.109 -m reboot
 
 10.
 ansible localhost -m file -a "path=/opt/devopsschool.txt state=touch" 
