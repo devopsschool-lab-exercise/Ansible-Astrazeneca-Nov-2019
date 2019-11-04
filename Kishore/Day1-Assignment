@@ -19,3 +19,40 @@ localhost | SUCCESS => {
     "state": "present",
     "system": false
 }
+
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Program 2 – Write a Ansible Adhoc Commands to create a user called “deploy-user” which is part of group called “deploy” 
+and with /bin/bash shell.
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+[ec2-user@ip-172-31-11-15 ~]$ sudo ansible localhost -m user -a"name=deploy-user group=deploy shell=/bin/bash"
+localhost | CHANGED => {
+    "changed": true,
+    "comment": "",
+    "create_home": true,
+    "group": 1001,
+    "home": "/home/deploy-user",
+    "name": "deploy-user",
+    "shell": "/bin/bash",
+    "state": "present",
+    "system": false,
+    "uid": 1001
+}
+
+[ec2-user@ip-172-31-11-15 ~]$ sudo ansible localhost -m user -a"name=deploy-user group=deploy shell=/bin/bash"
+localhost | SUCCESS => {
+    "append": false,
+    "changed": false,
+    "comment": "",
+    "group": 1001,
+    "home": "/home/deploy-user",
+    "move_home": false,
+    "name": "deploy-user",
+    "shell": "/bin/bash",
+    "state": "present",
+    "uid": 1001
+}
+
+[ec2-user@ip-172-31-11-15 ~]$ more /etc/passwd | grep deploy-user
+deploy-user:x:1001:1001::/home/deploy-user:/bin/bash
