@@ -96,3 +96,13 @@ ansible localhost -m yum -a"name=wget state=present"
 ansible localhost -m yum -a"name=git state=present"
 
 
+
+Program 8 – Write a Ansible Adhoc commands to clone git repo. https://github.com/scmgalaxy/ansible-role-template.
+
+[root@ip-172-31-11-15 ~]# ansible localhost -m git -a"clone=yes repo='https://github.com/scmgalaxy/ansible-role-template' dest=/var/kishore"
+
+localhost | CHANGED => {
+    "after": "d3eefe03c1bb6c9b0e1574347523174a26d015ff",
+    "before": null,
+    "changed": true
+}
