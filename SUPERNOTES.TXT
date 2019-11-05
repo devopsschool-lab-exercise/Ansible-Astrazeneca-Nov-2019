@@ -199,8 +199,9 @@ FLOW
 	using ADHOC command 
 		Do one task in ONE MACHINE(localhost)    DONE
 		Do one task in ONE REMOTE MACHINE               DONE         
-		Do one task in MULTIPLE REMOTE MACHINES using Inventory
-		Do one task in MULTIPLE REMOTE MACHINES using group in Inventory
+		Do one task in MULTIPLE REMOTE MACHINES using Inventory DONE
+		Do one task in MULTIPLE REMOTE MACHINES using group in Inventory DONE
+
 	using Playbook(Program)
 		Do Multiple tasks(Playbook) in ONE MACHINE(localhost)
 		Do Multiple tasks(Playbook) in ONE REMOTE MACHINE
@@ -558,4 +559,29 @@ web3 ansible_host=13.233.144.212 ansible_user=user2
 13.233.120.202
 
 ansible mine -i inventory -m copy -a"dest=/var/www/html src=index.html" 
+
+
+ansible localhost -m yum -a"name=httpd state=present"
+ansible localhost -m copy -a"dest=/var/www/html src=index.html"
+ansible localhost -m service -a"name=httpd state=started"
+
+---
+- name: This sets up an httpd webserver
+  hosts: mine
+  tasks:
+  - name: Install the httpd apps
+    yum: name=httpd
+  - name: start the httpd service
+    service: name=httpd state=started
+  - name: create a empty fle
+    file: dest=/opt/test.txt state=touch
+  - name: copy a file
+    copy: dest=/var/www/html/ src="/root/index.html"
+
+...
+
+ansible-playbook -i inventory web.yaml
+
+task 1 - Convert each adhoc command to PLAYBOOk
+task 2 - https://www.devopsschool.com/blog/ansible-playbook-lab-excercise-part-3/
 
