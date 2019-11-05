@@ -1,0 +1,15 @@
+---
+- name: playbook1
+  hosts: ACS
+  remote_user: deploy
+  become: true
+  tasks:
+  - name: create empty directory
+    file:
+      dest: /var/www/html
+      state: directory
+  - name: create empty file
+    file:
+      dest: /var/www/html/index.html
+      state: touch
+...
