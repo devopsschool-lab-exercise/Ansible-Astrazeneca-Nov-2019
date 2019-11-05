@@ -7,6 +7,39 @@ ansible localhost -m copy -a"dest=/var/www/html/ src=second.html"
 ansible localhost -m yum -a "name=wget,git state=present"
 ansible localhost -m git -a "repo=https://github.com/scmgalaxy/ansible-role-template clone=yes dest=/sakthi"
 ansible localhost -m file -a "path=/var/www/html/second.html state=absent"
+ansible localhost -m reboot
+
+Lab2:
+
+Task1:
+
+ansible all -i 15.206.90.82, -m group -a "name=deploy state=present" --key-file=rajesh-mumbai.pem -u ec2-user -b
+ansible all -i 15.206.90.82, -m user -a "name=deploy-user group=deploy shell=/bin/bash state=present" --key-file=rajesh-mumbai.pem -u ec2-user -b
+ansible all -i 15.206.90.82, -m yum -a"name=httpd state=present" --key-file=rajesh-mumbai.pem -u ec2-user -b
+ansible all -i 15.206.90.82, -m copy -a "dest=/var/www/html src=index.html" --key-file=rajesh-mumbai.pem -u ec2-user -b
+ansible all -i 15.206.90.82, -m service -a "name=httpd state=started enabled=yes" --key-file=rajesh-mumbai.pem -u ec2-user -b
+ansible all -i 15.206.90.82, -m copy -a "dest=/var/www/html src=second.html" --key-file=rajesh-mumbai.pem -u ec2-user -b
+ansible all -i 15.206.90.82, -m yum -a "name=wget,git state=present" --key-file=rajesh-mumbai.pem -u ec2-user -b
+ansible all -i 15.206.90.82, -m git -a "repo=https://github.com/scmgalaxy/ansible-role-template clone=yes dest=/sakthi" --key-file=rajesh-mumbai.pem -u ec2-user -b
+ansible all -i 15.206.90.82, -m file -a "path=/var/www/html/second.html state=absent" --key-file=rajesh-mumbai.pem -u ec2-user -b
+ansible all -i 15.206.90.82, -m reboot --key-file=rajesh-mumbai.pem -u ec2-user -b
+
+Task2:
+
+ansible all -i 15.206.90.82, -b -m lineinfile -a 'dest=/etc/sudoers line="deploy-user        ALL=(ALL)       NOPASSWD: ALL"' --key-file=rajesh-mumbai.pem -u ec2-user -b
+
+Task3:
+
+ansible all -i 15.206.90.82, -m group -a "name=unixadm state=present" -u deploy-user -k -b
+ansible all -i 15.206.90.82, -m user -a "name=krwg074 group=unixadm shell=/bin/bash state=present" -u deploy-user -k -b
+ansible all -i 15.206.90.82, -m yum -a"name=telnet state=present" -u deploy-user -k -b
+ansible all -i 15.206.90.82, -m service -a "name=httpd state=stopped enabled=yes" -u deploy-user -k -b
+ansible all -i 15.206.90.82, -m service -a "name=httpd state=started enabled=yes" -u deploy-user -k -
+ansible all -i 15.206.90.82, -m copy -a "dest=/var/www/html src=second.html"  -u deploy-user -k -b
+ansible all -i 15.206.90.82, -m yum -a "name=wget,git state=absent" -u deploy-user -k -b
+ansible all -i 15.206.90.82, -m yum -a "name=wget,git state=present" -u deploy-user -k -b
+ansible all -i 15.206.90.82, -m git -a "repo=https://github.com/scmgalaxy/ansible-role-template clone=yes dest=/test" -u deploy-user -k -b
+ansible all -i 15.206.90.82, -m file -a "path=/var/www/html/second.html state=absent" -u deploy-user -k -b
 
 
 
