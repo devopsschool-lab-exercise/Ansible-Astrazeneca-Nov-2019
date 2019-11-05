@@ -218,4 +218,4 @@ ansible localhost -m reboot -a"reboot_timeout=200"
 
 Program 10 – Write a Ansible commands to touch a file called “devopsschool.txt” in /opt/ and delete after using ansible adhoc command.
 
-
+ansible localhost -m file -a"touch=devopsschool.txt state=touch state=absent"
