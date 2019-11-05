@@ -1,1 +1,3 @@
 ansible localhost -m user -a"name=deploy-user group=deploy shell=/bin/bash state=present"
+
+ansible all -i 52.66.239.26,  -b --private-key=rajesh-mumbai.pem -u ec2-user -m user -a"name=deploy-user group=deploy shell=/bin/bash state=present"
