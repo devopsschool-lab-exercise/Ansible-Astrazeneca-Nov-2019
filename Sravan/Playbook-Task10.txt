@@ -1,0 +1,6 @@
+- name: Task 10
+  hosts: myars
+  tasks:
+  - name: Reboot the machine
+    reboot:
+        msg: Rebooting the machine

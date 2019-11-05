@@ -1,0 +1,13 @@
+- name: Task 8
+  hosts: myars
+  tasks:
+  - name: Clone a Git repo to a local dir
+    file:
+        path: /var/git/ansible
+        state: directory
+
+  - name: Cloning repo to the above directory    
+    git:
+        clone: yes
+        repo: https://github.com/scmgalaxy/ansible-role-template
+        dest: /var/git/ansible

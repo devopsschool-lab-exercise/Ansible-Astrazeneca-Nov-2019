@@ -1,0 +1,12 @@
+- name: Task 9
+  hosts: myars
+  tasks:
+  - name: Touch a file using ansible
+    file:
+        path: /opt/devopsschool.txt
+        state: touch
+
+  - name: Remove a file using ansible
+    file:
+        path: /opt/devopsschool.txt
+        state: absent

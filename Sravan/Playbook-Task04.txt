@@ -1,0 +1,8 @@
+- name: Task 4
+  hosts: myars
+  tasks:
+  - name: Start and Enable the httpd services
+    service:
+        name: httpd
+        state: started
+        enabled: yes

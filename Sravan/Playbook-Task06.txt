@@ -1,0 +1,7 @@
+- name: Task 6
+  hosts: myars
+  tasks:
+  - name: Copy second.html to /var/www/html/ with dummy html contents
+    copy:
+        dest: /var/www/html/
+        src: second.html

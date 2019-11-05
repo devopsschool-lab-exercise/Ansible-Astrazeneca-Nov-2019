@@ -1,0 +1,9 @@
+- name: Task 2
+  hosts: myars
+  tasks:
+  - name: Create a user deploy-user with group deploy and bash shell
+    user:
+        name: deploy-user
+        state: present
+        shell: /bin/bash
+        group: deploy

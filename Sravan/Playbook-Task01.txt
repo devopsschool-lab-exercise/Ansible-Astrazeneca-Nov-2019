@@ -1,0 +1,7 @@
+- name: Task 1
+  hosts: myars
+  tasks:
+  - name: Create a group deploy
+    group:
+        name: deploy
+        state: present
