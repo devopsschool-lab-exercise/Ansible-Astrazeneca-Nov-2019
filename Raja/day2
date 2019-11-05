@@ -1,0 +1,22 @@
+sudo ansible all -i 35.154.177.238, -m group -a"name=deploy state=present" --key-file=rajesh-mumbai.pem -u ec2-user -b
+
+sudo ansible all -i 35.154.177.238, -m user -a"name=deploy-user shell=/bin/bash group=deploy state=present" --key-file=rajesh-mumbai.pem -u ec2-user -b
+
+sudo ansible all -i 35.154.177.238, -m yum -a"name=httpd state=present" --key-file=rajesh-mumbai.pem -u ec2-user -b
+
+sudo ansible all -i 35.154.177.238, -m service -a"name=httpd state=started" --key-file=rajesh-mumbai.pem -u ec2-user -b
+
+sudo ansible all -i 35.154.177.238, -m file -a"state=touch path=/var/www/html/index.html" --key-file=rajesh-mumbai.pem -u ec2-user -b
+sudo ansible all -i 35.154.177.238, -m copy -a"dest=/var/www/html/index.html content='<html><body><h1>My First Heading</h1><p>My first paragraph</p></body></html>'" --key-file=rajesh-mumbai.pem -u ec2-user -b
+
+sudo ansible all -i 35.154.177.238, -m copy -a"dest=/var/www/html/second.html src=/var/www/html/index.html remote_src=yes" --key-file=rajesh-mumbai.pem -u ec2-user -b
+
+sudo ansible all -i 35.154.177.238, -m yum -a"name=wget state=present" --key-file=rajesh-mumbai.pem -u ec2-user -b
+sudo ansible all -i 35.154.177.238, -m yum -a"name=git state=present" --key-file=rajesh-mumbai.pem -u ec2-user -b
+
+
+sudo ansible all -i 35.154.177.238, -m git -a"dest=/home/ec2-user/repo_dir repo=https://github.com/scmgalaxy/ansible-role-template" --key-file=rajesh-mumbai.pem -u ec2-user -b
+
+
+sudo ansible all -i 35.154.177.238, -m file -a"state=touch path=/opt/devopsschool.txt" --key-file=rajesh-mumbai.pem -u ec2-user -b
+sudo ansible all -i 35.154.177.238, -m file -a"state=absent path=/opt/devopsschool.txt" --key-file=rajesh-mumbai.pem -u ec2-user -b
