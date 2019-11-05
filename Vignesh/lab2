@@ -1,0 +1,25 @@
+1. REMOTE MACHINES:
+ansible all -i 13.235.49.197, -m group -a "name=deploy" -u ec2-user --private-key=rajesh-mumbai.pem -b
+ansible all -i 13.235.49.197, -m user -a "name=deploy state=present password={{ 'deploy' | password_hash('sha512') }} shell=/bin/bash" -u ec2-user --private-key=rajesh-mumbai.pem -b
+ansible all -i 13.235.49.197, -m yum -a "name=httpd state=installed" -u ec2-user --private-key=rajesh-mumbai.pem -b
+ansible all -i 13.235.49.197, -m service -a "name=httpd state=started enabled=yes" -u ec2-user --private-key=rajesh-mumbai.pem -b
+ansible all -i 13.235.49.197, -m copy -a "dest=/var/www/html/index.html content='Hello World'" -u ec2-user --private-key=rajesh-mumbai.pem -b
+ansible all -i 13.235.49.197, -m copy -a "dest=/var/www/html/second.html content='Second html'" -u ec2-user --private-key=rajesh-mumbai.pem -b
+ansible all -i 13.235.49.197, -m package -a "name=wget,git state=present" -u ec2-user --private-key=rajesh-mumbai.pem -b
+ansible all -i 13.235.49.197, -m git -a "repo=https://github.com/scmgalaxy/ansible-role-template clone=yes dest=/etc/ansible/html" -u ec2-user --private-key=rajesh-mumbai.pem -b
+ansible all -i 13.235.49.197, -m file -a "path=/opt/devopsschool.txt state=present" -u ec2-user --private-key=rajesh-mumbai.pem -b
+
+2. EDIT SUDOERS FILE:
+ansible all -i 13.235.49.197, -m lineinfile -a 'path=/etc/sudoers state=present backup=yes line="deploy ALL=(ALL) NOPASSWD: ALL"' -u ec2-user --private-key=rajesh-mumbai.pem -b
+
+3. LOGIN VIA SUDO USER:
+ansible all -i 13.235.49.197, -m copy -a "dest=/var/www/html/index.html content='Hello World...'" -u deploy -b -k
+
+4. USE BEHAVIOURAL PARAMETERS IN INVENTORY FILE:
+[ACS]
+server1 ansible_host=13.235.49.246 ansible_user=ec2-user ansible_ssh_private_key_file=/etc/ansible/lab/rajesh-mumbai.pem
+
+[ARS]
+server2 ansible_host=13.235.49.197 ansible_user=deploy ansible_ssh_pass=deploy
+
+ansible ACS,ARS -i hosts -m shell -a 'id; uname -a'
