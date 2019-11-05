@@ -1,0 +1,16 @@
+---
+- name: playbook3
+  hosts: ACS
+  remote_user: deploy
+  become: true
+  tasks:
+  - name: install httpd
+    yum:
+      name: httpd
+      state: latest
+  - name: start webserver
+    service:
+      name: httpd
+      state: restarted
+      enabled: yes
+...
