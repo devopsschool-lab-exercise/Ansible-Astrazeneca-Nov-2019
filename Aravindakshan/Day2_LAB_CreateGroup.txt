@@ -1,0 +1,368 @@
+Task 1  - RUn all Adhocs which you created in Remote MACHINE(Ec-user with Key)
+Task 2 - Using Ansible only - Add a user called deploy into suder file without password.
+Task 3 - Run again all with Deploy user only and password.
+
+#15
+13.126.122.101
+13.233.40.247
+
+Program 1 – Write a Ansible Adhoc Commands to create a group called “deploy
+
+
+[root@ip-172-31-10-26 /]# ansible localhost -m group -a"name=Deploy state=present"
+localhost | CHANGED => {
+    "changed": true,
+    "gid": 1001,
+    "name": "Deploy",
+    "state": "present",
+    "system": false
+}
+
+[root@ip-172-31-10-26 /]# more /etc/group | grep Deploy
+Deploy:x:1001:
+
+
+Program 2 – Write a Ansible Adhoc Commands to create a user called “deploy-user” which is part of group called “deploy” and with /bin/bash shell.
+[root@ip-172-31-10-26 /]# ansible localhost -m user -a"name=deploy-user state=present group=Deploy shell=/bin/bash"
+localhost | CHANGED => {
+    "changed": true,
+    "comment": "",
+    "create_home": true,
+    "group": 1001,
+    "home": "/home/deploy-user",
+    "name": "deploy-user",
+    "shell": "/bin/bash",
+    "state": "present",
+    "system": false,
+    "uid": 1001
+}
+
+
+How to verify?
+[root@ip-172-31-10-26 /]# /etc/passwd | grep deploy-user
+bash: /etc/passwd: Permission denied
+
+
+Program 3 – Write a Ansible Adhoc commands install package named “httpd” in RHEL/centos.
+
+
+[root@ip-172-31-10-26 /]# ansible localhost -m yum -a"name=httpd state=present"
+localhost | SUCCESS => {
+    "ansible_facts": {
+        "pkg_mgr": "yum"
+    },
+    "changed": false,
+    "msg": "",
+    "rc": 0,
+    "results": [
+        "httpd-2.4.6-90.el7.x86_64 providing httpd is already installed"
+    ]
+}
+
+How to verify?
+[root@ip-172-31-10-26 /]# which httpd
+/sbin/httpd
+
+
+Program 4 – Write a Ansible Adhoc commands to start and enable the service named “httpd”
+[root@ip-172-31-10-26 /]# ansible localhost -m service -a"name=httpd state=started enabled=yes"
+localhost | CHANGED => {
+    "changed": true,
+    "enabled": true,
+    "name": "httpd",
+    "state": "started",
+    "status": {
+        "ActiveEnterTimestampMonotonic": "0",
+        "ActiveExitTimestampMonotonic": "0",
+        "ActiveState": "inactive",
+        "After": "system.slice -.mount nss-lookup.target systemd-journald.socket tmp.mount basic.target network.target remote-fs.target",
+        "AllowIsolate": "no",
+        "AmbientCapabilities": "0",
+        "AssertResult": "no",
+        "AssertTimestampMonotonic": "0",
+        "Before": "shutdown.target",
+        "BlockIOAccounting": "no",
+        "BlockIOWeight": "18446744073709551615",
+        "CPUAccounting": "no",
+        "CPUQuotaPerSecUSec": "infinity",
+        "CPUSchedulingPolicy": "0",
+        "CPUSchedulingPriority": "0",
+        "CPUSchedulingResetOnFork": "no",
+        "CPUShares": "18446744073709551615",
+        "CanIsolate": "no",
+        "CanReload": "yes",
+        "CanStart": "yes",
+        "CanStop": "yes",
+        "CapabilityBoundingSet": "18446744073709551615",
+        "ConditionResult": "no",
+        "ConditionTimestampMonotonic": "0",
+        "Conflicts": "shutdown.target",
+        "ControlPID": "0",
+        "DefaultDependencies": "yes",
+        "Delegate": "no",
+        "Description": "The Apache HTTP Server",
+        "DevicePolicy": "auto",
+        "Documentation": "man:httpd(8) man:apachectl(8)",
+        "EnvironmentFile": "/etc/sysconfig/httpd (ignore_errors=no)",
+        "ExecMainCode": "0",
+        "ExecMainExitTimestampMonotonic": "0",
+        "ExecMainPID": "0",
+        "ExecMainStartTimestampMonotonic": "0",
+        "ExecMainStatus": "0",
+        "ExecReload": "{ path=/usr/sbin/httpd ; argv[]=/usr/sbin/httpd $OPTIONS -k graceful ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+        "ExecStart": "{ path=/usr/sbin/httpd ; argv[]=/usr/sbin/httpd $OPTIONS -DFOREGROUND ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+        "ExecStop": "{ path=/bin/kill ; argv[]=/bin/kill -WINCH ${MAINPID} ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+        "FailureAction": "none",
+        "FileDescriptorStoreMax": "0",
+        "FragmentPath": "/usr/lib/systemd/system/httpd.service",
+        "GuessMainPID": "yes",
+        "IOScheduling": "0",
+        "Id": "httpd.service",
+        "IgnoreOnIsolate": "no",
+        "IgnoreOnSnapshot": "no",
+        "IgnoreSIGPIPE": "yes",
+        "InactiveEnterTimestampMonotonic": "0",
+        "InactiveExitTimestampMonotonic": "0",
+        "JobTimeoutAction": "none",
+        "JobTimeoutUSec": "0",
+        "KillMode": "control-group",
+        "KillSignal": "18",
+        "LimitAS": "18446744073709551615",
+        "LimitCORE": "18446744073709551615",
+        "LimitCPU": "18446744073709551615",
+        "LimitDATA": "18446744073709551615",
+        "LimitFSIZE": "18446744073709551615",
+        "LimitLOCKS": "18446744073709551615",
+        "LimitMEMLOCK": "65536",
+        "LimitMSGQUEUE": "819200",
+        "LimitNICE": "0",
+        "LimitNOFILE": "4096",
+        "LimitNPROC": "7175",
+        "LimitRSS": "18446744073709551615",
+        "LimitRTPRIO": "0",
+        "LimitRTTIME": "18446744073709551615",
+        "LimitSIGPENDING": "7175",
+        "LimitSTACK": "18446744073709551615",
+        "LoadState": "loaded",
+        "MainPID": "0",
+        "MemoryAccounting": "no",
+        "MemoryCurrent": "18446744073709551615",
+        "MemoryLimit": "18446744073709551615",
+        "MountFlags": "0",
+        "Names": "httpd.service",
+        "NeedDaemonReload": "no",
+        "Nice": "0",
+        "NoNewPrivileges": "no",
+        "NonBlocking": "no",
+        "NotifyAccess": "main",
+        "OOMScoreAdjust": "0",
+        "OnFailureJobMode": "replace",
+        "PermissionsStartOnly": "no",
+        "PrivateDevices": "no",
+        "PrivateNetwork": "no",
+        "PrivateTmp": "yes",
+        "ProtectHome": "no",
+        "ProtectSystem": "no",
+        "RefuseManualStart": "no",
+        "RefuseManualStop": "no",
+        "RemainAfterExit": "no",
+        "Requires": "basic.target system.slice -.mount",
+        "RequiresMountsFor": "/var/tmp",
+        "Restart": "no",
+        "RestartUSec": "100ms",
+        "Result": "success",
+        "RootDirectoryStartOnly": "no",
+        "RuntimeDirectoryMode": "0755",
+        "SameProcessGroup": "no",
+        "SecureBits": "0",
+        "SendSIGHUP": "no",
+        "SendSIGKILL": "yes",
+        "Slice": "system.slice",
+        "StandardError": "inherit",
+        "StandardInput": "null",
+        "StandardOutput": "journal",
+        "StartLimitAction": "none",
+        "StartLimitBurst": "5",
+        "StartLimitInterval": "10000000",
+        "StartupBlockIOWeight": "18446744073709551615",
+        "StartupCPUShares": "18446744073709551615",
+        "StatusErrno": "0",
+        "StopWhenUnneeded": "no",
+        "SubState": "dead",
+        "SyslogLevelPrefix": "yes",
+        "SyslogPriority": "30",
+        "SystemCallErrorNumber": "0",
+        "TTYReset": "no",
+        "TTYVHangup": "no",
+        "TTYVTDisallocate": "no",
+        "TasksAccounting": "no",
+        "TasksCurrent": "18446744073709551615",
+        "TasksMax": "18446744073709551615",
+        "TimeoutStartUSec": "1min 30s",
+        "TimeoutStopUSec": "1min 30s",
+        "TimerSlackNSec": "50000",
+        "Transient": "no",
+        "Type": "notify",
+        "UMask": "0022",
+        "UnitFilePreset": "disabled",
+        "UnitFileState": "disabled",
+        "WatchdogTimestampMonotonic": "0",
+        "WatchdogUSec": "0"
+    }
+}
+
+How to verify?
+[root@ip-172-31-10-26 /]#  ps -eaf | grep httpd
+root     32475     1  0 11:33 ?        00:00:00 /usr/sbin/httpd -DFOREGROUND
+apache   32476 32475  0 11:33 ?        00:00:00 /usr/sbin/httpd -DFOREGROUND
+apache   32477 32475  0 11:33 ?        00:00:00 /usr/sbin/httpd -DFOREGROUND
+apache   32478 32475  0 11:33 ?        00:00:00 /usr/sbin/httpd -DFOREGROUND
+apache   32479 32475  0 11:33 ?        00:00:00 /usr/sbin/httpd -DFOREGROUND
+apache   32480 32475  0 11:33 ?        00:00:00 /usr/sbin/httpd -DFOREGROUND
+root     32618 24055  0 11:34 pts/0    00:00:00 grep --color=auto httpd
+
+
+Program 5 – Write a Ansible commands to create a file called “index.html” in /var/www/html with some dummy html contents.
+[root@ip-172-31-10-26 /]# ansible localhost -m file -a"path=/var/www/html/index.html state=touch"
+localhost | CHANGED => {
+    "changed": true,
+    "dest": "/var/www/html/index.html",
+    "gid": 0,
+    "group": "root",
+    "mode": "0644",
+    "owner": "root",
+    "secontext": "unconfined_u:object_r:httpd_sys_content_t:s0",
+    "size": 0,
+    "state": "file",
+    "uid": 0
+}
+
+How to verify?
+Browse http://x.x.x.x:80
+
+Program 6 – Write a Ansible commands to copy a file called “second.html” in /var/www/html/second.html with some dummy html contents.
+[root@ip-172-31-10-97 ec2-user]# ansible all -i 13.233.40.247, -m copy -a"src=/var/www/html/index.html dest=/var/www/html/second.html remote_src=yes"  --key-file=rajesh-mumbai.pem -u ec2-user -b
+13.233.40.247 | CHANGED => {
+    "ansible_facts": {
+        "discovered_interpreter_python": "/usr/bin/python"
+    },
+    "changed": true,
+    "checksum": "da39a3ee5e6b4b0d3255bfef95601890afd80709",
+    "dest": "/var/www/html/second.html",
+    "gid": 0,
+    "group": "root",
+    "md5sum": "d41d8cd98f00b204e9800998ecf8427e",
+    "mode": "0644",
+    "owner": "root",
+    "secontext": "system_u:object_r:httpd_sys_content_t:s0",
+    "size": 0,
+    "src": "/var/www/html/index.html",
+    "state": "file",
+    "uid": 0
+}
+
+[root@ip-172-31-10-26 /]# ansible all -i 13.233.40.247, -m copy -a"src=/var/www/html/second.html dest=/etc/second.html" 
+localhost | CHANGED => {
+    "changed": true,
+    "checksum": "da39a3ee5e6b4b0d3255bfef95601890afd80709",
+    "dest": "/etc/second.html",
+    "gid": 0,
+    "group": "root",
+    "md5sum": "d41d8cd98f00b204e9800998ecf8427e",
+    "mode": "0644",
+    "owner": "root",
+    "secontext": "system_u:object_r:etc_t:s0",
+    "size": 0,
+    "src": "/root/.ansible/tmp/ansible-tmp-1572868502.74-238449098369371/source",
+    "state": "file",
+    "uid": 0
+}
+
+
+How to verify?
+Browse http://x.x.x.x/second.html
+
+Program 7 – Write a Ansible commands to install a package called “git”, “wget”.
+
+[root@ip-172-31-10-26 /]# ansible all -i 13.233.40.247, -m yum -a"name=git,wget state=present" --key-file=rajesh-mumbai.pem -u ec2-user -b
+13.233.40.247 | SUCCESS => {
+    "ansible_facts": {
+        "discovered_interpreter_python": "/usr/bin/python"
+    },
+    "changed": false,
+    "msg": "",
+    "rc": 0,
+    "results": [
+        "git-1.8.3.1-20.el7.x86_64 providing git is already installed",
+        "wget-1.14-18.el7_6.1.x86_64 providing wget is already installed"
+    ]
+}
+
+
+How to verify?
+[root@ip-172-31-10-26 /]# which git
+/bin/git
+[root@ip-172-31-10-26 /]# which wget
+/bin/wget
+
+
+Program 8 – Write a Ansible Adhoc commands to clone git repo. https://github.com/scmgalaxy/ansible-role-template.
+[root@ip-172-31-10-26 /]# ansible all -i 13.233.40.247, -m git -a"repo='https://github.com/scmgalaxy/ansible-role-template' clone=yes dest=/var/www/html/clone" --key-file=rajesh-mumbai.pem -u ec2-user -b
+13.233.40.247 | CHANGED => {
+    "after": "d3eefe03c1bb6c9b0e1574347523174a26d015ff",
+    "ansible_facts": {
+        "discovered_interpreter_python": "/usr/bin/python"
+    },
+    "before": null,
+    "changed": true
+}
+
+How to verify?
+$ ls
+
+Program 9 – Write a Ansible commands to reboot a self machine.
+
+[root@ip-172-31-10-26 /]# ansible localhost -m reboot -a"pre_reboot_delay=0 msg='This is a test reboot dont panic' connect_timeout=600"
+localhost | FAILED! => {
+    "changed": false,
+    "elapsed": 0,
+    "msg": "Running reboot with local connection would reboot the control node.",
+    "rebooted": false
+}
+
+this is a bug : https://github.com/ansible/ansible/issues/57874
+
+instead reboot using remote ip of AWS instance
+
+ansible localhost -m reboot -a"pre_reboot_delay=0 msg='This is a test reboot !!! dont panic connect_timeout=600"
+
+
+ansible  -m reboot -a"pre_reboot_delay=0 msg='This is a test reboot dont panic' connect_timeout=600"
+
+Program 10 – Write a Ansible commands to touch a file called “devopsschool.txt” in /opt/ and delete after using ansible adhoc command.
+
+[root@ip-172-31-10-97 ec2-user]# ansible all -i 13.233.40.247, -m file -a"path=devopsschool.txt state=touch" --key-file=rajesh-mumbai.pem -u ec2-user -b
+13.233.40.247 | CHANGED => {
+    "ansible_facts": {
+        "discovered_interpreter_python": "/usr/bin/python"
+    },
+    "changed": true,
+    "dest": "devopsschool.txt",
+    "gid": 0,
+    "group": "root",
+    "mode": "0644",
+    "owner": "root",
+    "secontext": "unconfined_u:object_r:user_home_t:s0",
+    "size": 0,
+    "state": "file",
+    "uid": 0
+}
+[root@ip-172-31-10-97 ec2-user]# ansible all -i 13.233.40.247, -m file -a"path=devopsschool.txt state=absent" --key-file=rajesh-mumbai.pem -u ec2-user -b
+13.233.40.247 | CHANGED => {
+    "ansible_facts": {
+        "discovered_interpreter_python": "/usr/bin/python"
+    },
+    "changed": true,
+    "path": "devopsschool.txt",
+    "state": "absent"
+}
