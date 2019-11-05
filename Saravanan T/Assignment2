@@ -1,0 +1,1 @@
+ansible all -i 15.206.128.246, -m group -a"name=deploy state=present" --key-file=rajesh-mumbai.pem -u ec2-user -b
