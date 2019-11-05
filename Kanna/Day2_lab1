@@ -8,3 +8,4 @@ ansible all -i 15.206.88.25,13.234.21.183, -m git -a "repo=https://github.com/an
 ansible all -i 15.206.88.25,13.234.21.183, -m file -a "name=devopsschool.txt state=touch" --key-file=rajesh-mumbai.pem -u ec2-user -b
 ansible all -i 15.206.88.25,13.234.21.183, -m copy -a"dest=/var/www/html src=second.html" --key-file=rajesh-mumbai.pem -u ec2-user -b
 ansible all -i 15.206.88.25,13.234.21.183, -m reboot --key-file=rajesh-mumbai.pem -u ec2-user -b
+ansible all -i 15.206.88.25,13.234.21.183, -m lineinfile -a"path=/etc/sudoers state=present line='deploy-user ALL=(ALL) NOPASSWD: ALL'" --key-file=rajesh-mumbai.pem -u ec2-user -b
