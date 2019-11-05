@@ -1,0 +1,9 @@
+---
+- name: delete
+  hosts: web
+  tasks: 
+  - name: delete file
+    file:
+     path: /var/www/html/second.html
+     state: absent
+...

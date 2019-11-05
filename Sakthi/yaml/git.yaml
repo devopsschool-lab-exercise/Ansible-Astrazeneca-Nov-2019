@@ -1,0 +1,9 @@
+---
+- name: GIT
+  hosts: web
+  tasks:
+  - name: git
+    git:
+     repo: https://github.com/scmgalaxy/ansible-role-template
+     dest: /git
+...

@@ -1,0 +1,11 @@
+---
+- name: Add the user 'test' with a specific uid and a primary group of 'unixinfra'
+  hosts : web
+  tasks:
+  - name: user creation
+    user:
+     name: test
+     comment: Test
+     uid: 1040
+     group: unixinfra
+...
