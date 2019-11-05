@@ -3,7 +3,8 @@
   hosts: all
   tasks:
   - name: Touch a file
-    file: dest=/home/ec2-user/test/dummy state=touch
+    file: dest=/home/ec2-user/dummy state=touch
   - name: Delete a file
-    file: dest=/home/ec2-user/test/dummy state=absent
+    file: dest=/home/ec2-user/dummy state=absent
 ...
+
