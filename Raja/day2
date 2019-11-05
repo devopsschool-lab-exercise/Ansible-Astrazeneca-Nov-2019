@@ -20,3 +20,14 @@ sudo ansible all -i 35.154.177.238, -m git -a"dest=/home/ec2-user/repo_dir repo=
 
 sudo ansible all -i 35.154.177.238, -m file -a"state=touch path=/opt/devopsschool.txt" --key-file=rajesh-mumbai.pem -u ec2-user -b
 sudo ansible all -i 35.154.177.238, -m file -a"state=absent path=/opt/devopsschool.txt" --key-file=rajesh-mumbai.pem -u ec2-user -b
+
+sudo ansible localhost -m lineinfile -a"path=/etc/sudoers state=present line='deploy-user ALL=(ALL) NOPASSWD: ALL'"
+sudo ansible localhost -m lineinfile -a"path=/etc/sudoers state=present regexp='^%deploy' line='deploy-user ALL=(ALL) NOPASSWD: ALL'"
+
+sudo ansible all -i 35.154.177.238, -m lineinfile -a"path=/etc/sudoers state=present line='deploy-user ALL=(ALL) NOPASSWD: ALL'" --key-file=rajesh-mumbai.pem -u ec2-user -b
+
+=================================================================================================
+
+sudo ansible all -i 35.154.177.238, -m user -a"name=new-user shell=/bin/bash group=deploy state=present" -u deploy-user -k -b
+
+sudo ansible all -i 35.154.177.238, -m file -a"state=touch path=/var/www/html/indexas_deploy-user.html" -u deploy-user -k -b
