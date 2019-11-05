@@ -1,0 +1,6 @@
+---
+- hosts: web
+  tasks:
+  - name: Install package
+    yum: name=git,wget state=present
+...

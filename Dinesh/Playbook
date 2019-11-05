@@ -78,4 +78,66 @@ ARC                        : ok=2    changed=0    unreachable=0    failed=0    s
   - name: start the httpd service
     service: name=httpd state=started
     
-    
+  [root@ip-172-31-14-93 ~]# vi touch.yaml
+[root@ip-172-31-14-93 ~]# lsa
+bash: lsa: command not found
+[root@ip-172-31-14-93 ~]# ls
+1.yaml  anaconda-ks.cfg  group1.yaml  group2.yaml  group.yaml  index.html  inventory  original-ks.cfg  rajesh-mumbai.pem  second.html  service.yaml  touch.yaml  user.yaml
+[root@ip-172-31-14-93 ~]# vi touch.yaml
+[root@ip-172-31-14-93 ~]# ansible-playbook -i inventory touch.yaml
+
+PLAY [create file] **********************************************************************************************************************************************************************************
+
+TASK [Gathering Facts] ******************************************************************************************************************************************************************************
+ok: [ARC]
+
+TASK [create file] **********************************************************************************************************************************************************************************
+changed: [ARC]
+
+PLAY RECAP ******************************************************************************************************************************************************************************************
+ARC                        : ok=2    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
+
+[root@ip-172-31-14-93 ~]# cat touch.yaml
+- name: create file
+  hosts: ARC
+  tasks:
+  - name: create file
+    file: dest=/root/test.txt state=touch
+  
+[root@ip-172-31-14-93 ~]# cat play.yaml
+- name: copy a file
+  hosts: ARC
+  tasks:
+  - name: copy a file
+    copy: dest=/tmp/test1.txt src=/root/test.txt
+  - name: download file
+    get_url: dest=/root/ url=https://github.com/scmgalaxy/ansible-role-template
+  - name: install git
+    yum: name=git state=present
+  - name : delete file
+    file: path=/root/test123.txt state=absent
+[root@ip-172-31-14-93 ~]# ls -ltr /root/test.txt
+ls: cannot access /root/test.txt: No such file or directory
+[root@ip-172-31-14-93 ~]# touch /root/test.txt
+[root@ip-172-31-14-93 ~]# ansible-playbook -i inventory play.yaml
+
+PLAY [copy a file] **********************************************************************************************************************************************************************************
+
+TASK [Gathering Facts] ******************************************************************************************************************************************************************************
+ok: [ARC]
+
+TASK [copy a file] **********************************************************************************************************************************************************************************
+changed: [ARC]
+
+TASK [download file] ********************************************************************************************************************************************************************************
+changed: [ARC]
+
+TASK [install git] **********************************************************************************************************************************************************************************
+ok: [ARC]
+
+TASK [delete file] **********************************************************************************************************************************************************************************
+ok: [ARC]
+
+PLAY RECAP ******************************************************************************************************************************************************************************************
+ARC                        : ok=5    changed=2    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
+

@@ -1,0 +1,5 @@
+- name: create user
+  hosts: mine
+  tasks:
+  - name: create group
+    group: name=dev state=present

@@ -1,0 +1,6 @@
+---
+- hosts: web
+  tasks:
+  - name: create a html file
+    lineinfile: path=/var/www/html/first.html line='<h1>Welcome</h1>' create=yes
+...
