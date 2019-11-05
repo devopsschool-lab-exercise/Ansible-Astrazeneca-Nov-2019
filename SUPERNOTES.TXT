@@ -585,3 +585,17 @@ ansible-playbook -i inventory web.yaml
 task 1 - Convert each adhoc command to PLAYBOOk
 task 2 - https://www.devopsschool.com/blog/ansible-playbook-lab-excercise-part-3/
 
+
+git clone https://github.com/devopsschool-lab-exercise/Ansible-Astrazeneca-Nov-2019.git
+
+cd Ansible-Astrazeneca-Nov-2019
+git config user.name "MY NAME"
+git config user.email "myEMAIL"
+
+cd YOUR DIR
+
+git add .
+git commit -m"adding
+git push origin master
+
+
