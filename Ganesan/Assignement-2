@@ -31,3 +31,6 @@ ansible all -i 13.233.156.131, -m file -a "state=absent path=/tmp/devopsschool.t
 ansible all -i 13.233.156.131,13.127.38.125 -m yum -a"name=httpd state=present" -u deploy -k -b
 ansible all -i 13.233.156.131, -m yum -a"name=httpd state=present" -u deploy -k -b -K
 ansible all -i 13.233.156.131, -m file -a "path=/tmp/testdrive state=touch" -u deploy -k -b -K --become-user=apache
+
+ansible all -i inventory -m copy -a"dest=/var/www/html src=index.html" --key-file=rajesh-mumbai.pem -u ec2-user -b
+ ansible db -i inventory -m copy -a"dest=/var/www/html src=index.html" --key-file=rajesh-mumbai.pem -u ec2-user -b
