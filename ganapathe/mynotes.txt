@@ -26,4 +26,20 @@ Write a Ansible Adhoc commands to clone git repo. https://github.com/scmgalaxy/a
   
 
 
-  
+Day 2
+==================================================================================================
+
+ wget https://www.devopsschool.com/notes/ansible/2019/rajesh-mumbai.pem
+   20  ansible all -i 13.235.68.69, -m group -a"name=deploy local=no state=present" -u ec2-user --key-file=rajesh-mumbai.pem -b
+   22  chmod 600 rajesh-mumbai.pem
+   23  ansible all -i 13.235.68.69, -m group -a"name=deploy local=no state=present" -u ec2-user --key-file=rajesh-mumbai.pem -b
+   24  ansible all -i 13.235.68.69, -m user -a"name=deploy-user group=deploy shell=/bin/bash" -u ec2-user --key-file=rajesh-mumbai.pem -b
+   25  ansible all -i 13.235.68.69, -m yum -a"name=httpd state=present" -u ec2-user --key-file=rajesh-mumbai.pem -b
+   26  ansible all -i 13.235.68.69, -m service -a"name=httpd state=started" -u ec2-user --key-file=rajesh-mumbai.pem -b
+   27  ansible all -i 13.235.68.69, -m file -a"state=touch path=/var/www/html/index.html content='Welcome to my Ansible Class'" -u ec2-user --key-file=rajesh-mumbai.pem -b
+   28  ansible all -i 13.235.68.69, -m file -a"state=touch path=/var/www/html/index.html content='Welcome to my Ansible Class'"
+   29  ansible all -i 13.235.68.69, -m file -a"state=touch path=/var/www/html/index.html content='Welcome to my Ansible Class'" -u ec2-user --key-file=rajesh-mumbai.pem -b
+   30  sudo ansible all -i 13.235.68.69, -m file -a"state=touch path=/var/www/html/index.html content='Welcome to my Ansible Class'" -u ec2-user --key-file=rajesh-mumbai.pem -b
+   31  ansible all -i 13.235.68.69, -m file -a"state=touch path=/var/www/html/index.html content='Welcome to my Ansible Class'" -u ec2-user --key-file=rajesh-mumbai.pem -b
+   32  ansible all -i 13.235.68.69, -m copy -a"dest=/var/www/html/index.html content='Welcome to my Ansible Class" -u ec2-user --key-file=rajesh-mumbai.pem -b
+   33  ansible all -i 13.235.68.69, -m copy -a"dest=/var/www/html/index.html content='Welcome to my Ansible Class'" -u ec2-user --key-file=rajesh-mumbai.pem -b
