@@ -1,0 +1,8 @@
+- name: This create user backup-user and  it part of group "backup"
+  hosts: test
+  tasks:
+  - name: create a user"backup-user"
+    user:
+      name: backup-user
+      group: backup
+      shell: /bin/bash

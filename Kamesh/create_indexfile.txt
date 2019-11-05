@@ -1,0 +1,7 @@
+- name: This creates index.html and put some content
+  hosts: test
+  tasks:
+   - name: copy a file
+     copy:
+       dest: /var/www/
+       src: /home/ec2-user/index.html
