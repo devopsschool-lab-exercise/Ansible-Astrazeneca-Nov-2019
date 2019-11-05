@@ -1,6 +1,3 @@
-ansible all -i 13.233.156.131, -m group -a "name=deploy state=present" --key-file=rajesh-mumbai.pem -u ec2-user -b
-
-ansible all -i 13.233.156.131, -m group -a "name=deploy state=present"  -u deploy --become-user=ec2-user -k
 
 web.yaml
 ---
