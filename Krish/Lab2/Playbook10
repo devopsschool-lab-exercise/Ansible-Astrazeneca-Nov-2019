@@ -1,0 +1,9 @@
+---
+- name: Touch a file
+  hosts: all
+  tasks:
+  - name: Touch a file
+    file: dest=/home/ec2-user/test/dummy state=touch
+  - name: Delete a file
+    file: dest=/home/ec2-user/test/dummy state=absent
+...
