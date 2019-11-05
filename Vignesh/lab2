@@ -23,3 +23,5 @@ server1 ansible_host=13.235.49.246 ansible_user=ec2-user ansible_ssh_private_key
 server2 ansible_host=13.235.49.197 ansible_user=deploy ansible_ssh_pass=deploy
 
 ansible ACS,ARS -i hosts -m shell -a 'id; uname -a'
+ansible ACS,ARS -i hosts -m shell -a 'id; uname -a' -b
+ansible server1,server2 -i hosts -m shell -a 'id; uname -a'
