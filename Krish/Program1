@@ -1,1 +1,5 @@
 ansible localhost -m group -a"name=deploy state=present"
+
+
+ansible all -i 52.66.239.26, -m group -a"name=deploy state=present" --private-key=rajesh-mumbai.pem -u ec2-user -b
+
