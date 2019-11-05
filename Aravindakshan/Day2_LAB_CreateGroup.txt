@@ -6,6 +6,10 @@ Task 3 - Run again all with Deploy user only and password.
 13.126.122.101
 13.233.40.247
 
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Task1 -  RUn all Adhocs which you created in Remote MACHINE(Ec-user with Key)
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 Program 1 – Write a Ansible Adhoc Commands to create a group called “deploy
 
 
@@ -322,7 +326,7 @@ $ ls
 
 Program 9 – Write a Ansible commands to reboot a self machine.
 
-[root@ip-172-31-10-26 /]# ansible localhost -m reboot -a"pre_reboot_delay=0 msg='This is a test reboot dont panic' connect_timeout=600"
+[root@ip-172-31-10-26 /]# ansible all -i 13.233.40.247, -m reboot -a"pre_reboot_delay=0 msg='This is a test reboot dont panic' " --key-file=rajesh-mumbai.pem -u ec2-user -b
 localhost | FAILED! => {
     "changed": false,
     "elapsed": 0,
@@ -366,3 +370,86 @@ Program 10 – Write a Ansible commands to touch a file called “devopsschool.t
     "path": "devopsschool.txt",
     "state": "absent"
 }
+
+
+
+
++++++++++++++++++++++++++++++++++++++++++++++++++++
+TASK 2 -Using Ansible only - Add a user called deploy into suder file without password.
+++++++++++++++++++++++++++++++++++++++++++++++=
+
+
+
++++++++++++++++++++++++++++++++++++++++++++++++++++
+Task 3 - Run again all with Deploy user only and password.
+++++++++++++++++++++++++++++++++++++++++++++++=
+
+
++++++++++++++++++++++++++++++++++++++++++++++++++++
+Task 4 - Groups and behavioural pattern
+++++++++++++++++++++++++++++++++++++++++++++++=
+
+[root@ip-172-31-10-97 ec2-user]# ansible mine -i inventory -m file -a"path=/tmp/text state=touch" -b
+13.233.40.247 | CHANGED => {
+    "ansible_facts": {
+        "discovered_interpreter_python": "/usr/bin/python"
+    },
+    "changed": true,
+    "dest": "/tmp/text",
+    "gid": 0,
+    "group": "root",
+    "mode": "0644",
+    "owner": "root",
+    "secontext": "unconfined_u:object_r:user_tmp_t:s0",
+    "size": 0,
+    "state": "file",
+    "uid": 0
+}
+13.126.122.101 | CHANGED => {
+    "ansible_facts": {
+        "discovered_interpreter_python": "/usr/bin/python"
+    },
+    "changed": true,
+    "dest": "/tmp/text",
+    "gid": 0,
+    "group": "root",
+    "mode": "0644",
+    "owner": "root",
+    "secontext": "unconfined_u:object_r:user_tmp_t:s0",
+    "size": 0,
+    "state": "file",
+    "uid": 0
+}
+[root@ip-172-31-10-97 ec2-user]# ansible mine -i inventory -m file -a"path=/tmp/text state=file" -b
+13.126.122.101 | SUCCESS => {
+    "ansible_facts": {
+        "discovered_interpreter_python": "/usr/bin/python"
+    },
+    "changed": false,
+    "gid": 0,
+    "group": "root",
+    "mode": "0644",
+    "owner": "root",
+    "path": "/tmp/text",
+    "secontext": "unconfined_u:object_r:user_tmp_t:s0",
+    "size": 0,
+    "state": "file",
+    "uid": 0
+}
+13.233.40.247 | SUCCESS => {
+    "ansible_facts": {
+        "discovered_interpreter_python": "/usr/bin/python"
+    },
+    "changed": false,
+    "gid": 0,
+    "group": "root",
+    "mode": "0644",
+    "owner": "root",
+    "path": "/tmp/text",
+    "secontext": "unconfined_u:object_r:user_tmp_t:s0",
+    "size": 0,
+    "state": "file",
+    "uid": 0
+}
+
+
