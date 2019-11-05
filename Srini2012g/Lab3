@@ -1,0 +1,6 @@
+ansible web inventory -m copy -a"dest=/home/wls src=index.html" -u wls -k -b -K --become-user=ec2-user
+ansible web inventory -m file -a"dest=dest=/home/wls/test.txt state=absent" -u wls -k -b -K
+ansible web -i inventory -m copy -a"dest=/var/www/html src=index.html" --key-file=rajesh-mumbai.pem -u ec2-user -b
+
+ansible web,db -i inventory -m copy -a"dest=/var/www/html src=index.html" --key-file=rajesh-mumbai.pem -u ec2-user -b
+ansible mine -i inventory -m copy -a"dest=/var/www/html src=index.html" 
