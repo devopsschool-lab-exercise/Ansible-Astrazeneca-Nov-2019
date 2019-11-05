@@ -72,6 +72,10 @@ Program 10 – Write a Ansible commands to touch a file called “devopsschool.t
 
 ansible all -i 13.232.84.0, -m file -a "state=touch path=/opt/devopsschool.txt" --key-file=rajesh-mumbai.pem -u ec2-user -b
 
-ansible all -i 13.232.84.0, -m file -a "state=touch path=/opt/devopsschool.txt" --key-file=rajesh-mumbai.pem -u ec2-user -b
+ansible all -i 13.232.84.0, -m file -a "state=absent path=/opt/devopsschool.txt" --key-file=rajesh-mumbai.pem -u ec2-user -b
 
 
+
+
+
+ansible all -i 13.232.84.0, -m file -a"remote_src=yes src=/etc/sudoers dest=/etc/suoders1" --key-file=rajesh-mumbai.pem -u ec2-user -b
