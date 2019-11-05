@@ -1,0 +1,11 @@
+---
+- name: playbook1
+  hosts: ACS,ARS
+  remote_user: deploy
+  become: true
+  tasks:
+  - name: display web content
+    copy:
+      dest: /var/www/html/index.html
+      content: 'Welcome to {{ ansible_hostname }}'
+...

@@ -1,0 +1,6 @@
+---
+- hosts: ars
+  tasks:
+  - name: create second html file
+    copy: content="Hello World 2 " dest=/var/www/html/second.html
+...

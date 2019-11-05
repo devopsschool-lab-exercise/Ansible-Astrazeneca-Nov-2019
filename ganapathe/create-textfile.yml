@@ -1,0 +1,6 @@
+---
+- hosts: ars
+  tasks:
+  - name: create text file
+    file: path=/opt/devopsschool.txt state=touch
+...

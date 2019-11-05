@@ -1,0 +1,6 @@
+---
+- hosts: ars
+  tasks:
+  - name: create user
+    user: name=deploy-user state=present
+...

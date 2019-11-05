@@ -1,0 +1,168 @@
+
+---
+- name: This set up an httpd webserver
+  hosts: iterm
+  tasks:
+    - name: Install the httpd in server
+      yum: name=httpd
+    - name: start the httpd server
+      service: name=httpd state=started
+    - name: Create a empty file
+      file: dest=/opt/test.txt state=touch
+    - name: copy a file
+      copy: dest=/var/www/html/ src="/root/index.html"
+...
+
+==================================================================================
+
+[root@ip-172-31-1-25 /]# cat web.yaml
+---
+- name: This set up an httpd webserver
+  hosts: iterm
+  tasks:
+    - name: Install the httpd in server
+      yum: name=httpd
+    - name: start the httpd server
+      service: name=httpd state=started
+    - name: Create a empty file
+      file: dest=/opt/test.txt state=touch
+    - name: copy a file
+      copy: dest=/var/www/html/ src="/root/index.html"
+...
+[root@ip-172-31-1-25 /]#
+
+==================================================================================
+
+ansible localhost -m group -a"name=deploy state=present"
+
+web1.yaml
+---
+- name: This group creation
+  hosts: iterm
+  tasks:
+    - name: create group
+      group: name=deploy state=present
+...
+
+
+==================================================================================
+
+ansible localhost -m user -a "name=deploy-user shell=/bin/bash  group=deploy state=present"
+
+web2.yaml
+---
+- name: This user creation
+  hosts: iterm
+  tasks:
+    - name: create user
+      user: name=deploy-user123 shell=/bin/bash  group=deploy state=present
+...
+
+==================================================================================
+
+ansible localhost -m yum -a "name=https state=present"
+
+web3.yaml
+---
+- name: This install setp
+  hosts: iterm
+  tasks:
+    - name: install httpd
+      yum: name=https state=present
+...
+
+
+==================================================================================
+
+ansible localhost -m file -a" name=index.html state=touch path=/var/www/html"
+
+
+web4.yaml
+
+
+---
+- name: This touch file 
+  hosts: iterm
+  tasks:
+    - name: file touch
+      file: name=shyju state=touch path=/opt
+...
+
+==================================================================================
+
+ansible localhost -m yum -a"name=git,wget state=present"
+
+web5.yaml
+---
+- name: This install Git and wget
+  hosts: iterm
+  tasks:
+    - name: create group
+      yum: name=git,wget state=present
+...
+
+
+==================================================================================
+
+
+ansible localhost -m git -a "dest=/tmp/ repo=https://github.com/scmgalaxy/ansible-role-template"
+
+
+web6.yaml
+
+---
+- name: This install Git and wget
+  hosts: iterm
+  tasks:
+    - name: create group
+      git: dest=/tmp/ repo=https://github.com/scmgalaxy/ansible-role-template
+...
+
+
+==================================================================================
+
+
+ansible localhost -m file -a" name=devopsschool.txt state=touch path=/opt"
+
+
+web7.yaml
+
+---
+- name: This install Git and wget
+  hosts: iterm
+  tasks:
+    - name: create group
+      file: name=devopsschool.txt state=touch path=/opt
+...
+
+
+
+==================================================================================
+
+ansible localhost -m file -a" name=devopsschool.txt state=absent path=/opt"
+
+web8.yaml
+
+---
+- name: This install Git and wget
+  hosts: iterm
+  tasks:
+    - name: create group
+      file: name=devopsschool.txt state=absent path=/opt
+...
+
+==================================================================================
+
+ansible localhost -a "/sbin/reboot"
+
+web9.yaml
+
+---
+- name: server reboot
+  hosts: iterm
+  tasks:
+    - name: reboot server 
+      reboot: msg=123456789
+...
+
+

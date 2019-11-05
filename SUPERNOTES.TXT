@@ -595,7 +595,7 @@ git config user.email "myEMAIL"
 cd YOUR DIR
 
 git add .
-git commit -m"adding
+git commit -m"adding"
 git push origin master
 
 
