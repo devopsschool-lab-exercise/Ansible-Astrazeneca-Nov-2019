@@ -1,0 +1,7 @@
+---
+- name: install package named “httpd” in RHEL/centos
+  hosts: all
+  tasks:
+  - name: install webserverices 
+    yum: name=httpd state=present
+...

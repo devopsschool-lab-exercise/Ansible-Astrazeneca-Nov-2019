@@ -1,0 +1,7 @@
+---
+- name: "copy a file called “second.html” in /var/www/html/second.html with some dummy html contents"
+  hosts: all
+  tasks:
+  - name: copy a file
+    copy: src=/var/www/html/index.html dest=/var/www/html/second.html remote_src=yes
+...

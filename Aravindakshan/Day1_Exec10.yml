@@ -1,0 +1,7 @@
+---
+- name: "reboot a self machine"
+  hosts: all
+  tasks:
+  - name: "Reboot"
+    reboot: pre_reboot_delay=0 msg='This is a test reboot'
+...

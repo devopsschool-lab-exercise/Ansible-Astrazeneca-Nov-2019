@@ -1,0 +1,9 @@
+---
+- name: "touch a file called “devopsschool.txt” in /opt/ and delete after using ansible adhoc command"
+  hosts: all
+  tasks:
+  - name: "touch"
+    file: path=devopsschool.txt state=touch
+  - name: "absent"
+    file: path=devopsschool.txt state=absent
+...

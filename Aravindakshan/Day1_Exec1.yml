@@ -1,0 +1,7 @@
+---
+- name: "Write a Ansible Play  to create a group called deploy"
+  hosts: all
+  tasks:
+  - name: "Create new Group"
+    group: name=Deploy state=present
+ ...

@@ -1,0 +1,7 @@
+---
+- name: create a file called index.html in /var/www/html with some dummy html contents
+  hosts: all
+  tasks:
+  - name: create new file
+    file: path=/var/www/html/index.html state=touch
+...

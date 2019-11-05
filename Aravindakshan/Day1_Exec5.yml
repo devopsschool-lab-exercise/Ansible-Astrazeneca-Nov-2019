@@ -1,0 +1,7 @@
+---
+- name: start and enable the service named “httpd”
+  hosts: all
+  tasks:
+  - name: start webserverices 
+    service: name=httpd state=started enabled=yes
+...
