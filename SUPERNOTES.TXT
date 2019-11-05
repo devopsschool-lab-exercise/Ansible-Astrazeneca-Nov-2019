@@ -198,7 +198,7 @@ FLOW
 
 	using ADHOC command 
 		Do one task in ONE MACHINE(localhost)    DONE
-		Do one task in ONE REMOTE MACHINE               
+		Do one task in ONE REMOTE MACHINE               DONE         
 		Do one task in MULTIPLE REMOTE MACHINES using Inventory
 		Do one task in MULTIPLE REMOTE MACHINES using group in Inventory
 	using Playbook(Program)
@@ -454,10 +454,108 @@ Task 3 - Run again all with Deploy user only and password.
 52.66.247.115
 13.232.84.0
 
+=======================================
+How to view a file contents from ARS to ACS?
+ -------
+ ACS --> ARS
+ -------------
+ ACS --> Mdoules-> Copy ARS file to COMMON -GIT - FROM 
+
+==============
+LINIX - LINUX   
+        KEY
+        PASS
+                WITH user               WITH SUDO user
+                deploy
+                        - EXIST?
+                        - PASSWORD SET
+                        - ACCEPT?
+
+SUDO WITHOUT PASSWORD
+ansible all -i 13.233.120.241,35.154.198.224, -m yum -a"name=httpd state=present" -u username -k -b
+
+SUDO WITH PASSWORD
+ansible all -i 13.233.120.241,35.154.198.224, -m yum -a"name=httpd state=present" -u username -k -b -K
+
+SUDO WITH DIFF USER AND PASSWORD
+ansible all -i 13.233.120.241,35.154.198.224, -m yum -a"name=httpd state=present" -u username -k -b -K --become-user=diffuser
+=======================================
+
+ansible all -i 13.233.120.241,35.154.198.224,35.154.198.224,35.154.198.224,35.154.198.224,35.154.198.224,35.154.198.224,35.154.198.224,35.154.198.224,35.154.198.224,35.154.198.224,35.154.198.224,35.154.198.224,35.154.198.224,35.154.198.224,35.154.198.224,35.154.198.224,35.154.198.224,35.154.198.224, -m yum -a"name=httpd state=present" --key-file=rajesh-mumbai.pem -u ec2-user -b
 
 
+What is inventory file? AKA hostfile
+===========================================
+- a file
+- INI format
+- List of IP address
+- Can have group
+- Can have BEHAVIOURAL Parameters
 
 
+inventory
+--------------------------
+52.66.249.125
+13.233.144.212
+#2
+13.232.212.162
+13.233.103.250
+#3
+13.232.252.165
+13.233.255.63
+#4
+15.206.89.5
+13.233.120.202
 
 
+ansible all -i inventory -m copy -a"dest=/var/www/html src=index.html" --key-file=rajesh-mumbai.pem -u ec2-user -b
+
+GROUP IN INVENTORY
+-------------------------
+[root@ip-172-31-3-127 ~]# more inventory
+[web]
+52.66.249.125
+13.233.144.212
+#2
+13.232.212.162
+13.233.103.250
+#3
+[db]
+13.232.252.165
+13.233.255.63
+#4
+15.206.89.5
+13.233.120.202
+
+ansible web -i inventory -m copy -a"dest=/var/www/html src=index.html" --key-file=rajesh-mumbai.pem -u ec2-user -b
+
+ansible web,db -i inventory -m copy -a"dest=/var/www/html src=index.html" --key-file=rajesh-mumbai.pem -u ec2-user -b
+
+Google
+"List of ansible BEHAVIOURAL Parameters"
+
+-------------------------
+[root@ip-172-31-3-127 ~]# more inventory
+
+[mine]
+35.154.198.224 ansible_user=ec2-user ansible_ssh_private_key_file=rajesh-mumbai.pem ansible_become=yes
+
+13.233.120.241 ansible_user=ec2-user ansible_become=yes ansible_ssh_pass=rajesh123
+
+[web]
+web ansible_host=52.66.249.125 ansible_port=23 ansible_user=user1 ansible_ssh_private_key_file=key.pem
+web3 ansible_host=13.233.144.212 ansible_user=user2 
+
+#2
+13.232.212.162
+13.233.103.250
+#3
+[db]
+13.232.252.165
+13.233.255.63
+#4
+15.206.89.5
+13.233.120.202
+
+ansible mine -i inventory -m copy -a"dest=/var/www/html src=index.html" 
 
