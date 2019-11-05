@@ -1,0 +1,30 @@
+[root@ip-172-31-6-165 ~]# cat inventory
+[db]
+#5
+ACS_ANSI ansible_host=13.233.116.156 ansible_port=22 ansible_user=ec2-user ansible_ssh_private_key_file=rajesh-mumbai.pem ansible_become=yes
+ARC_ANSI ansible_host=13.126.118.47 ansible_user=deploy ansible_ssh_pass=astra123$
+[root@ip-172-31-6-165 ~]#
+
+
+
+
+[root@ip-172-31-6-165 ~]# ansible ACS_ANSI -i inventory -m file -a"path=/home/ec2-user/index.html state=touch"
+The authenticity of host '13.233.116.156 (13.233.116.156)' can't be established.
+ECDSA key fingerprint is SHA256:TzUt0y+wanUeJdecDNxxkmhn1Upnveo4PIEqnX6p5LI.
+ECDSA key fingerprint is MD5:9f:96:4c:ba:b7:5c:6e:c2:2e:45:a2:79:f3:2d:32:12.
+Are you sure you want to continue connecting (yes/no)? yes
+ACS_ANSI | CHANGED => {
+    "ansible_facts": {
+        "discovered_interpreter_python": "/usr/bin/python"
+    },
+    "changed": true,
+    "dest": "/home/ec2-user/index.html",
+    "gid": 0,
+    "group": "root",
+    "mode": "0644",
+    "owner": "root",
+    "secontext": "unconfined_u:object_r:user_home_t:s0",
+    "size": 0,
+    "state": "file",
+    "uid": 0
+}
