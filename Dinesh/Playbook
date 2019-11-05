@@ -78,4 +78,29 @@ ARC                        : ok=2    changed=0    unreachable=0    failed=0    s
   - name: start the httpd service
     service: name=httpd state=started
     
-    
+  [root@ip-172-31-14-93 ~]# vi touch.yaml
+[root@ip-172-31-14-93 ~]# lsa
+bash: lsa: command not found
+[root@ip-172-31-14-93 ~]# ls
+1.yaml  anaconda-ks.cfg  group1.yaml  group2.yaml  group.yaml  index.html  inventory  original-ks.cfg  rajesh-mumbai.pem  second.html  service.yaml  touch.yaml  user.yaml
+[root@ip-172-31-14-93 ~]# vi touch.yaml
+[root@ip-172-31-14-93 ~]# ansible-playbook -i inventory touch.yaml
+
+PLAY [create file] **********************************************************************************************************************************************************************************
+
+TASK [Gathering Facts] ******************************************************************************************************************************************************************************
+ok: [ARC]
+
+TASK [create file] **********************************************************************************************************************************************************************************
+changed: [ARC]
+
+PLAY RECAP ******************************************************************************************************************************************************************************************
+ARC                        : ok=2    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
+
+[root@ip-172-31-14-93 ~]# cat touch.yaml
+- name: create file
+  hosts: ARC
+  tasks:
+  - name: create file
+    file: dest=/root/test.txt state=touch
+  
