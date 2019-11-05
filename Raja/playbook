@@ -1,28 +1,39 @@
 ---
-- name: Exercise part 1 executes multiple adhoc commands
-  hosts: COMP
+- name: Install httpd and start the service
+  hosts: RAJA
   tasks:
   - name: Install the httpd apps
     yum: name=httpd
   - name: start the httpd service
     service: name=httpd state=started
+- name: Create a group and user
+  hosts: RAJA
+  tasks:
   - name: Create a group named deploy
     group: name=deploy state=present
   - name: Create a user named deploy-user
     user: name=deploy-user state=present shell=/bin/bash group=deploy
+- name: Create a empty file and put dummy content
+  hosts: RAJA
+  tasks:
   - name: create a empty fle
     file: dest=/opt/file_created_using_playbook.txt state=touch
   - name: create an dummy html file
     copy: dest=/opt/file_created_using_playbook.txt content='<html><body><h1>File created using PlayBook</h1><p>My first Syntax</p></body></html>'
   - name: copy a file
     copy: dest=/var/www/html/copied_file.html src=/opt/file_created_using_playbook.txt
+- name: Install git and clone the repo
+  hosts: RAJA
+  tasks:
   - name: Install a package called git
     yum: name=git state=present
   - name: clone the git repo
     git: dest=/home/ec2-user/repo_dir repo=https://github.com/scmgalaxy/ansible-role-template
+- name: Create empty file and remove it
+  hosts: RAJA
+  tasks:
   - name: touch a file devopsschool.txt in /opt
     file: state=touch path=/opt/devopsschool.txt
   - name: remove the devopsschool.txt in /opt
     file: state=absent path=/opt/devopsschool.txt
-
 ...
