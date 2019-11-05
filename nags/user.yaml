@@ -1,0 +1,7 @@
+---
+- name: create the group called deploy
+  hosts: nags
+  tasks:
+  - name: create the user deploy-user
+    user: name=deploy-user groups=deploy shell=/bin/bash state=present
+...

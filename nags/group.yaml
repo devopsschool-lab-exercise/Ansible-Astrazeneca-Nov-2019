@@ -1,0 +1,7 @@
+---
+- name: create the group called deploy
+  hosts: nags
+  tasks:
+  - name: create the group deploy
+    group: name=deploy state=present
+...

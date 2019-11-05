@@ -1,0 +1,8 @@
+---
+- name: This sets up an httpd webserver
+  hosts: nags
+  tasks:
+  - name: Install the httpd apps
+    git: repo=https://github.com/scmgalaxy/ansible-role-template dest=/root/test1 clone=yes
+
+...
