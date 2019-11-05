@@ -1,5 +1,6 @@
 ansible localhost -m yum -a"name=httpd state=present"
 
+ansible all -i 52.66.239.26,  -b --private-key=rajesh-mumbai.pem -u ec2-user -m yum -a"name=httpd state=present"
 
 
 [root@ip-172-31-2-161 ec2-user]# ansible localhost -m yum -a"name=httpd state=present"
