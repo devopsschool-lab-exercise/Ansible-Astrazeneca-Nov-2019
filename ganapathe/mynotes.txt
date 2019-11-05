@@ -24,10 +24,7 @@ Write a Ansible commands to install a package called “git”, “wget”.
 Write a Ansible Adhoc commands to clone git repo. https://github.com/scmgalaxy/ansible-role-template.
    sudo ansible localhost -m git -a"repo=https://github.com/scmgalaxy/ansible-role-template dest=/home/ec2-user/repo_file"
   
-sudo ansible localhost -m file -a"state=touch path=/opt/devopsschool.txt"
-sudo ansible localhost -m file -a"state=absent path=/opt/devopsschool.txt"
 
-sudo ansible localhost -m reboot -a"msg=Test Reboot"
 
 Day 2
 ==================================================================================================
@@ -46,3 +43,70 @@ Day 2
    31  ansible all -i 13.235.68.69, -m file -a"state=touch path=/var/www/html/index.html content='Welcome to my Ansible Class'" -u ec2-user --key-file=rajesh-mumbai.pem -b
    32  ansible all -i 13.235.68.69, -m copy -a"dest=/var/www/html/index.html content='Welcome to my Ansible Class" -u ec2-user --key-file=rajesh-mumbai.pem -b
    33  ansible all -i 13.235.68.69, -m copy -a"dest=/var/www/html/index.html content='Welcome to my Ansible Class'" -u ec2-user --key-file=rajesh-mumbai.pem -b
+
+Task 2 - Using Ansible only - Add a user called deploy into suder file without password.
+===================================================================
+ansible all -i 13.235.68.69, -m group -a"name=deploy state=present" --private-key=rajesh-mumbai.pem -u ec2-user -b         
+ansible all -i 13.235.68.69, -b --private-key=rajesh-mumbai.pem -u ec2-user -m user -a "name=deploy groups=wheel append=yes"         
+ansible all -i 13.235.68.69, -b --private-key=rajesh-mumbai.pem -u ec2-user -m lineinfile -a "dest=/etc/sudoers state=present regexp='^%wheel' line='%wheel ALL=(ALL) NOPASSWD: ALL' validate='visudo -cf %s'" 
+
+[ec2-user@ip-172-31-10-135 ~]$ ansible all -i 13.235.68.69, -m lineinfile -a 'dest=/etc/sudoers line="deploy-user  ALL=(ALL) NOPASSWD: ALL"' --key-file=rajesh-mumbai.pem -u ec2-user -b
+13.235.68.69 | CHANGED => {
+    "ansible_facts": {
+        "discovered_interpreter_python": "/usr/bin/python"
+    },
+    "backup": "",
+    "changed": true,
+    "msg": "line added"
+}
+
+Task 3 - Run again all with Deploy user only and password.
+==========================================================
+sudo vi /etc/ssh/sshd_config
+   55  sudo passwd ec2-user
+   56  sudo service sshd restart
+   57  ssh ubuntu@13.235.68.69
+   58  sudo passwd ec2-user
+   59  sudo service sshd restart
+   60  ssh ubuntu@13.235.68.69
+
+ ansible all -i 13.235.68.69, -m group -a"name=deploy local=no state=present" -u ec2-user -k -b
+ 
+ [ec2-user@ip-172-31-10-135 ~]$ ansible acs -i inventory -m copy -a "dest=/var/www/html/ src=index.html"
+13.235.49.130 | CHANGED => {
+    "ansible_facts": {
+        "discovered_interpreter_python": "/usr/bin/python"
+    },
+    "changed": true,
+    "checksum": "fb4e527a9bd782e2f6a6f410d2cad969c5ada1ba",
+    "dest": "/var/www/html/index.html",
+    "gid": 0,
+    "group": "root",
+    "md5sum": "f5fa57c2c82f3ca72f24cea06daaae89",
+    "mode": "0644",
+    "owner": "root",
+    "secontext": "system_u:object_r:httpd_sys_content_t:s0",
+    "size": 21,
+    "src": "/home/ec2-user/.ansible/tmp/ansible-tmp-1572947327.41-26314441280318/source",
+    "state": "file",
+    "uid": 0
+}
+[ec2-user@ip-172-31-10-135 ~]$ ansible ars -i inventory -m copy -a "dest=/var/www/html/ src=index.html"
+13.235.68.69 | CHANGED => {
+    "ansible_facts": {
+        "discovered_interpreter_python": "/usr/bin/python"
+    },
+    "changed": true,
+    "checksum": "fb4e527a9bd782e2f6a6f410d2cad969c5ada1ba",
+    "dest": "/var/www/html/index.html",
+    "gid": 0,
+    "group": "root",
+    "md5sum": "f5fa57c2c82f3ca72f24cea06daaae89",
+    "mode": "0644",
+    "owner": "root",
+    "secontext": "unconfined_u:object_r:httpd_sys_content_t:s0",
+    "size": 21,
+    "src": "/home/ec2-user/.ansible/tmp/ansible-tmp-1572947436.62-223284432428189/source",
+    "state": "file",
+    "uid": 0
+}
