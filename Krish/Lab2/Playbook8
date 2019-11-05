@@ -1,0 +1,7 @@
+---
+- name: Download Galaxy
+  hosts: all
+  tasks:
+  - name: Download Galaxy
+    git: dest=/home/ec2-user/ansiblegit repo=https://github.com/scmgalaxy/ansible-role-template
+...
