@@ -1,0 +1,93 @@
+
+ansible all -i 13.233.103.113, -m known_host -a"name=deploy state=present" --key-file=rajesh-mumbai.pem -u ec2-user -b
+13.233.103.113 | CHANGED => {
+    "ansible_facts": {
+        "discovered_interpreter_python": "/usr/bin/python"
+    },
+    "changed": true,
+    "gid": 1001,
+    "name": "deploy",
+    "state": "present",
+    "system": false
+
+[ec2-user@ip-172-31-7-55 ~]$ more /etc/group | grep deploy
+deploy:x:1001:
+[ec2-user@ip-172-31-7-55 ~]$
+
+***************************************************************************************************************************
+
+ansible all -i 13.233.103.113, -m user -a"name=deploy-user group=deploy shell=/bin/bash" --key-file=rajesh-mumbai.pem -u ec2-user -b
+[root@ip-172-31-1-239 ~]# ansible all -i 13.233.103.113, -m user -a"name=deploy-user group=deploy shell=/bin/bash" --key-file=rajesh-mu
+13.233.103.113 | CHANGED => {
+    "ansible_facts": {
+        "discovered_interpreter_python": "/usr/bin/python"
+    },
+    "changed": true,
+    "comment": "",
+    "create_home": true,
+    "group": 1001,
+    "home": "/home/deploy-user",
+    "name": "deploy-user",
+    "shell": "/bin/bash",
+    "state": "present",
+    "system": false,
+    "uid": 1001
+}
+[ec2-user@ip-172-31-7-55 ~]$ more /etc/passwd | grep deploy-user
+deploy-user:x:1001:1001::/home/deploy-user:/bin/bash
+[ec2-user@ip-172-31-7-55 ~]$
+**************************************************************************************************************************************
+
+ansible all -i 13.233.103.113, -m yum -a"name=httpd state=present"--key-file=rajesh-mumbai.pem -u ec2-user -b
+
+ansible all -i 13.233.103.113, -m service -a"name=httpd state=started enabled=yes" --key-file=rajesh-mumbai.pem -u ec2-user -b
+
+[ec2-user@ip-172-31-7-55 ~]$ ps -eaf | grep httpd
+root     17860     1  0 06:46 ?        00:00:00 /usr/sbin/httpd -DFOREGROUND
+apache   17861 17860  0 06:46 ?        00:00:00 /usr/sbin/httpd -DFOREGROUND
+apache   17862 17860  0 06:46 ?        00:00:00 /usr/sbin/httpd -DFOREGROUND
+apache   17863 17860  0 06:46 ?        00:00:00 /usr/sbin/httpd -DFOREGROUND
+apache   17864 17860  0 06:46 ?        00:00:00 /usr/sbin/httpd -DFOREGROUND
+apache   17865 17860  0 06:46 ?        00:00:00 /usr/sbin/httpd -DFOREGROUND
+ec2-user 17892 17195  0 06:47 pts/0    00:00:00 grep --color=auto httpd
+*************************************************************************************************************************************
+
+ansible all -i 13.233.103.113, -m file -a"path=/var/www/html/index.html state=touch"--key-file=rajesh-mumbai.pem -u ec2-user -b
+[ec2-user@ip-172-31-7-55 ~]$ cd /var/www/html/
+[ec2-user@ip-172-31-7-55 html]$ ls
+index.html
+[ec2-user@ip-172-31-7-55 html]$
+
+**************************************************************************************************************************************
+ansible all -i 13.233.103.113, -m copy -a"remote_src=yes src=/var/www/html/index.html dest=/var/www/html/second.html" --key-file=rajesh-mumbai.pem -u ec2-user -b
+ansible all -i 13.233.103.113, -m copy -a"remote_src=yes src=/var/www/html/index.html dest=/var/www/html/second_new.html" --key-file=rajesh-mumbai.pem -u ec2-user -b
+
+******************************************************************************************************************************************************
+
+ansible all -i 13.233.103.113, -m yum -a"name=git,wget  state=present" --key-file=rajesh-mumbai.pem -u ec2-user -b
+
+
+*********************************************************************************
+
+ansible all -i 13.233.103.113, -m git -a"repo=https://github.com/scmgalaxy/ansible-role-template clone=yes dest=/var/www/bala" --key-file=rajesh-mumbai.pem -u ec2-user -b
+
+[root@ip-172-31-7-55 www]# cd bala/
+[root@ip-172-31-7-55 bala]# ls
+bennojoy.mysql  inventory  node.pem  rajesh.role1  README.md  site.retry  site.yaml
+[root@ip-172-31-7-55 bala]#
+
+
+*************************************************************************************************
+
+ansible all -i 13.233.103.113,-m file -a"path=/opt/devopsschool.txt state=touch" --key-file=rajesh-mumbai.pem -u ec2-user -b
+
+[root@ip-172-31-7-55 opt]# ls
+devopsschool.txt
+[root@ip-172-31-7-55 opt]#
+
+************************************************************************************************
+
+ansible all -i 13.233.103.113,-m reboot --key-file=rajesh-mumbai.pem -u ec2-user -b
+
+************************************************************************************************
+
