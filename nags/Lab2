@@ -1,0 +1,22 @@
+Task 1  - RUn all Adhocs which you created in Remote MACHINE(Ec-user with Key)
+
+
+
+
+ansible all -i 13.232.212.162,13.233.103.250, -m yum -a"name=httpd state=present" --key-file=rajesh-mumbai.pem -u ec2-user -b
+
+ansible all -i 13.232.212.162,13.233.103.250, -m copy -a"dest=/var/www/html src=index.html" --key-file=rajesh-mumbai.pem -u ec2-user -b
+
+ansible all -i 13.232.212.162,13.233.103.250, -m service -a"name=httpd state=started" --key-file=rajesh-mumbai.pem -u ec2-user -b
+
+
+Task 2 - Using Ansible only - Add a user called deploy into suder file without password.
+
+
+ansible all -i 13.232.212.162,13.233.103.250, -m lineinfile -a"path=/etc/sudoers state=present line='deploy-user ALL=(ALL) NOPASSWD: ALL'" --key-file=rajesh-mumbai.pem -u ec2-user -b
+
+
+
+Task 3 - Run again all with Deploy user only and password.
+
+ ansible all -i 13.232.212.162,13.233.103.250, -m yum -a"name=httpd state=present" -u deploy-user -k
