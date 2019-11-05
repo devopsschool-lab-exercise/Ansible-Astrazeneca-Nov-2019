@@ -33,3 +33,9 @@ ansible all -i /inventory -m copy -a"dest=/var/www/html src=saravanan" --key-fil
 GROUP IN INVENTORY:
 ====================
 ansible iterm -i /inventory -m copy -a"dest=/var/www/html src=/root/saravanan123" --key-file=rajesh-mumbai.pem -u ec2-user -b
+
+BEHAVIOURAL Parameters:
+=========================
+iterm ansible_host=15.206.128.246 ansible_port=22 ansible_user=deploy-user ansible_ssh_pass=qwemnb43 ansible_become=yes
+
+ansible iterm -i inventory -m copy -a"dest=/var/www/html src=/root/Avanitka" 
