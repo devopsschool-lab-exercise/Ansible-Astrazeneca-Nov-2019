@@ -1,3 +1,6 @@
+AMI ID
+RHEL-7.5_HVM_GA-20180322-x86_64-1-Hourly2-GP2 (ami-5b673c34)
+
 Task 1 - Pre Test
 https://www.devopsschool.com/lms
 
@@ -155,6 +158,8 @@ ACS
         Core Module  --- Each Module would ONE thing
     Inventory --- List of IP Address
     Playbook ------> Come from Humen
+    Ansible Config - /etc/ansible/ansible.cfg
+
 -----------------
 
 Roles you are going to play Ansible?
@@ -193,7 +198,7 @@ FLOW
 
 	using ADHOC command 
 		Do one task in ONE MACHINE(localhost)    DONE
-		Do one task in ONE REMOTE MACHINE
+		Do one task in ONE REMOTE MACHINE               
 		Do one task in MULTIPLE REMOTE MACHINES using Inventory
 		Do one task in MULTIPLE REMOTE MACHINES using group in Inventory
 	using Playbook(Program)
@@ -308,9 +313,146 @@ Lab1 - https://www.devopsschool.com/blog/ansible-adhoc-commands-lab-excercise-pa
 
 
 
+using ADHOC command 
+		Do one task in ONE MACHINE(localhost)    DONE
+		Do one task in ONE REMOTE MACHINE               
+		Do one task in MULTIPLE REMOTE MACHINES using Inventory
+		Do one task in MULTIPLE REMOTE MACHINES using group in Inventory
+
+
+Do one task in ONE REMOTE MACHINE    
+========================================================
+ansible localhost -m yum -a"name=httpd state=present"
+ansible localhost -m copy -a"dest=/var/www/html src=index.html"
+ansible localhost -m service -a"name=httpd state=started"
+
+Ansible Execution TYPE
+=========================
+                localhost
+                Remote
+                        SSH
+                        winrm
+                docker
+=====================================
+
+Ansible Adhoc commands has 3 sections of argements.
+        - Options
+        - Privilege Escalation Options:
+        - Connection Options:
+
+-i INVENTORY, --inventory=INVENTORY, --inventory-file=INVENTORY
+                        specify inventory host path or comma separated host
+                        list. --inventory-file is deprecated
+INVENTORY
+        - List of IPs address/Hostname
+                - Command Line
+                        6.4.4.4,6.4.4.5
+                        6.4.4.4, 
+                - File (INI format or YAML formar)
+                - Script
+                        Local
+                        remote    
+
+        - HAS group
+                - default -  all, nogroup
+                - Custom  
+
+ansible localhost -m yum -a"name=httpd state=present"
+ansible localhost -m copy -a"dest=/var/www/html src=index.html"
+ansible localhost -m service -a"name=httpd state=started"  
+
+ansible -i 35.154.198.224, -m yum -a"name=httpd state=present"
+ansible all -i 35.154.198.224, -m yum -a"name=httpd state=present"
+
+
+PRBLEM - 1 
+---> LINUX --> SSH --> LINUX
+------------------------------
+1. finterprint
+        YES - host entry of remote would be add in known host.
+        NO - DISCONNECTED
+
+How to authenticate from LINXU to LINUX?
+        - KEY
+        - PASSWORD
+What you are authorized to do in Remote linux?
+
+35.154.198.224 - ACS
+13.233.120.241 - ARS 
+
+ansible all -i 13.233.120.241,35.154.198.224, -m yum -a"name=httpd state=present" --key-file=rajesh-mumbai.pem -u ec2-user -b
+
+ansible all -i 13.233.120.241,35.154.198.224, -m copy -a"dest=/var/www/html src=index.html" --key-file=rajesh-mumbai.pem -u ec2-user -b
+
+ansible all -i 13.233.120.241,35.154.198.224, -m service -a"name=httpd state=started" --key-file=rajesh-mumbai.pem -u ec2-user -b
+
+======
+Task 1  - RUn all Adhocs which you created in Remote MACHINE(Ec-user with Key)
+Task 2 - Using Ansible only - Add a user called deploy into suder file without password.
+Task 3 - Run again all with Deploy user only and password.
 
 
 
+#1
+52.66.249.125
+13.233.144.212
+#2
+13.232.212.162
+13.233.103.250
+#3
+13.232.252.165
+13.233.255.63
+#4
+15.206.89.5
+13.233.120.202
+#5
+13.233.116.156
+13.126.118.47
+#6
+13.233.75.23
+13.233.91.147
+#7
+15.206.88.25
+13.234.21.183
+#8
+13.127.37.168
+15.206.128.246
+#9
+13.233.152.172
+13.233.156.131
+#10
+13.127.38.125
+13.233.119.183
+#11
+13.235.49.130
+13.235.68.69
+#12
+15.206.127.113
+13.233.23.127
+#13
+13.235.49.246
+13.235.49.197
+#14
+13.235.80.38
+52.66.239.26
+#15
+13.126.122.101
+13.233.40.247
+#16
+13.232.188.175
+35.154.177.238
+#17
+13.126.33.229
+52.66.245.32
+#18
+13.235.71.53
+15.206.90.82
+#19
+13.233.51.150
+13.233.103.113
+#20
+52.66.247.115
+13.232.84.0
 
 
 
