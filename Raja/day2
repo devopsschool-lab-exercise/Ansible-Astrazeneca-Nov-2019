@@ -31,3 +31,22 @@ sudo ansible all -i 35.154.177.238, -m lineinfile -a"path=/etc/sudoers state=pre
 sudo ansible all -i 35.154.177.238, -m user -a"name=new-user shell=/bin/bash group=deploy state=present" -u deploy-user -k -b
 
 sudo ansible all -i 35.154.177.238, -m file -a"state=touch path=/var/www/html/indexas_deploy-user.html" -u deploy-user -k -b
+
+=============================================================================================
+Inventory, Group, Behavioural parameter..........
+
+
+[RAJA]
+13.232.188.175
+[REST]
+35.154.177.238
+[beh_par]
+13.232.188.175 ansible_user=ec2-user ansible_ssh_private_key_file=rajesh-mumbai.pem ansible_become=yes
+35.154.177.238 ansible_user=deploy-user ansible_become=yes ansible_ssh_pass=training
+
+
+sudo ansible all -i myinv -m copy -a"dest=/var/www/html/copy_using_inv.html src=/var/www/html/index.html remote_src=yes" --key-file=rajesh-mumbai.pem -u ec2-user -b
+
+sudo ansible RAJA -i myinv -m copy -a"dest=/var/www/html/copy_using_inv.html src=/var/www/html/index.html remote_src=yes" --key-file=rajesh-mumbai.pem -u ec2-user -b
+
+sudo ansible beh_par -i myinv -m copy -a"dest=/var/www/html/copy_using_ben_par.html src=/var/www/html/index.html remote_src=yes"
