@@ -23,7 +23,7 @@ ansible all -i 13.233.156.131, -m copy -a "src=/root/second.html dest=/var/www/h
 ansible all -i 13.233.156.131, -m yum -a "name=git,wget state=present" -u deploy --become-user=ec2-user -k
 ansible all -i 13.233.156.131, -m git -a "repo=https://github.com/scmgalaxy/ansible-role-template dest=/tmp/repo" -u deploy --become-user=ec2-user -k
 ansible all -i 13.233.156.131, -m "reboot" -u deploy --become-user=ec2-user -k
-ansible all -i 13.233.156.131, -m file -a "state=touch path=/opt/devopsschool.txt"  --become-user=ec2-user -k
-ansible all -i 13.233.156.131, -m file -a "state=absent path=/opt/devopsschool.txt" --become-user=ec2-user -k
+ansible all -i 13.233.156.131, -m file -a "state=touch path=/opt/devopsschool.txt"  -u deploy --become-user=ec2-user -k
+ansible all -i 13.233.156.131, -m file -a "state=absent path=/opt/devopsschool.txt" -u deploy --become-user=ec2-user -k
 
 
