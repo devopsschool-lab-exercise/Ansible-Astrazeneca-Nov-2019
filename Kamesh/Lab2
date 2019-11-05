@@ -1,0 +1,19 @@
+Task 1
+
+ansible -i 52.66.245.32, -m yum -a"name=httpd state=present"
+ansible -i 52.66.245.32-m group -a "name=deploy state=present"
+ansible -i 52.66.245.32 -m user -a"name=deploy-user shell=/bin/bash group=deploy"
+ansible -i 52.66.245.32 -m service -a"name=httpd state=started"
+ansible -i 52.66.245.32 -m yum -a"name=git,wget state=present"
+ansible -i 52.66.245.32 -m reboot -a"reboot_timeout=300"
+
+Task 2
+
+ansible all -i 52.66.245.32, -m lineinfile -a "path=/etc/sudoers line='deploy-user  ALL=(ALL) NOPASSWD: ALL'" --key-file kamesh.pem -u ec2-user -b
+
+Task 3
+
+Edit sshd config file to enable Password authentication to true
+Restart sshd service
+
+ansible all -i 52.66.245.32, -m lineinfile -a "path=/etc/sudoers line='test'"  -u deploy-user -k -b
