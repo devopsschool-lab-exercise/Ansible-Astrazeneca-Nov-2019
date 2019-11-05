@@ -9,3 +9,8 @@ ansible all -i 15.206.88.25,13.234.21.183, -m file -a "name=devopsschool.txt sta
 ansible all -i 15.206.88.25,13.234.21.183, -m copy -a"dest=/var/www/html src=second.html" --key-file=rajesh-mumbai.pem -u ec2-user -b
 ansible all -i 15.206.88.25,13.234.21.183, -m reboot --key-file=rajesh-mumbai.pem -u ec2-user -b
 ansible all -i 15.206.88.25,13.234.21.183, -m lineinfile -a"path=/etc/sudoers state=present line='deploy-user ALL=(ALL) NOPASSWD: ALL'" --key-file=rajesh-mumbai.pem -u ec2-user -b
+[ec2-user@ip-172-31-5-151 ~]$ more inventory
+[Router]
+15.206.88.25 ansible_port=22 ansible_user=ec2-user ansible_ssh_private_key_file=rajesh-mumbai.pem
+13.234.21.183 ansible_port=22 ansible_user=ec2-user ansible_password=test123
+ansible Router -i inventory -m copy -a"dest=/var/www/html/hi.html content='Welcome'"
