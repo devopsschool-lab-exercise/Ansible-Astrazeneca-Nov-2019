@@ -1,6 +1,10 @@
 ansible localhost -m yum -a"name=git,wget state=present"
 
 
+
+ansible all -i 52.66.239.26,  -b --private-key=rajesh-mumbai.pem -u ec2-user -m yum -a"name=git,wget state=present"
+
+
 localhost | CHANGED => {
     "ansible_facts": {
         "pkg_mgr": "yum"
