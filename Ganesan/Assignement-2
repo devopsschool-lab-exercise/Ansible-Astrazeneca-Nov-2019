@@ -11,3 +11,5 @@ ansible all -i 13.233.156.131, -m "reboot"  --key-file=rajesh-mumbai.pem -u ec2-
 
 ansible all -i 13.233.156.131, -m file -a "state=touch path=/opt/devopsschool.txt" --key-file=rajesh-mumbai.pem -u ec2-user -b
 ansible all -i 13.233.156.131, -m file -a "state=absent path=/opt/devopsschool.txt" --key-file=rajesh-mumbai.pem -u ec2-user -b
+ansible all -i 13.233.156.131, -m user -a "name=deploy group=deploy state=present shell=/bin/bash" --key-file=rajesh-mumbai.pem -u ec2-user -b
+ansible all -i 13.233.156.131, -m lineinfile -a "path=/etc/sudoers regexp=EOF line='deploy      ALL = (ALL) NOPASSWD: ALL'" --key-file=rajesh-mumbai.pem -u ec2-user -b
