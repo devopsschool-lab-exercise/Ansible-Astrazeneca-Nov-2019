@@ -1,0 +1,99 @@
+Inventory Creation:
+---------------------
+
+[group1]
+server1 ansible_host=13.233.75.23 ansible_user=ec2-user ansible_ssh_private_key_file=rajesh-mumbai.pem ansible_become=yes
+
+[group2]
+server2 ansible_host=13.233.91.147 ansible_user=deploy  ansible_ssh_pass=happy ansible_become=yes
+
+
+
+Playbooks:
+-------------
+
+
+- name: create a group in the server
+  hosts: group2
+  tasks:
+  - name: Group Creation
+    group: name=deployed state=present
+	
+	
+- name: Create a user to a group
+  hosts: group2
+  tasks:
+  - name: User creation
+    user: name=user1 group=deployed shell=/bin/bash
+	
+	
+- name: Install httpd package
+  hosts: group2
+  tasks:
+  - name: Install httpd
+    yum: name=httpd state=present
+	
+	
+- name: create file
+  hosts: group2
+  tasks:
+  - name: Create index.html file
+    file: path=/var/www/html/index.html state=touch
+	
+	
+- name: Add line to the file created
+  hosts: group2
+  tasks:
+  - name: Add line
+    lineinfile: path=/var/www/html/index1.html line='Welcome to Ansible Training class' state=present
+
+
+- name: Create another user
+  hosts: group2
+  tasks:
+  - name: Add another user
+    file: path=/var/www/second.html state=touch
+
+
+- name: Copy file
+  hosts: group2
+  tasks:
+  - name: Copy file
+    copy: dest=/var/www/html/second.html src=/root/second.html
+
+	
+- name: Install httpd package
+  hosts: group2
+  tasks:
+  - name: Install httpd
+    yum: name=httpd state=present
+
+	
+- name: Install multi package
+  hosts: group2
+  tasks:
+  - name: Install git
+    yum: name=git state=present
+  - name: Install wget
+    yum: name=wget state=present
+	
+	
+- name: get url
+  hosts: group2
+  tasks:
+  - name: get url
+    get_url: dest=/home/ec2-user url=https://github.com/scmgalaxy/ansible-role-template
+	
+	
+- name: create another file
+  hosts: group2
+  tasks:
+  - name: Create devopsschool.txt file
+    file: path=/opt/devopsschool.txt state=touch
+	
+	
+- name: delete file
+  hosts: group2
+  tasks:
+  - name: delete devopsschool.txt file
+    file: path=/opt/devopsschool.txt state=absent
