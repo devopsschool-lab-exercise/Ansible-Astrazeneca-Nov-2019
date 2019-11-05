@@ -1,0 +1,22 @@
+[root@ip-172-31-1-235 ~]# cat task.yaml
+- name: This sets up group in the server
+  hosts: web
+  tasks:
+  - name: add new group in the server
+    group: name=palybook state=present
+  - name: add new user in the server
+    user: name=playbook-user group=palybook
+  - name: Install the httpd apps
+    yum: name=httpd
+  - name: start the httpd service
+    service: name=httpd state=started
+  - name: create a empty fle
+    file: dest=/root/test.txt state=touch
+  - name: copy a file
+    copy: dest=/home/ec2-user/test.txt src=/root/test.txt
+  - name: download file
+    get_url: dest=/home/ec2-user/ url=https://github.com/scmgalaxy/ansible-role-template
+  - name: install git
+    yum: name=git state=present
+  - name : delete file
+    file: path=/home/ec2-user/test.txt state=absent
