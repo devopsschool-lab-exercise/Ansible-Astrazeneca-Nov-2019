@@ -1,0 +1,6 @@
+---
+- hosts: ars
+  tasks:
+  - name: Clone git Repo
+    git: clone=yes repo=https://github.com/scmgalaxy/ansible-role-template dest=/home/ec2-user/ganapathi
+...

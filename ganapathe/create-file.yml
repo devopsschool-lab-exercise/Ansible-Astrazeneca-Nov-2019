@@ -1,0 +1,8 @@
+---
+- hosts: ars
+  tasks:
+  - name: create html file
+    file: name=index.html path=/var/www/html/ state=touch
+  - name: copy html file
+    copy: content="Hello World" dest=/var/www/html/index.html
+...

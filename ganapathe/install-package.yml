@@ -1,0 +1,8 @@
+---
+- hosts: ars
+  tasks:
+  - name: install a package called wget
+    yum: name=wget state=present
+  - name: install git
+    yum: name=git state=present
+...
