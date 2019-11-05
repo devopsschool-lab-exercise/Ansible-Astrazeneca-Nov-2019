@@ -1,0 +1,7 @@
+---
+- name First playbook which converts adhoc commands into yaml file
+  hosts Router
+  tasks
+  - name create group
+    group name=deploy-user state=present
+...
