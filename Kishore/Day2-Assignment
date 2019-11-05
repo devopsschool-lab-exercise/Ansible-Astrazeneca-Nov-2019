@@ -1,0 +1,116 @@
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Program 1 – Write a Ansible Adhoc Commands to create a group called “deploy"
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+sudo ansible localhost -m group -a"state=present name=deploy"
+
+
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Program 2 – Write a Ansible Adhoc Commands to create a user called “deploy-user” which is part of group called “deploy” 
+and with /bin/bash shell.
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+[ec2-user@ip-172-31-11-15 ~]$ sudo ansible localhost -m user -a"name=deploy-user group=deploy shell=/bin/bash"
+localhost | CHANGED => {
+    "changed": true,
+    "comment": "",
+    "create_home": true,
+    "group": 1001,
+    "home": "/home/deploy-user",
+    "name": "deploy-user",
+    "shell": "/bin/bash",
+    "state": "present",
+    "system": false,
+    "uid": 1001
+}
+
+[ec2-user@ip-172-31-11-15 ~]$ more /etc/passwd | grep deploy-user
+deploy-user:x:1001:1001::/home/deploy-user:/bin/bash
+
+
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Program 3 – Write a Ansible Adhoc commands install package named “httpd” in RHEL/centos.
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+[root@ip-172-31-11-15 ~]# which httpd
+/sbin/httpd
+
+[root@ip-172-31-11-15 ~]# ansible localhost -m yum -a"name=[Ahttpd state=present"
+localhost | FAILED! => {
+    "ansible_facts": {
+        "pkg_mgr": "yum"
+    },
+    "changed": false,
+    "msg": "No package matching '[Ahttpd' found available, installed or updated",
+    "rc": 126,
+    "results": [
+        "No package matching '[Ahttpd' found available, installed or updated"
+    ]
+}
+
+
+
+Program 4 – Write a Ansible Adhoc commands to start and enable the service named “httpd”
+
+ansible localhost -m service -a"name=httpd enabled=yes state=started"
+
+[root@ip-172-31-11-15 ~]# ps -eaf | grep httpd
+root     17974     1  0 11:32 ?        00:00:00 /usr/sbin/httpd -DFOREGROUND
+apache   17975 17974  0 11:32 ?        00:00:00 /usr/sbin/httpd -DFOREGROUND
+apache   17976 17974  0 11:32 ?        00:00:00 /usr/sbin/httpd -DFOREGROUND
+apache   17977 17974  0 11:32 ?        00:00:00 /usr/sbin/httpd -DFOREGROUND
+apache   17978 17974  0 11:32 ?        00:00:00 /usr/sbin/httpd -DFOREGROUND
+apache   17979 17974  0 11:32 ?        00:00:00 /usr/sbin/httpd -DFOREGROUND
+root     17987 17819  0 11:33 pts/0    00:00:00 grep --color=auto httpd
+
+
+Program 5 – Write a Ansible commands to create a file called “index.html” in /var/www/html with some dummy html contents.
+
+ansible localhost -m file -a"path=/var/www/html/index1.html state=touch"
+
+ansible localhost -m copy -a"content=HelloWorld dest=/var/www/html/index.html"
+
+http://13.233.194.31/
+
+
+Program 6 – Write a Ansible commands to copy a file called “second.html” in /var/www/html/second.html with some dummy html contents.
+
+ansible localhost -m copy -a"content='Hello World 2' dest=/var/www/html/second.html"
+
+http://13.233.194.31/second.html
+
+
+Program 7 – Write a Ansible commands to install a package called “git”, “wget”.
+
+ansible localhost -m yum -a"name=wget state=present"
+
+ansible localhost -m yum -a"name=git state=present"
+
+
+
+Program 8 – Write a Ansible Adhoc commands to clone git repo. https://github.com/scmgalaxy/ansible-role-template.
+
+[root@ip-172-31-11-15 ~]# ansible localhost -m git -a"clone=yes repo='https://github.com/scmgalaxy/ansible-role-template' dest=/var/kishore"
+
+localhost | CHANGED => {
+    "after": "d3eefe03c1bb6c9b0e1574347523174a26d015ff",
+    "before": null,
+    "changed": true
+}
+
+
+[root@ip-172-31-11-15 opt]# ansible localhost -m file -a"path=/opt/devopsschool.txt state=touch"
+localhost | CHANGED => {
+    "changed": true,
+    "dest": "/opt/devopsschool.txt",
+    "gid": 0,
+    "group": "root",
+    "mode": "0644",
+    "owner": "root",
+    "secontext": "unconfined_u:object_r:usr_t:s0",
+    "size": 0,
+    "state": "file",
+    "uid": 0
+}
