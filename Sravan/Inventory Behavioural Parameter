@@ -1,0 +1,66 @@
+
+[root@ip-172-31-12-88 ~]# cat myinventory
+[myars]
+13.233.119.183 ansible_user=deploy ansible_ssh_pass=User1@Deploy ansible_become=yes
+
+
+[root@ip-172-31-12-88 ~]# ansible myars -i myinventory -m yum -a "name=ftp state=installed"
+13.233.119.183 | CHANGED => {
+    "ansible_facts": {
+        "discovered_interpreter_python": "/usr/bin/python"
+    },
+    "changed": true,
+    "changes": {
+        "installed": [
+            "ftp"
+        ]
+    },
+    "msg": "",
+    "rc": 0,
+    "results": [
+        "Loaded plugins: amazon-id, rhui-lb, search-disabled-repos\nResolving Dependencies\n--> Running transaction check\n---> Package ftp.x86_64 0:0.17-67.el7 will be installed\n--> Finished Dependency Resolution\n\nDependencies Resolved\n\n================================================================================\n Package Arch       Version          Repository                            Size\n================================================================================\nInstalling:\n ftp     x86_64     0.17-67.el7      rhui-REGION-rhel-server-releases      61 k\n\nTransaction Summary\n================================================================================\nInstall  1 Package\n\nTotal download size: 61 k\nInstalled size: 96 k\nDownloading packages:\nRunning transaction check\nRunning transaction test\nTransaction test succeeded\nRunning transaction\n  Installing : ftp-0.17-67.el7.x86_64                                       1/1 \n  Verifying  : ftp-0.17-67.el7.x86_64                                       1/1 \n\nInstalled:\n  ftp.x86_64 0:0.17-67.el7                                                      \n\nComplete!\n"
+    ]
+}
+
+
+[root@ip-172-31-12-88 ~]# cat myinventory
+[myars]
+13.233.119.183 ansible_user=deploy ansible_ssh_pass=User1@Deploy ansible_become_method=yes
+
+
+
+[root@ip-172-31-12-88 ~]# vi myinventory
+[root@ip-172-31-12-88 ~]# ansible myars -i myinventory -m yum -a "name=ftp state=installed"
+13.233.119.183 | SUCCESS => {
+    "ansible_facts": {
+        "discovered_interpreter_python": "/usr/bin/python"
+    },
+    "changed": false,
+    "msg": "",
+    "rc": 0,
+    "results": [
+        "ftp-0.17-67.el7.x86_64 providing ftp is already installed"
+    ]
+}
+
+
+
+[root@ip-172-31-12-88 ~]# cat myinventory
+[myars]
+13.233.119.183 ansible_user=deploy ansible_ssh_pass=User1@Deploy ansible_become_user=sudo
+
+
+
+[root@ip-172-31-12-88 ~]# vi myinventory
+[root@ip-172-31-12-88 ~]# ansible myars -i myinventory -m yum -a "name=ftp state=installed"
+13.233.119.183 | SUCCESS => {
+    "ansible_facts": {
+        "discovered_interpreter_python": "/usr/bin/python"
+    },
+    "changed": false,
+    "msg": "",
+    "rc": 0,
+    "results": [
+        "ftp-0.17-67.el7.x86_64 providing ftp is already installed"
+    ]
+}
