@@ -77,6 +77,8 @@ ansible all -i 13.232.84.0, -m file -a "state=absent path=/opt/devopsschool.txt"
 
 Task 2:
 
+ansible all -i 13.232.84.0,  -m lineinfile -a 'dest=/etc/sudoers line="deploy-user ALL=(ALL) NOPASSWD: ALL"' --key-file=rajesh-mumbai.pem -u ec2-user -b 
+
 ansible all -i 13.232.84.0, -m user -a"name=deploy groups=wheel append=yes state=present createhome=yes" --key-file=rajesh-mumbai.pem -u ec2-user -b
 
 
