@@ -1,0 +1,22 @@
+$ sudo yum install wget -y
+$ wget https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+$ yum install https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+$ sudo rpm -i epel-release-latest-7.noarch.rpm
+$ sudo yum install ansible -y
+
+wget https://www.devopsschool.com/notes/ansible/2019/rajesh-mumbai.pem
+
+ansible all -i 52.66.249.125,13.233.144.212, -m yum -a"name=httpd state=present" --key-file=rajesh-mumbai.pem -u ec2-user -b
+ansible all -i 52.66.249.125,13.233.144.212, -m copy -a"dest=/var/www/html src=index.html" --key-file=rajesh-mumbai.pem -u ec2-user -b
+ansible all -i 52.66.249.125,13.233.144.212, -m service -a"name=httpd state=started" --key-file=rajesh-mumbai.pem -u ec2-user -b
+
+ansible all -i 52.66.249.125,13.233.144.212, -m shell -a"name=wls group=wls password=wls" --key-file=rajesh-mumbai.pem -u ec2-user -b 
+[root@ip-172-31-1-235 ~]# ansible all -i 52.66.249.125,13.233.144.212, -m shell -a"name=wls group=wls password=wls" --key-file=rajesh-mumbai.pem -u ec2-user -b
+52.66.249.125 | CHANGED | rc=0 >>
+13.233.144.212 | CHANGED | rc=0 >>
+
+ansible all -i 52.66.249.125,13.233.144.212, -m file -a"dest=/home/ec2-user/test.txt state=touch" --key-file=rajesh-mumbai.pem -u ec2-user -b 
+ansible all -i 52.66.249.125,13.233.144.212, -m file -a"dest=/home/ec2-user/test.txt state=absent" --key-file=rajesh-mumbai.pem -u ec2-user -b 
+
+ansible all -i 52.66.249.125,13.233.144.212, -m shell -a"name=wls group=wls password=wls" --key-file=rajesh-mumbai.pem -u ec2-user -b
+ansible all -i 52.66.249.125,13.233.144.212, -m service -a"name=httpd state=restarted" --key-file=rajesh-mumbai.pem -u wls -b
