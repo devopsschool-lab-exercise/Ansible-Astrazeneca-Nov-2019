@@ -45,20 +45,33 @@ Program 6 – Write a Ansible commands to copy a file called “second.html” i
 ansible all -i 13.232.84.0, -m copy -a"content='Hello World 2' dest=/var/www/html/second.html" --key-file=rajesh-mumbai.pem -u ec2-user -b
 
 
-
-
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 Program 7 – Write a Ansible commands to install a package called “git”, “wget”.
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-ansible all -i 13.232.84.0, -m yum -a"name=wget state=present"
+ansible all -i 13.232.84.0, -m yum -a"name=wget,git state=present" --key-file=rajesh-mumbai.pem -u ec2-user -b
 
-ansible all -i 13.232.84.0, -m yum -a"name=git state=present"
 
 
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 Program 8 – Write a Ansible Adhoc commands to clone git repo. https://github.com/scmgalaxy/ansible-role-template.
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-[root@ip-172-31-11-15 ~]# ansible all -i 13.232.84.0, -m git -a"clone=yes repo='https://github.com/scmgalaxy/ansible-role-template' dest=/var/kishore" --key-file=rajesh-mumbai.pem -u ec2-user -b
+ansible all -i 13.232.84.0, -m git -a"clone=yes repo='https://github.com/scmgalaxy/ansible-role-template' dest=/var/kishore" --key-file=rajesh-mumbai.pem -u ec2-user -b
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Program 9 – Write a Ansible commands to reboot a self machine.
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+ansible all -i 13.232.84.0, -m reboot --key-file=rajesh-mumbai.pem -u ec2-user -b
+
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Program 10 – Write a Ansible commands to touch a file called “devopsschool.txt” in /opt/ and delete after using ansible adhoc command.
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+ansible all -i 13.232.84.0, -m file -a "state=touch path=/opt/devopsschool.txt" --key-file=rajesh-mumbai.pem -u ec2-user -b
+
+ansible all -i 13.232.84.0, -m file -a "state=touch path=/opt/devopsschool.txt" --key-file=rajesh-mumbai.pem -u ec2-user -b
+
 
