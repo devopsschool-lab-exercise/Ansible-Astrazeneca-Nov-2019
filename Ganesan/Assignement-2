@@ -34,3 +34,5 @@ ansible all -i 13.233.156.131, -m file -a "path=/tmp/testdrive state=touch" -u d
 
 ansible all -i inventory -m copy -a"dest=/var/www/html src=index.html" --key-file=rajesh-mumbai.pem -u ec2-user -b
  ansible db -i inventory -m copy -a"dest=/var/www/html src=index.html" --key-file=rajesh-mumbai.pem -u ec2-user -b
+ansible db,data -i inventory -m copy -a"dest=/var/www/html src=index.html" --key-file=rajesh-mumbai.pem -u ec2-user -b
+
