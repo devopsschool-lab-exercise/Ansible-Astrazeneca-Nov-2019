@@ -1,0 +1,20 @@
+
+ansible all -i 13.233.255.63, -m group -a "name=deploy-user state=present" --key-file=rajesh-mumbai.pem -u ec2-user -b
+ansible all -i 13.233.255.63, -m user -a "name=deploy state=present" --key-file=rajesh-mumbai.pem -u ec2-user -b
+ansible all -i 13.233.255.63, -m yum -a"name=httpd state=present" --key-file=rajesh-mumbai.pem -u ec2-user -b	
+ansible all -i 13.233.255.63, -m copy -a"dest=/var/www/html src=index.html" --key-file=rajesh-mumbai.pem -u ec2-user -b
+ansible all -i 13.233.255.63, -m service -a"name=httpd state=started" --key-file=rajesh-mumbai.pem -u ec2-user -b
+ansible all -i 13.233.255.63, -m yum -a"name=git" --key-file=rajesh-mumbai.pem -u ec2-user -b
+ansible all -i 13.233.255.63, -m yum -a"name=wget" --key-file=rajesh-mumbai.pem -u ec2-user -b
+ansible all -i 13.233.255.63, -m git -a "repo=https://github.com/ansible/ansible-examples.git dest=/home/ec2-user/git clone=yes" --key-file=rajesh-mumbai.pem -u ec2-user -b
+ansible all -i 13.233.255.63, -m file -a "name=devopsschool.txt state=absent" --key-file=rajesh-mumbai.pem -u ec2-user -b
+ansible all -i 13.233.255.63, -m reboot --key-file=rajesh-mumbai.pem -u ec2-user -b
+
+
+
+
+ansible all -i 13.232.252.165,13.233.255.63, -m yum -a"name=httpd state=present" --key-file=rajesh-mumbai.pem -u ec2-user -b
+
+ansible all -i 13.232.252.165,13.233.255.63, -m copy -a"dest=/var/www/html src=web.html" --key-file=rajesh-mumbai.pem -u ec2-user -b
+
+ansible all -i 13.232.252.165,13.233.255.63, -m service -a"name=httpd state=started" --key-file=rajesh-mumbai.pem -u ec2-user -b
