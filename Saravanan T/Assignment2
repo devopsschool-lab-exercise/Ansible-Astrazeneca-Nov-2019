@@ -22,3 +22,14 @@ ansible all -i 15.206.128.246, -m lineinfile -a "path=/etc/sudoers regexp=EOF li
 Task 3 - Run again all with Deploy user only and password.
 
 ansible all -i 15.206.128.246, -m user -a "name=deploy-user shell=/bin/bash  group=deploy state=present" -u ec2-user -b -k
+
+
+
+
+Inventory:
+==========
+ansible all -i /inventory -m copy -a"dest=/var/www/html src=saravanan" --key-file=rajesh-mumbai.pem -u ec2-user -b
+
+GROUP IN INVENTORY:
+====================
+ansible iterm -i /inventory -m copy -a"dest=/var/www/html src=/root/saravanan123" --key-file=rajesh-mumbai.pem -u ec2-user -b
