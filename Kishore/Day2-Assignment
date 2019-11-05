@@ -79,8 +79,22 @@ Task 2:
 
 ansible all -i 13.232.84.0,  -m lineinfile -a 'dest=/etc/sudoers line="deploy-user ALL=(ALL) NOPASSWD: ALL"' --key-file=rajesh-mumbai.pem -u ec2-user -b 
 
-ansible all -i 13.232.84.0, -m user -a"name=deploy groups=wheel append=yes state=present createhome=yes" --key-file=rajesh-mumbai.pem -u ec2-user -b
+Task3:
 
+ansible all -i 13.232.84.0, -m group -a "name=tmpadmin state=present" -u deploy-user -k -b
 
-ansible all -i 13.232.84.0, -m lineinfile -a"dest=/etc/sudoers state=present regexp='^%wheel' line='%wheel ALL=(ALL) NOPASSWD: ALL'" --key-file=rajesh-mumbai.pem -u ec2-user -b
+ansible all -i 13.232.84.0, -m user -a "name=testusr1 group=tmpadmin shell=/bin/bash state=present" -u deploy-user -k -b
 
+ansible all -i 13.232.84.0, -m yum -a"name=telnet state=present" -u deploy-user -k -b
+
+ansible all -i 13.232.84.0, -m service -a "name=httpd state=stopped enabled=yes" -u deploy-user -k -b
+
+ansible all -i 13.232.84.0, -m service -a "name=httpd state=started enabled=yes" -u deploy-user -k -b
+
+ansible all -i 13.232.84.0, -m copy -a "dest=/var/www/html src=second.html"  -u deploy-user -k -b
+
+ansible all -i 13.232.84.0, -m yum -a "name=wget,git state=present" -u deploy-user -k -b
+
+ansible all -i 13.232.84.0, -m git -a "repo=https://github.com/scmgalaxy/ansible-role-template clone=yes dest=/gitclone" -u deploy-user -k -b
+
+ansible all -i 13.232.84.0, -m file -a "path=/var/www/html/second.html state=absent" -u deploy-user -k -b
