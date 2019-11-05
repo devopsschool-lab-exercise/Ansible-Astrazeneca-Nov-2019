@@ -1,0 +1,54 @@
+---
+- name: First playbook which converts adhoc commands into yaml file
+  hosts: Router
+  tasks:
+  - name: create group
+    group: name=deploy-user state=present
+---
+- name: First playbook which converts adhoc commands into yaml file
+  hosts: Router
+  tasks:
+  - name: create user
+    group: name=deploy state=present
+---
+- name: First playbook which converts adhoc commands into yaml file
+  hosts: Router
+  tasks:
+  - name: create service
+    yum: name=httpd state=present
+---
+- name: First playbook which converts adhoc commands into yaml file
+  hosts: Router
+  tasks:
+  - name: Run service
+    service: name=httpd state=started
+---
+- name: First playbook which converts adhoc commands into yaml file
+  hosts: Router
+  tasks:
+  - name: Run git
+    service: name=git
+---
+- name: First playbook which converts adhoc commands into yaml file
+  hosts: Router
+  tasks:
+  - name: Run wget
+    service: name=wget
+---
+- name: First playbook which converts adhoc commands into yaml file
+  hosts: Router
+  tasks:
+  - name: clone repositary
+    git: repo=https://github.com/ansible/ansible-examples.git dest=/home/ec2-user/git clone=yes
+---
+- name: First playbook which converts adhoc commands into yaml file
+  hosts: Router
+  tasks:
+  - name: create Dummy file
+    file: name=Dummy.txt state=touch
+---
+- name: First playbook which converts adhoc commands into yaml file
+  hosts: Router
+  tasks:
+  - name: reboot instance
+    reboot: 
