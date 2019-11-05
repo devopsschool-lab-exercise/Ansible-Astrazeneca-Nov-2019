@@ -1,0 +1,9 @@
+---
+- name: This create a user and adds to depoy group
+  hosts: all
+  tasks:
+  - name: Add user to group
+    user: name=deploy-user group=deploy state=present shell=/bin/bash
+...
+
+

@@ -1,0 +1,9 @@
+---
+- name: Start and enable HTTP service
+  hosts: all
+  tasks:
+  - name: Start and enable HTTP service
+    service: name=httpd state=started enabled=yes
+...
+
+  

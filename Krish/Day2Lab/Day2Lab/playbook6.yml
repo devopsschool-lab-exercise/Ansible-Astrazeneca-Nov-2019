@@ -1,0 +1,9 @@
+---
+- name: Copy Second HTML
+  hosts: all
+  tasks:
+  - name: Copy Second HTML
+    copy: dest=/var/www/html/second.html src=second.html
+...
+
+  

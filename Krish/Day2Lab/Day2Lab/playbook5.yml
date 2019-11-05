@@ -1,0 +1,9 @@
+---
+- name: Copy Index HTML
+  hosts: all
+  tasks:
+  - name: Copy Index HTML
+    lineinfile: path=/var/www/html/index.html line='<h1>This is a sample</h1>' create=yes
+...
+
+  
