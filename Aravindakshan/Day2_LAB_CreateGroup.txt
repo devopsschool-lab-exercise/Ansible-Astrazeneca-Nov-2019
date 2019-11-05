@@ -452,4 +452,27 @@ Task 4 - Groups and behavioural pattern
     "uid": 0
 }
 
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Convert each adhoc command to PLAYBOOk
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+YAML File : Day3_exce1
+
+---#YAML START
+
+- name: Network Getting Started First Playbook
+  connection: network_cli
+  gather_facts: false
+  hosts: all
+  tasks:
+
+    - name: Get config for VyOS devices
+      vyos_facts:
+        gather_subset: all
+
+    - name: Display the config
+      debug:
+        msg: "The hostname is {{ ansible_net_hostname }} and the OS is {{ ansible_net_version }}"
+
+....#YAML END
 
