@@ -1,0 +1,5 @@
+[acs]
+13.235.49.130 ansible_user=ec2-user ansible_ssh_private_key_file=rajesh-mumbai.pem ansible_become=yes
+
+[ars]
+13.235.68.69 ansible_user=ec2-user ansible_become=yes ansible_ssh_pass=ubuntu123
