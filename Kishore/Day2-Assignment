@@ -76,6 +76,3 @@ ansible all -i 13.232.84.0, -m file -a "state=absent path=/opt/devopsschool.txt"
 
 
 
-
-
-ansible all -i 13.232.84.0, -m file -a"remote_src=yes src=/etc/sudoers dest=/etc/suoders1" --key-file=rajesh-mumbai.pem -u ec2-user -b
