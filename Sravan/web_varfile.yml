@@ -1,0 +1,9 @@
+---
+# Variables for webserver play
+
+package: httpd
+pkgstate: installed
+service: httpd
+ssstate: started
+ssenable: yes
+

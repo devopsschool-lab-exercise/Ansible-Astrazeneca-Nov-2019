@@ -1,0 +1,4 @@
+- name: Template exercise
+  hosts: localhost
+  tasks:
+  vars:

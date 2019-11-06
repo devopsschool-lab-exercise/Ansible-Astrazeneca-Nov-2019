@@ -1,0 +1,12 @@
+  - name: Setting up a play to install package input through prompt in localhost
+    hosts: localhost
+    vars_prompt:
+       - name: packagename
+         prompt: "Please enter the package name to be installed ?"
+         private: false
+
+    tasks:
+    - name: Install package mentioned by prompt
+      yum: name={{ packagename }}
+    - name: Start the service and enable
+      service: name={{ packagename }} state=started enabled=yes

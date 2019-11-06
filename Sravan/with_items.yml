@@ -1,0 +1,7 @@
+- name: Install common software requirements
+  hosts: localhost
+  tasks:
+   - name: Install below packages  
+     yum: 
+        name: [git, iotop, ftp]
+        state: installed
