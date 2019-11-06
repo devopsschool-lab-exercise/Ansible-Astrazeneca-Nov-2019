@@ -203,12 +203,12 @@ FLOW
 		Do one task in MULTIPLE REMOTE MACHINES using group in Inventory DONE
 
 	using Playbook(Program)
-		Do Multiple tasks(Playbook) in ONE MACHINE(localhost)
-		Do Multiple tasks(Playbook) in ONE REMOTE MACHINE
-		Do Multiple tasks(Playbook) in MULTIPLE REMOTE MACHINE using Inventory
-		Do Multiple tasks(Playbook) in MULTIPLE REMOTE MACHINE using group in Inventory
-		Do Multiple tasks(Playbook) in MULTIPLE REMOTE MACHINE using group of group in Inventory
-		Do Multiple tasks(Playbook) in MULTIPLE REMOTE MACHINE using environment directory Inventory 
+		Do Multiple tasks(Playbook) in ONE MACHINE(localhost) - DONE
+		Do Multiple tasks(Playbook) in ONE REMOTE MACHINE - DONE
+		Do Multiple tasks(Playbook) in MULTIPLE REMOTE MACHINE using Inventory - DONE
+		Do Multiple tasks(Playbook) in MULTIPLE REMOTE MACHINE using group in Inventory - DONE
+		Do Multiple tasks(Playbook) in MULTIPLE REMOTE MACHINE using group of group in Inventory - PENDING
+		Do Multiple tasks(Playbook) in MULTIPLE REMOTE MACHINE using environment directory Inventory - PENDING 
 	using Role(Program)
 		Do One Role in in ONE MACHINE(localhost)
 		Do Multiple Roles in ONE REMOTE MACHINE
@@ -586,16 +586,84 @@ task 1 - Convert each adhoc command to PLAYBOOk
 task 2 - https://www.devopsschool.com/blog/ansible-playbook-lab-excercise-part-3/
 
 
-git clone https://github.com/devopsschool-lab-exercise/Ansible-Astrazeneca-Nov-2019.git
+=======================================
+Lets write better playbook?
+        - Using VARIABLES
+        - Using Conditioning
+        - Using Looping
+        - Using template
+        - Using Handlers
+        
+- Using VARIABLES
+=============================
+Where to decalare variable?
+https://www.devopsschool.com/tutorial/ansible/variables/index.html
 
-cd Ansible-Astrazeneca-Nov-2019
-git config user.name "MY NAME"
-git config user.email "myEMAIL"
+        playbook
+                - EMBED
+                - External vars file
+                - Prompt
+                - include
+                - Register
+        inventory
+                - inventory
+                - group_vars
+                - hosts_vars
+        Command 
+                - Command line
 
-cd YOUR DIR
-
-git add .
-git commit -m"adding"
-git push origin master
+How to declare variable?
+How to use it?
+What is the predence of variable. - TEST
 
 
+Variables in playbook
+                - EMBED
+                - External vars file
+                - Prompt
+                - include in tasks
+                - Register
+==============================
+---
+- name: This sets up an httpd webserver
+  hosts: localhost
+  vars:
+    myname: "rajesh kumar in playbook"
+    package: "httpd"
+    service: "httpd"
+
+  tasks:
+  - name: Install the httpd apps
+    yum: name={{ package }}
+  - name: start the httpd service
+    service: name={{ service }} state=started
+  - name: create a empty fle
+    file: dest=/opt/test.txt state=touch
+  - name: copy a file
+    copy: dest=/var/www/html/ src="index.html"
+  - name: Ansible prompt example.
+    debug:
+      msg: "{{ myname }}"
+...
+
+13.233.26.25
+
+whatisinclude
+default_step.yml
+===================
+Variales in inventory
+                - inventory
+                - group_vars
+                - hosts_vars
+
+
+
+ansible_become=yes
+ansible_ssh_private_key_file=rajesh-mumbai.pem
+ansible_user=ec2-user
+
+Ansible Variables using COMMAND LINE
+https://www.devopsschool.com/blog/how-can-i-pass-variable-to-ansible-playbook-in-the-command-line/
+
+Assignemnt
+https://www.devopsschool.com/blog/ansible-variable-lab-excercise-part-2/
