@@ -1,0 +1,20 @@
+Condition
+ - name:
+   hosts: localhost
+   tasks:
+      - name: "Shut down CentOS 6 and Debian 7 systems"
+        command: /bin/systemctl restart network.service
+        when: (ansible_distribution == "CentOS" and ansible_distribution_major_version == "6") or
+              (ansible_distribution == "RedHat" and ansible_distribution_major_version == "7")
+
+
+Loop
+- name: Install common software requirements
+  hosts: localhost
+  tasks:
+   - name: Install below packages  
+     yum: name={{ item }} state=installed
+     with_items:
+        - git
+        - iotop
+        - ftp
