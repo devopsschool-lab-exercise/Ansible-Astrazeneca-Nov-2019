@@ -1,0 +1,12 @@
+- name: Install httpd package
+  hosts: local
+  vars_prompt:
+  - name: package
+    prompt: "Please enter the package name to be installed ?"
+    private: false
+  tasks:
+  - name: Install httpd
+    yum: name={{ package }}
+  - name: start the httpd service
+    service: name={{ package }} state=started
+

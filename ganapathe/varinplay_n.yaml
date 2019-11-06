@@ -1,0 +1,17 @@
+---
+- hosts: local
+  tasks:
+  - name: Ansible register variable basic example
+    shell: "find httpd"
+    args:
+     chdir: "/home/ec2-user/Ansible-Astrazeneca-Nov-2019/ganapathe"
+    register: reg_output
+  - debug:
+     var: reg_output
+
+  - name: Install the httpd apps
+    yum: name={{ reg_output.stdout }}
+  - name: start the httpd service
+    service: name={{reg_output.stdout }} state=started
+
+...

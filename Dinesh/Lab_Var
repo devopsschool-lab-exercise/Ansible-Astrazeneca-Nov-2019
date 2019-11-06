@@ -1,0 +1,100 @@
+[root@ip-172-31-2-26 ec2-user]# cat var.yaml
+- name: This sets up an httpd webserver
+  hosts: localhost
+  vars_files:
+     - "varinplay.yaml"
+  tasks:
+  - name: Install the httpd apps
+    yum: name={{ package }}
+  - name: start the httpd service
+    service: name={{package}} state=started
+
+[root@ip-172-31-2-26 ec2-user]# cat varinplay.yaml
+---
+package: "httpd"
+service: "httpd"
+
+[root@ip-172-31-2-26 ec2-user]# ansible-playbook -i inventory1 var.yaml
+
+PLAY [This sets up an httpd webserver] **************************************************************************************************************************************************************
+
+TASK [Gathering Facts] ******************************************************************************************************************************************************************************
+ok: [localhost]
+
+TASK [Install the httpd apps] ***********************************************************************************************************************************************************************
+ok: [localhost]
+
+TASK [start the httpd service] **********************************************************************************************************************************************************************
+ok: [localhost]
+
+PLAY RECAP ******************************************************************************************************************************************************************************************
+localhost                  : ok=3    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
+
+[root@ip-172-31-2-26 ec2-user]# ansible-playbook -i inventory1 var2.yaml
+Which version Do you want to install?: 1
+
+PLAY [localhost] ************************************************************************************************************************************************************************************
+
+TASK [Gathering Facts] ******************************************************************************************************************************************************************************
+ok: [localhost]
+
+PLAY RECAP ******************************************************************************************************************************************************************************************
+localhost                  : ok=1    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
+
+[root@ip-172-31-2-26 ec2-user]# cat var2.yaml
+- hosts: localhost
+
+  vars_prompt:
+    - name: "Version"
+      prompt: "Which version Do you want to install?"
+      private: false
+
+
+[root@ip-172-31-2-26 ec2-user]# ansible-playbook -i inventory1 var3.yaml
+
+PLAY [localhost] ************************************************************************************************************************************************************************************
+
+TASK [Gathering Facts] ******************************************************************************************************************************************************************************
+ok: [localhost]
+
+TASK [Ansible register variable basic example] ******************************************************************************************************************************************************
+changed: [localhost]
+
+TASK [debug] ****************************************************************************************************************************************************************************************
+ok: [localhost] => {
+    "find_output": {
+        "changed": true,
+        "cmd": "find *.yaml",
+        "delta": "0:00:00.004533",
+        "end": "2019-11-06 07:30:02.796178",
+        "failed": false,
+        "rc": 0,
+        "start": "2019-11-06 07:30:02.791645",
+        "stderr": "",
+        "stderr_lines": [],
+        "stdout": "var1.yaml\nvar2.yaml\nvar3.yaml\nvarinplay.yaml\nvar.yaml",
+        "stdout_lines": [
+            "var1.yaml",
+            "var2.yaml",
+            "var3.yaml",
+            "varinplay.yaml",
+            "var.yaml"
+        ]
+    }
+}
+
+PLAY RECAP ******************************************************************************************************************************************************************************************
+localhost                  : ok=3    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
+
+[root@ip-172-31-2-26 ec2-user]# cat var3.yaml
+- hosts: localhost
+  tasks:
+  - name: Ansible register variable basic example
+    shell: "find *.yaml"
+    args:
+      chdir: "/home/ec2-user"
+    register: find_output
+
+  - debug:
+      var: find_output
+
