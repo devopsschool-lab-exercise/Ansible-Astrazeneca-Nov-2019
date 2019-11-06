@@ -1,0 +1,84 @@
+Myinventory file
+================
+[local]
+localhost ansible_connection=local
+[REST]
+13.127.90.66
+
+my yaml file
+=================
+
+---
+- name: This sets up an httpd webserver using EMBED Variable
+  hosts: local
+  vars:
+    myname: "Rajadurai task completed"
+    package: "httpd"
+    service: "httpd"
+  tasks:
+  - name: Install the httpd apps
+    yum: name={{ package }}
+  - name: start the httpd service
+    service: name={{ service }} state=started
+  - name: Print the confirmation
+    debug:
+      msg: "{{ package }} Installed"
+  - name: Print my message
+    debug:
+      msg: "{{ myname }}"
+...
+
+
+---
+- name: This sets up an httpd webserver using PROMPT Variable
+  hosts: local
+  vars_prompt:
+    - name: "Package"
+      prompt: "Which Package Do you want to install?"
+      private: false
+# prompt in private mode
+    - name: "Service"
+      prompt: "Do you wish to start which service"
+  tasks:
+  - name: Install the httpd apps
+    yum: name={{ Package }}
+  - name: Start the httpd Service
+    yum: name={{ Service }}
+    
+...
+
+
+---
+- name: This find the file using REGISTER Variable
+  hosts: local
+  tasks:
+  - name: Ansible register variable basic example
+    shell: "find *.txt"
+    args:
+      chdir: "/home/ec2-user"
+    register: find_res
+  - debug:
+      var: find_res
+  - debug:
+      msg: "{{ find_res }} - printed using message command"
+...
+
+vars in file
+===============
+---
+totest: "Message retrived from vars in file"
+
+...
+
+
+---
+- name: This using the variabe from the var file
+  hosts: local
+  vars_file:
+    - "varsinfile.yml"
+  tasks:
+  - name: Ansible vars in file
+    debug:
+      msg: "{{ totest }}"
+...
+  
