@@ -37,6 +37,34 @@
       msg: "{{ whatisinclude }}"
   - name: Ansible register variable basic example
     shell: "find / -name test.txt"
+    
+    
+    
+    
+    cat when.yaml
+---
+- name: When Condition
+  hosts: localhost
+  tasks:
+  - name: sytem reboot
+    command: /sbin/reboot
+    when: ansible_distribution == "RedHat"
+
+
+WHEN and AND:
+================
+
+cat whenand.yaml
+---
+- name: When Condition
+  hosts: localhost
+  tasks:
+  - name: sytem reboot
+    command: /sbin/reboot
+    when: (ansible_distribution == "RedHat" and ansible_product_version == "5.2.amazon"
+
+
+
     args:
       chdir: "/"
     register: find_output
