@@ -1,0 +1,10 @@
+---
+- name: conditioning example
+  hosts: local
+  tasks:
+  - name: print numbers using condition
+    shell: echo {{ item }}
+    with_items:
+      - [1,2,5,7,9]
+    when: item >= 5
+   
