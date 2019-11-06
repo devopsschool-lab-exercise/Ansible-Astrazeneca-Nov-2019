@@ -1,0 +1,9 @@
+- name: Conditioning 3
+  hosts: local
+  vars:
+    test1: "Hello All"
+  tasks:
+    - name: Ansible when variable equals example
+      debug:
+        msg: "Equals"
+      when: test1 == "Hello All"

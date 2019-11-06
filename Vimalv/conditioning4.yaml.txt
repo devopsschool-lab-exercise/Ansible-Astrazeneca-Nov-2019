@@ -1,0 +1,9 @@
+- name: Conditioning 4
+  hosts: local
+  tasks:
+      - shell: cat /root/temp.txt
+        register: output
+      - name: Ansible when variable contains string example example
+        debug:
+          msg: "Equals"
+        when: output.stdout.find("Bye") != -1
