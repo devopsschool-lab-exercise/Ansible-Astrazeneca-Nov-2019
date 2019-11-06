@@ -1,0 +1,5 @@
+- name: Create another user
+  hosts: group2
+  tasks:
+  - name: Add another user
+    file: path=/var/www/second.html state=touch

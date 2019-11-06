@@ -1,0 +1,5 @@
+- name: delete file
+  hosts: group2
+  tasks:
+  - name: delete devopsschool.txt file
+    file: path=/opt/devopsschool.txt state=absent

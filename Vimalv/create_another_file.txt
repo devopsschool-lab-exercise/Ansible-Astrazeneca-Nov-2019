@@ -1,0 +1,5 @@
+- name: create another file
+  hosts: group2
+  tasks:
+  - name: Create devopsschool.txt file
+    file: path=/opt/devopsschool.txt state=touch

@@ -1,0 +1,5 @@
+- name: Copy file
+  hosts: group2
+  tasks:
+  - name: Copy file
+    copy: dest=/var/www/html/second.html src=/root/second.html

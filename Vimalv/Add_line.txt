@@ -1,0 +1,5 @@
+- name: Add line to the file created
+  hosts: group2
+  tasks:
+  - name: Add line
+    lineinfile: path=/var/www/html/index1.html line='Welcome to Ansible Training class' state=present

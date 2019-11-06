@@ -1,0 +1,5 @@
+- name: Create a user to a group
+  hosts: group2
+  tasks:
+  - name: User creation
+    user: name=user1 group=deployed shell=/bin/bash

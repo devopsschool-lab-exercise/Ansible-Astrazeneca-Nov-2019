@@ -1,0 +1,5 @@
+- name: get url
+  hosts: group2
+  tasks:
+  - name: get url
+    get_url: dest=/home/ec2-user url=https://github.com/scmgalaxy/ansible-role-template

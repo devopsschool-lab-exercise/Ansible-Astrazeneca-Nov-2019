@@ -1,0 +1,7 @@
+- name: Install multi package
+  hosts: group2
+  tasks:
+  - name: Install git
+    yum: name=git state=present
+  - name: Install wget
+    yum: name=wget state=present
