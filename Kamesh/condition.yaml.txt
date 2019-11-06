@@ -1,0 +1,10 @@
+- name: To test condition
+
+hosts: localhost
+
+tasks:
+  - name: touch file
+    command: touch /opt/verizon.txt
+    when:
+      - ansible_distribution == "Redhat"
+      - ansible_distribution_major_version == "7"
