@@ -1,0 +1,7 @@
+- name: Install common software requirements
+  hosts: local
+  apt: pkg={{ item }} state=installed
+  with_items:
+     - git
+     - htop
+     - vim

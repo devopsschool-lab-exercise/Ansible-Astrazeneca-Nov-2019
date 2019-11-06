@@ -1,0 +1,6 @@
+---
+    myname: "Mithuna in playbook"
+    package: "httpd"
+    service: "httpd"
+...
+

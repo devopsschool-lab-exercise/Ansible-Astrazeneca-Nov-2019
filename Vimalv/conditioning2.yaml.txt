@@ -1,0 +1,7 @@
+- name: Conditioning 2
+  hosts: local
+  tasks:
+    - name: "shut down CentOS 6 and Linux 7 systems"
+      command: /sbin/shutdown -t now
+      when: (ansible_distribution == "Linux" and ansible_distribution_major_version == "6") or
+            (ansible_distribution == "Debian" and ansible_distribution_major_version == "7")

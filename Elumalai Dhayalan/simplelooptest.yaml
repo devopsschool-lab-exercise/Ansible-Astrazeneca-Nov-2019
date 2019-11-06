@@ -1,0 +1,13 @@
+[root@ip-172-31-15-173 ~]# vi simplelooptest.yaml
+---
+- name: package install
+  hosts: local
+  tasks:
+  - name: Install base packages
+    yum: name={{ item }} state=installed
+    with_items:
+    - git
+    - python-pip
+    - python3-pip
+...
+~

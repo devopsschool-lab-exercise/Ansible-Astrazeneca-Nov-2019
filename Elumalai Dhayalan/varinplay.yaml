@@ -1,0 +1,53 @@
+[root@ip-172-31-15-173 ~]# vi varinplay.yaml
+---
+- name: This sets up an httpd webserver
+  hosts: local
+  vars:
+    myname: "rajesh kumar in playbook"
+    package: "httpd"
+    service: "httpd"
+  vars_files:
+    - "vars.yaml"
+  vars_prompt:
+    - name: "Version"
+      prompt: "Which version Do you want to install?"
+      private: false
+
+  tasks:
+  - name: Install the httpd apps
+    yum: name={{ package }}
+  - name: start the httpd service
+    service: name={{ service }} state=started
+  - name: create a empty fle
+    file: dest=/opt/test.txt state=touch
+  - name: copy a file
+    copy: dest=/var/www/html/ src="index.html"
+  - name: Ansible prompt example.
+    debug:
+      msg: "{{ myname }}"
+  - name: Ansible prompt example.
+    debug:
+      msg: "{{ Version }}"
+  - name: include default step variables
+    include_vars: default_step.yml
+  - name: Ansible prompt example.
+    debug:
+      msg: "{{ whatisinclude }}"
+  - name: Ansible register variable basic example
+    shell: "find *.txt"
+    args:
+      chdir: "/root/ansible"
+    register: find_output
+
+  - debug:
+      var: find_output
+  - name: Ansible vars in inventory
+    debug:
+      msg: "{{ mynamein }}"
+...
+~
+~
+~
+~
+~
+"varinplay.yaml" 46L, 1133C

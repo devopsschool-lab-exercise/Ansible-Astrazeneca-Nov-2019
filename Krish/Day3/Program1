@@ -1,0 +1,7 @@
+---
+- name: This reboots the machine
+  hosts: localhost
+  tasks:
+      - name: "shut down Debian flavored systems"
+        command: /sbin/reboot
+        when: ansible_os_family == "RedHat"

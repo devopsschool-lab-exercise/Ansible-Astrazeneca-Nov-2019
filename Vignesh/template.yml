@@ -1,0 +1,9 @@
+---
+- name: using templates
+  hosts: local
+  vars:
+    content: "Hello World in the template"
+  tasks:
+  - template:
+      src: index.j2
+      dest: /var/www/html/index.html

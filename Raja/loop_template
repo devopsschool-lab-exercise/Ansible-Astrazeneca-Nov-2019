@@ -1,0 +1,86 @@
+=========================================================
+---
+- name: This demo for using the condition
+  hosts: local
+  tasks:
+  - name: Conditional statement
+    yum: name=httpd state=present
+    when: ansible_os_family == "RedHat"
+...
+
+=========================================================
+    
+---
+- name: This demo for using the Loop
+  hosts: local
+  tasks:
+  - name: Loop - Examples to install multiple rpm
+    yum: name={{ item }} state=installed
+    with_items:
+      - git
+      - wget
+      - vim
+...
+
+=========================================================
+
+---
+- name: This demo for using the Loop
+  hosts: local
+  tasks:
+  - name: Loop - Examples to install multiple rpm
+    yum: name={{ item }} state=installed
+    loop:
+      - git
+      - wget
+      - vim
+...
+
+=========================================================
+
+---
+- name: This demo for using the Loop and condition
+  hosts: local
+  tasks:
+  - name: Loop - Examples to install multiple rpm
+  - command: echo {{ item }}
+    loop: [ Unix, DB, Ansible, Win ]
+    when: item > 5
+...
+
+=========================================================
+---
+- name: This demo for using include module
+  hosts: local
+  tasks:
+  - name: parent file for the include demo
+    include: play.yml
+...
+
+---
+  - name: child file for the include
+    command: echo {{ item }}
+    loop: [ Unix, DB, Ansible, Win ]
+    when: item > 5
+...
+
+=========================================================
+
+---
+- name: This demo for using template and handlers
+  hosts: local
+  vars:
+    my_port_var: 8080
+    doc_root: /etc/httpd/conf/
+  tasks:
+  - name: To modify the httpd servie port and restart
+    template: src={{ doc_root }}/httpd.conf.j2 dest={{ doc_root }}/httpd.conf
+    notify:
+      - Restart http
+  handlers:
+    - name: Restart http
+      service: name=httpd state=restarted
+...
+
+
+=========================================================

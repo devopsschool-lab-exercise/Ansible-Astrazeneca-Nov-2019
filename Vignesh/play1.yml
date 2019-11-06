@@ -1,0 +1,11 @@
+---
+- name: multiple playbooks
+  hosts: local
+  vars:
+    val: "this is in main play"
+  tasks:
+  - name: print message inside main play
+    debug: var=val
+  - name: print message inside another play
+    include: task.yml
+- include: play2.yml

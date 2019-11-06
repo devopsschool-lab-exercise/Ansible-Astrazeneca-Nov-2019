@@ -1,0 +1,47 @@
+when.yaml
+     	  
+---
+- name: reboot the server
+  hosts: localhost
+  tasks:
+  - name: reboot the servers
+    command: /sbin/reboot
+    when: ansible_distribution == "RedHat" 
+
+whenand.yaml
+
+---
+- name: Using whenand condition
+  hosts: localhost
+  tasks:
+  - name: install the package
+    yum: name=ntp state=present
+  - name: start the service 
+    service: state=started name=ntpd enabled=yes
+  when: (ansible_distribution == "RedHat" and ansible_distribution_file_path == "/etc/redhat-release")
+...
+
+--- 
+- name: Create a directory
+  hosts: localhost
+  tasks:
+  - name: name of the directory
+    file: dest=/tmp/testdrive state=directory
+  when:
+    - ansible_distribution_major_version == "7"
+	- ansible_fqdn == "ip-172-31-3-232.ap-south-1.compute.internal"
+...
+
+loop.yaml
+
+
+---
+- name: install multiple packages
+  hosts: localhost
+  tasks:
+  - name: install list of the packages
+    yum: pkg={{ item }} state=present
+    with_items:
+      - ftp
+      - chrony
+      - iotop

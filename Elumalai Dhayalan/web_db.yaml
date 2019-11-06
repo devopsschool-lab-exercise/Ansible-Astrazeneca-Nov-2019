@@ -1,0 +1,29 @@
+[root@ip-172-31-15-173 ~]# vi web_db.yaml
+---
+- name: inputs prompt
+  hosts: local
+  sudo: yes
+
+  vars:
+    http_port: 80
+    doc_dir: /ansible/
+    doc_root: /var/www/html/
+    max_clients: 5
+
+  vars_prompt:
+    - name: username
+      prompt:  What is your name?  What is your Quest?  What is your fav color?
+
+  tasks:
+  - name: Ensure that Apache is installed
+    yum: name=httpd state=present
+    when: ansible_os_family == "RedHat"
+
+  - name: Copy Site Files
+    template: src=templates-example/index.j2 dest={{ doc_root }}/index.html
+        notify:
+
+      - Restart Apache - name: Start Apache Services
+    service: name=httpd enabled=yes state=started
+...
+~

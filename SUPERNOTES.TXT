@@ -593,22 +593,6 @@ Lets write better playbook?
         - Using Looping
         - Using template
         - Using Handlers
-	
- 132  git clone https://github.com/devopsschool-lab-exercise/Ansible-Astrazeneca-Nov-2019
-  133  l
-  134  ls
-  135  mv ansible vars
-  136  mv vars/ Ansible-Astrazeneca-Nov-2019/RajeshKumar/
-  137  cd Ansible-Astrazeneca-Nov-2019/
-  138  git add .
-  139  clear
-  140  git config user.name "Rajesh Kumar"
-  141  git condig user.email "devOps@rajeshkumar.xyz"
-  142  git config user.email "devOps@rajeshkumar.xyz"
-  143  git commit -m"ading"
-  144  git push origin master
-  145  git push origin master
-  146  history
         
 - Using VARIABLES
 =============================
@@ -705,3 +689,34 @@ https://www.devopsschool.com/blog/ansible-variable-lab-excercise-part-2/
 18 13.233.251.145
 19 35.154.239.64
 20 13.232.37.24
+
+ 132  git clone https://github.com/devopsschool-lab-exercise/Ansible-Astrazeneca-Nov-2019
+  133  l
+  134  ls
+  135  mv ansible vars
+  136  mv vars/ Ansible-Astrazeneca-Nov-2019/RajeshKumar/
+  137  cd Ansible-Astrazeneca-Nov-2019/
+  138  git add .
+  139  clear
+  140  git config user.name "Rajesh Kumar"
+  141  git condig user.email "devOps@rajeshkumar.xyz"
+  142  git config user.email "devOps@rajeshkumar.xyz"
+  143  git commit -m"ading"
+  144  git push origin master
+  145  git push origin master
+  146  history
+
+  =========================================
+  Conditioning programmming
+  https://www.devopsschool.com/tutorial/ansible/ansible-conditional-programming-playbooks.html
+
+
+  Looping
+  https://www.devopsschool.com/tutorial/ansible/ansible-looping-programming-playbooks.html
+
+  Handlers
+  https://www.devopsschool.com/tutorial/ansible/ansible-playbook-template.html
+
+
+  Working with Multiple Ansible Playbook
+  https://www.devopsschool.com/blog/ansible-include-scnario-with-list-of-plays-or-tasks/
