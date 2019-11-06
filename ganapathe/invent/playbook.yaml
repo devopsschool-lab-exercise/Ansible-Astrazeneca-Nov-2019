@@ -1,0 +1,10 @@
+---
+- name: This sets up an httpd webserver
+  hosts: web
+
+  tasks:
+  - name: create a empty fle
+    file: dest=/opt/testg.txt state=touch
+  - name: Showing you group vars and host vars
+    debug:
+      msg: "{{ myname }}"
