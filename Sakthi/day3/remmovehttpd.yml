@@ -1,0 +1,9 @@
+---
+- name: Remove httpd  playbook
+  hosts: localhost
+ 
+  tasks:
+  - name: check if "{{ package }}" is installed
+    yum:
+      list="{{ package }}"
+      register: is_installed

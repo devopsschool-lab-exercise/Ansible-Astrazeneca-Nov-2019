@@ -1,0 +1,8 @@
+---
+- name: multiple playbooks
+  hosts: local
+  vars:
+    val: "this is in main play 2"
+  tasks:
+  - name: print message inside main play2
+    debug: var=val

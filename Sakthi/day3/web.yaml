@@ -1,0 +1,45 @@
+---
+- name: This sets up an httpd webserver
+  hosts: localhost
+  vars:
+    myname: "Sakthi"
+    package: "httpd"
+    service: "httpd"
+  vars_files:
+   - "vars.yaml"
+  vars_prompt:
+    - name: "Version"
+      prompt: "Which version Do you want to install?"
+      private: false
+
+  tasks:
+  - name: Install the httpd apps
+    yum: name={{ package }}
+  - name: start the httpd service
+    service: name={{ service }} state=started
+  - name: create a empty fle
+    file: dest=/opt/test.txt state=touch
+  - name: copy a file
+    copy: dest=/var/www/html/ src="index.html"
+  - name: Ansible prompt example.
+    debug:
+      msg: "{{ myname }}"
+  - name: Ansible prompt version
+    debug:
+      msg: "{{ Version }}"
+  - name: include default step variables
+    include_vars: default.yaml
+  - name: Ansible prompt example.
+    debug:
+      msg: "{{ whatisinclude }}"
+  - name: Ansible register variable basic example
+    shell: "find *.html"
+    args:
+      chdir: "/var/www/html"
+    register: find_output
+  - debug:
+     var: find_output
+  - name: Ansible vars in inventory
+    debug:
+      msg: "{{ mynamein }}"
+...
