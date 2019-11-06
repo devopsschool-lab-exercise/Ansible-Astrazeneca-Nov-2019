@@ -1,0 +1,119 @@
+
+[root@ip-172-31-1-38 ~]# cat 3.yaml
+- hosts: all
+  tasks:
+  - name: Ansible register variable basic example
+    shell: "find *.yaml"
+    args:
+      chdir: "/root"
+    register: find_output
+
+  - debug:
+      var: find_output
+[root@ip-172-31-1-38 ~]# vi 3.yaml
+[root@ip-172-31-1-38 ~]# cat httpd.yaml
+
+---
+ - name: install http package
+   hosts: ACS_ANSI
+   vars_files:
+     - "role.yaml"
+
+   tasks:
+   - name: install httpd
+     yum: name={{package}}
+   - name: start https
+     service: name={{package}} state=started
+
+
+[root@ip-172-31-1-38 ~]#  ansible-playbook -i inventory httpd.yaml
+
+PLAY [install http package] *****************************************************************************************************************************************************************
+
+TASK [Gathering Facts] **********************************************************************************************************************************************************************
+ok: [ACS_ANSI]
+
+TASK [install httpd] ************************************************************************************************************************************************************************
+ok: [ACS_ANSI]
+
+TASK [start https] **************************************************************************************************************************************************************************
+ok: [ACS_ANSI]
+
+PLAY RECAP **********************************************************************************************************************************************************************************
+ACS_ANSI                   : ok=3    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
+
+
+
+[root@ip-172-31-1-38 ~]# cat 3.yaml
+- hosts: all
+  tasks:
+  - name: Ansible register variable basic example
+    shell: "find *.yaml"
+    args:
+      chdir: "/root"
+    register: find_output
+
+  - debug:
+      var: find_output
+
+
+[root@ip-172-31-1-38 ~]# ansible-playbook -i inventory 3.yaml
+
+PLAY [all] **********************************************************************************************************************************************************************************
+
+TASK [Gathering Facts] **********************************************************************************************************************************************************************
+ok: [loalhost]
+ok: [ACS_ANSI]
+
+TASK [Ansible register variable basic example] **********************************************************************************************************************************************
+changed: [loalhost]
+changed: [ACS_ANSI]
+
+TASK [debug] ********************************************************************************************************************************************************************************
+ok: [loalhost] => {
+    "find_output": {
+        "changed": true,
+        "cmd": "find *.yaml",
+        "delta": "0:00:00.005259",
+        "end": "2019-11-06 07:12:58.821775",
+        "failed": false,
+        "rc": 0,
+        "start": "2019-11-06 07:12:58.816516",
+        "stderr": "",
+        "stderr_lines": [],
+        "stdout": "1.yaml\n2.yaml\n3.yaml\nhttpd.yaml\nrole.yaml",
+        "stdout_lines": [
+            "1.yaml",
+            "2.yaml",
+            "3.yaml",
+            "httpd.yaml",
+            "role.yaml"
+        ]
+    }
+}
+ok: [ACS_ANSI] => {
+    "find_output": {
+        "changed": true,
+        "cmd": "find *.yaml",
+        "delta": "0:00:00.004474",
+        "end": "2019-11-06 07:12:59.002826",
+        "failed": false,
+        "rc": 0,
+        "start": "2019-11-06 07:12:58.998352",
+        "stderr": "",
+        "stderr_lines": [],
+        "stdout": "1.yaml\n2.yaml\n3.yaml\nhttpd.yaml\nrole.yaml",
+        "stdout_lines": [
+            "1.yaml",
+            "2.yaml",
+            "3.yaml",
+            "httpd.yaml",
+            "role.yaml"
+        ]
+    }
+}
+
+PLAY RECAP **********************************************************************************************************************************************************************************
+ACS_ANSI                   : ok=3    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
+loalhost                   : ok=3    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
+
