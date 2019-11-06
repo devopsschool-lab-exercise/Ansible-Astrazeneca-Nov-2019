@@ -1,0 +1,37 @@
+---
+- hosts: localhost
+  sudo: yes
+  vars:
+    http_port: 8080
+    doc_dir: /ansible/
+    doc_root: /var/www/html/
+    max_clients: 5
+
+  vars_prompt:
+    - name: username
+      prompt:  What is your name?  What is your Quest?  What is your fav color?
+
+  tasks:
+  - name: Ensure the default Apache port is 8080
+    lineinfile:
+      path: /etc/httpd/conf/httpd.conf
+      regexp: '^Listen '
+      insertafter: '^#Listen '
+      line: Listen 8080
+
+  - name: Ensure that Apache is installed
+    yum: name=httpd state=present
+    when: ansible_os_family == "RedHat"
+
+  - name: Start Apache Services
+    service: name=httpd enabled=yes state=started
+
+  - name: Copy Site Files
+    template: src=/home/ec2-user/Ansible-Astrazeneca-Nov-2019/ganapathe/template-example/index.j2 dest={{ doc_root }}/index.html
+    notify:
+      - Restart Apache
+
+  handlers:
+     - name: Restart Apache
+       service: name=httpd state=restarted
+...

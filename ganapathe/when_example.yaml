@@ -1,0 +1,8 @@
+---
+- hosts: local
+  tasks:
+  - name: "shut down CentOS 6 systems"
+    command: touch /home/ec2-user/Ansible-Astrazeneca-Nov-2019/ganapathe/when_test.txt
+    when:
+      - ansible_distribution == "RedHat"
+      - ansible_distribution_major_version == "7"
