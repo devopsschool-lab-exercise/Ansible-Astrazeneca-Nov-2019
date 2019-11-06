@@ -1,0 +1,24 @@
+---
+- name: playbook with var prompt
+  hosts: local
+  vars_prompt:
+    - name: "Service"
+      prompt: "Type the service to configure: "
+      private: false
+  tasks:
+  - name: install httpd
+    yum:
+      name: "{{ Service }}"
+      state: installed
+  - name: start httpd Service
+    service:
+      name: "{{ Service }}"
+      state: started
+  - name: create empty file 
+    file:
+      dest: /var/www/html
+      state: directory 
+  - name: copy content
+    copy:
+      content: "This content is inside vars prompt"
+      dest: /var/www/html/index.html
