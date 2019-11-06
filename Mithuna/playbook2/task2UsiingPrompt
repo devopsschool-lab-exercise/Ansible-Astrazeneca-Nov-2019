@@ -1,0 +1,39 @@
+[root@ip-172-31-14-151 ec2-user]# vi varinplay2.yaml
+---
+- name: This sets up an httpd webserver
+  hosts: local
+  vars_prompt:
+    - name: "package"
+      prompt: "Which package Do you want to install?"
+      private: false
+    - name: "service"
+      prompt: "Which servcie  Do you want to start?"
+      private: false
+
+  tasks:
+  - name: Install the httpd apps
+    yum: name={{ package }}
+  - name: start the httpd service
+    service: name={{ service }} state=started
+...
+
+
+output:
+======
+[root@ip-172-31-14-151 ec2-user]# ansible-playbook -i inventory varinplay2.yaml
+Which package Do you want to install?: httpd
+Which servcie  Do you want to start?: httpd
+
+PLAY [This sets up an httpd webserver] **************************************************************************************************************************************************************
+
+TASK [Gathering Facts] ******************************************************************************************************************************************************************************
+ok: [localhost]
+
+TASK [Install the httpd apps] ***********************************************************************************************************************************************************************
+ok: [localhost]
+
+TASK [start the httpd service] **********************************************************************************************************************************************************************
+ok: [localhost]
+
+PLAY RECAP ******************************************************************************************************************************************************************************************
+localhost                  : ok=3    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
