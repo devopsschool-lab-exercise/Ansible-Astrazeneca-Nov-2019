@@ -1,0 +1,14 @@
+---
+- name: This sets up an httpd webserver
+  hosts: localhost
+  tasks:
+      - name: Install required packages
+        yum:
+          name: "{{ item }}"
+          state: latest
+        with_items:
+          - iscsi-initiator-utils
+          - device-mapper-multipath
+          - lvm2
+          - telnet
+...
