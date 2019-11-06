@@ -1,0 +1,6 @@
+---
+- name: test condition
+  hosts: local
+  tasks:
+  - debug: msg="this is {{ ansible_os_family }} system."
+    when: ansible_os_family == "RedHat"

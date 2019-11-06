@@ -5,7 +5,9 @@
     - name: "Service"
       prompt: "Type the service to configure: "
       private: false
+      register: out
   tasks:
+  - debug: var=out
   - name: install httpd
     yum:
       name: "{{ Service }}"
