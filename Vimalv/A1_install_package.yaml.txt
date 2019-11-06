@@ -1,0 +1,9 @@
+- name: Install httpd package
+  hosts: local
+  vars_files:
+    - "role.yaml"
+  tasks:
+  - name: Install httpd
+    yum: name={{ package }}
+  - name: start the httpd service
+    service: name={{ service }} state=started
