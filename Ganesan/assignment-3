@@ -1,0 +1,36 @@
+---
+- name: Configure web server
+  hosts: localhost
+  vars:
+    myname: "My name is Ganesh"
+    package: "httpd"
+    service: "httpd"
+  vars_files:
+    - "vars.yaml"
+  vars_prompt:
+   - name: "Version"
+     prompt: "Please ask me to be install?"
+     private: false
+  tasks:
+   - name: Install the package
+     yum:  name={{ package }}
+   - name: Start the service
+     service: name={{ service }} state=started
+   - name: create the file
+     file: dest=/tmp/ansible.txt state=touch
+   - name: copy the file
+     copy: src=index.html dest=/var/www/html
+   - name: Ansible print name
+     debug:
+      msg: "{{ myname }}"
+   - name: print the values
+     debug:
+      msg: "{{ Version }}"
+   - name: Find the register variable in text file
+     shell: "find *.txt"
+     args:
+      chdir: "/tmp/ansible"
+     register: find_output
+   - name: Output print
+     debug:
+         var: find_output
