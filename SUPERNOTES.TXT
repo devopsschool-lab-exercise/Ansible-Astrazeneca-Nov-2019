@@ -720,3 +720,30 @@ https://www.devopsschool.com/blog/ansible-variable-lab-excercise-part-2/
 
   Working with Multiple Ansible Playbook
   https://www.devopsschool.com/blog/ansible-include-scnario-with-list-of-plays-or-tasks/
+
+  Group of Group
+  ==============================
+  inventory
+---------------------
+[web]
+35.154.22.83
+13.233.155.43
+13.232.54.105
+13.232.144.149
+[db]
+52.66.236.57
+13.127.13.164
+13.233.62.140
+13.127.90.66
+[qa]
+13.126.13.179
+13.233.251.145
+[stage]
+35.154.239.64
+13.232.37.24
+
+[gog:children]
+web
+db
+qa
+stage

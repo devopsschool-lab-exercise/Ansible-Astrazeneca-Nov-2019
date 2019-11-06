@@ -45,3 +45,13 @@ loop.yaml
       - ftp
       - chrony
       - iotop
+      
+---
+- name: using loop condition
+  hosts: localhost
+  tasks:
+     - command: echo {{ item }}
+       loop: [ 0, 10, 20, 30, 40, 50]
+       when: item > 20
+
+ 

@@ -1,0 +1,10 @@
+---
+- name: This is to test looping install
+  hosts: localhost
+  tasks:
+  - name: install
+    apt: pkg={{ item }} state=installed
+    with_items:
+       - git
+       - htop
+       - vim

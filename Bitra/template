@@ -1,0 +1,54 @@
+[root@ip-172-31-1-38 ~]# cat web_db.yaml
+---
+- hosts: db
+  vars:
+    http_port: 80
+    doc_dir: /root/test/
+    doc_root: /var/www/html/
+    max_clients: 5
+    companyname: astra
+    yourname: ramesh
+    age: 39
+    emailaddress: "bitra.ramesh@gmail.com"
+  vars_prompt:
+    - name: username
+      prompt:  What is your name?  What is your Quest?  What is your fav color?
+
+  tasks:
+  - name: Ensure that Apache is installed
+    yum: name=httpd state=present
+    when: ansible_os_family == "RedHat"
+
+  - name: Start Apache Services
+    service: name=httpd enabled=yes state=started
+
+  - name: Copy Site Files
+    template: src=/root/template-example/index.j2 dest={{ doc_root }}/index.html
+    notify:
+      - Restart Apache
+
+  handlers:
+     - name: Restart Apache
+       service: name=httpd state=restarted
+
+
+[root@ip-172-31-1-38 ~]# ansible-playbook -i inventory web_db.yaml
+What is your name?  What is your Quest?  What is your fav color?:
+
+PLAY [db] ***********************************************************************************************************************************************************************************
+
+TASK [Gathering Facts] **********************************************************************************************************************************************************************
+ok: [ACS_ANSI]
+
+TASK [Ensure that Apache is installed] ******************************************************************************************************************************************************
+ok: [ACS_ANSI]
+
+TASK [Start Apache Services] ****************************************************************************************************************************************************************
+ok: [ACS_ANSI]
+
+TASK [Copy Site Files] **********************************************************************************************************************************************************************
+ok: [ACS_ANSI]
+
+PLAY RECAP **********************************************************************************************************************************************************************************
+ACS_ANSI                   : ok=4    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
+
