@@ -1,0 +1,27 @@
+---
+- name: This sets up an httpd webserver
+  hosts: localhost
+  tasks:
+  - name: "creating a file"
+    command: touch /home/ec2-user/verizon.txt
+    when:
+     - ansible_distribution == "RedHat"
+     - ansible_distribution_major_version == "7"
+...
+[root@ip-172-31-14-151 ec2-user]# ansible-playbook conditioning.yaml
+ [WARNING]: provided hosts list is empty, only localhost is available. Note that the implicit localhost does not match 'all'
+
+
+PLAY [This sets up an httpd webserver] **************************************************************************************************************************************************************
+
+TASK [Gathering Facts] ******************************************************************************************************************************************************************************
+ok: [localhost]
+
+TASK [creating a file] ******************************************************************************************************************************************************************************
+ [WARNING]: Consider using the file module with state=touch rather than running 'touch'.  If you need to use command because file is insufficient you can add 'warn: false' to this command task or
+set 'command_warnings=False' in ansible.cfg to get rid of this message.
+
+changed: [localhost]
+
+PLAY RECAP ******************************************************************************************************************************************************************************************
+localhost                  : ok=2    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0

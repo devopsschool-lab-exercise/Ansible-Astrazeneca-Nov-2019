@@ -1,0 +1,16 @@
+---
+- name: This sets up an httpd webserver
+  hosts: Router
+  vars:
+    myname: "rajesh kumar in playbook"
+    package: "httpd"
+    service: "httpd"
+  tasks:
+    - shell: echo "nested test a={{ item[0] }} b={{ item[1] }} c={{ item[2] }}"
+      with_nested:
+        - [ 'red', 'blue', 'green' ]
+        - [ 1, 2, 3 ]
+        - [ 'up', 'down', 'strange']     
+
+...
+

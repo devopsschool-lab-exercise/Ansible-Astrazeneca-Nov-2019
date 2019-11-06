@@ -1,0 +1,40 @@
+ASSIGNMENT 1
+
+  - name: Setting up a Webserver in localhost
+    hosts: localhost
+    vars_files:
+        - "web_varfile.yml"
+
+    tasks:
+    - name: Install httpd package
+      yum: name={{ package }} state={{ pkgstate }}
+
+    - name: Start httpd and enable
+      service: name={{ service }} state={{ ssstate }} enabled={{ ssenable }}
+
+
+
+"web_varfile.yml"
+---
+# Variables for webserver play
+
+package: httpd
+pkgstate: installed
+service: httpd
+ssstate: started
+ssenable: yes
+
+
+
+ASSIGNMENT 2
+
+  - name: Setting up a play to install package input through prompt in localhost
+    hosts: localhost
+    vars_prompt:
+       - name: package
+         prompt: "Please enter the package name to be installed ?"
+         private: false
+
+    tasks:
+    - name: Install package mentioned by prompt
+      yum: name={{ package }}

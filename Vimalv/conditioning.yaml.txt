@@ -1,0 +1,6 @@
+- name: Conditioning
+  hosts: local
+  tasks:
+    - name: "Print message"
+      command: /sbin/shutdown -t now
+      when: ansible_os_family == "Windows"

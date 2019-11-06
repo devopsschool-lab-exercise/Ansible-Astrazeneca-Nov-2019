@@ -1,0 +1,11 @@
+[root@ip-172-31-15-173 ~]# vi simplecondi.yaml
+    - hosts: local
+      vars:
+        test1: "Hell World"
+      tasks:
+      - name: Ansible when variable equals example
+        debug:
+          msg: "Not Equals"
+        when: test1 != "Hello World"
+~
+~

@@ -1,0 +1,11 @@
+
+[root@ip-172-31-1-38 ~]# cat loop.yaml
+---
+ - hosts: db
+   tasks:
+    - command: echo {{ item }}
+      loop: [ 0, 2, 4, 6, 8, 10 ]
+      when: item < 6
+      register: item
+    - debug:
+        var: item
