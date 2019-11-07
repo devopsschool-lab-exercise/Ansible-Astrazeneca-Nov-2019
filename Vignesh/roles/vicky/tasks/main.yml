@@ -1,0 +1,16 @@
+---
+# tasks file for vicky
+- name: print msg
+  debug: 
+    msg: "Message is : {{ msg }}"
+- name: copy j2 into files dir
+  template:
+    src: test.txt.j2
+    dest: /etc/ansible/roles/vicky/files/test.txt
+  register: out
+- name: print variable defined in vars folder
+  debug: var=rout
+- name: copy above copied file into diff location
+  copy:
+    src: test.txt
+    dest: /tmp/

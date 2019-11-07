@@ -1,0 +1,5 @@
+---
+# vars file for web-01
+doc_root: /var/www/html
+
+...
