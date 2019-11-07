@@ -247,6 +247,63 @@ localhost                  : ok=3    changed=1    unreachable=0    failed=0    s
 
 
 
+[root@ip-172-31-13-98 roles]# ansible-playbook site.yaml
+ [WARNING]: provided hosts list is empty, only localhost is available. Note that the implicit localhost does not match 'all'
+
+[DEPRECATION WARNING]: Instead of sudo/sudo_user, use become/become_user and make sure become_method is 'sudo' (default). This feature will be removed in version 2.9. Deprecation warnings can be
+disabled by setting deprecation_warnings=False in ansible.cfg.
+
+PLAY [localhost] ************************************************************************************************************************************************************************************
+
+TASK [Gathering Facts] ******************************************************************************************************************************************************************************
+ok: [localhost]
+
+TASK [web : Ensure that Apache is installed] ********************************************************************************************************************************************************
+ok: [localhost]
+
+TASK [web : Start Apache Services] ******************************************************************************************************************************************************************
+ok: [localhost]
+
+TASK [web : Copy Site Files] ************************************************************************************************************************************************************************
+ok: [localhost]
+
+TASK [web : Copy file with owner and permissions] ***************************************************************************************************************************************************
+changed: [localhost]
+
+TASK [geerlingguy.java : Include OS-specific variables for Fedora or FreeBSD.] **********************************************************************************************************************
+skipping: [localhost]
+
+TASK [geerlingguy.java : Include version-specific variables for CentOS/RHEL.] ***********************************************************************************************************************
+ok: [localhost]
+
+TASK [geerlingguy.java : Include version-specific variables for Ubuntu.] ****************************************************************************************************************************
+skipping: [localhost]
+
+TASK [geerlingguy.java : Include version-specific variables for Debian.] ****************************************************************************************************************************
+skipping: [localhost]
+
+TASK [geerlingguy.java : Define java_packages.] *****************************************************************************************************************************************************
+ok: [localhost]
+
+TASK [geerlingguy.java : include_tasks] *************************************************************************************************************************************************************
+included: /root/roles/geerlingguy.java/tasks/setup-RedHat.yml for localhost
+
+TASK [geerlingguy.java : Ensure Java is installed.] *************************************************************************************************************************************************
+changed: [localhost]
+
+TASK [geerlingguy.java : include_tasks] *************************************************************************************************************************************************************
+skipping: [localhost]
+
+TASK [geerlingguy.java : include_tasks] *************************************************************************************************************************************************************
+skipping: [localhost]
+
+TASK [geerlingguy.java : Set JAVA_HOME if configured.] **********************************************************************************************************************************************
+skipping: [localhost]
+
+PLAY RECAP ******************************************************************************************************************************************************************************************
+localhost                  : ok=9    changed=2    unreachable=0    failed=0    skipped=6    rescued=0    ignored=0
+
+[root@ip-172-31-13-98 roles]#
 
 
 
