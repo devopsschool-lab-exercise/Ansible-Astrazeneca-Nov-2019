@@ -1,0 +1,4 @@
+---
+# defaults file for web
+
+doc_root: /var/www/html
