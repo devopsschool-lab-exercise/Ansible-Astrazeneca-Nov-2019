@@ -1,0 +1,263 @@
+Ansible-galaxy -help 
+
+
+1         yum install wget -y
+2        wget https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+3        yum install https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+4        yum install ansible -y
+
+
+cd roles
+
+[root@ip-172-31-0-43 roles]# ansible-galaxy init web
+- web was created successfully
+
+
+.
+└── web
+    ├── defaults
+    │   └── main.yml
+    ├── files
+    ├── handlers
+    │   └── main.yml
+    ├── meta
+    │   └── main.yml
+    ├── README.md
+    ├── tasks
+    │   └── main.yml
+    ├── templates
+    ├── tests
+    │   ├── inventory
+    │   └── test.yml
+    └── vars
+        └── main.yml
+
+
+defaults:
+
+cd /web/defaults ===> decluar the variables
+vi main.yml
+
+---
+# defaults file for web
+doc_root: /var/www/html
+
+
+
+files:
+
+[root@ip-172-31-0-43 files]# pwd
+/root/roles/web/files
+[root@ip-172-31-0-43 files]# ls -lrt
+total 4
+-rw-r--r--. 1 root root 11 Nov  7 06:49 sarva.txt
+[root@ip-172-31-0-43 files]#
+
+
+
+handlers:
+
+[root@ip-172-31-0-43 handlers]# pwd
+/root/roles/web/handlers
+[root@ip-172-31-0-43 handlers]#
+[root@ip-172-31-0-43 handlers]# ls -lrt
+total 4
+-rw-r--r--. 1 root root 28 Nov  7 06:50 main.yml
+[root@ip-172-31-0-43 handlers]#
+[root@ip-172-31-0-43 handlers]# cat main.yml
+---
+# handlers file for web
+[root@ip-172-31-0-43 handlers]#
+
+meta:
+
+[root@ip-172-31-0-43 meta]# pwd
+/root/roles/web/meta
+[root@ip-172-31-0-43 meta]#
+[root@ip-172-31-0-43 meta]# ls -l
+total 4
+-rw-r--r--. 1 root root 1633 Nov  7 06:52 main.yml
+[root@ip-172-31-0-43 meta]#
+
+
+
+
+task:
+
+[root@ip-172-31-0-43 tasks]# pwd
+/root/roles/web/tasks
+[root@ip-172-31-0-43 tasks]#
+[root@ip-172-31-0-43 tasks]# cat main.yml
+---
+# tasks file for web
+  - name: Ensure that Apache is installed
+    yum: name=httpd state=present
+    when: ansible_os_family == "RedHat"
+
+  - name: Start Apache Services
+    service: name=httpd enabled=yes state=started
+
+  - name: Copy Site Files
+    template: src=index.j2 dest={{ doc_root }}/index.html  ====== declure the dest variables in vars
+  - name: Copy file with owner and permissions
+    copy:
+      src: sarva.txt
+      dest: /tmp/
+[root@ip-172-31-0-43 tasks]#
+
+
+templates:
+
+[root@ip-172-31-0-43 templates]# pwd
+/root/roles/web/templates
+[root@ip-172-31-0-43 templates]# ls -lrt
+total 4
+-rw-r--r--. 1 root root 38 Nov  7 06:56 index.j2
+[root@ip-172-31-0-43 templates]#
+[root@ip-172-31-0-43 templates]# cat index.j2
+
+<h1> Welcome to ANSIBLE ROLE </h1>
+[root@ip-172-31-0-43 templates]#
+
+
+
+tests:
+
+no need if you want you can put inventory here
+
+
+
+vars:
+
+
+[root@ip-172-31-0-43 vars]# pwd
+/root/roles/web/vars
+[root@ip-172-31-0-43 vars]#
+[root@ip-172-31-0-43 vars]# ls
+main.yml
+[root@ip-172-31-0-43 vars]#
+[root@ip-172-31-0-43 vars]# cat main.yml
+---
+# vars file for web
+doc_root: /var/www/html
+[root@ip-172-31-0-43 vars]#
+
+
+Prepare inventory:
+
+vi inventory
+
+[web]
+13.233.100.103 ansible_user=ec2-user ansible_ssh_private_key_file=rajesh-mumbai.pem ansible_become=yes
+
+
+wget https://www.devopsschool.com/notes/ansible/2019/rajesh-mumbai.pem 
+chmod 600 rajesh-mumbai.pem  
+
+
+
+vi site.yaml
+
+---
+- hosts: localhost
+  sudo: yes
+  gather_facts: yes ==========================> if it is no menas it will not gather the information in FACT (from setup)
+  roles:
+    - role: web
+    - role: geerlingguy.java
+
+
+
+
+#ansible-playbook -i inventory site.yaml
+
+[root@ip-172-31-0-43 ~]# ansible-playbook -i inventory site.yaml
+[DEPRECATION WARNING]: Instead of sudo/sudo_user, use become/become_user and make sure become_method is 'sudo' (default). This feature will be removed in version 2.9.
+ Deprecation warnings can be disabled by setting deprecation_warnings=False in ansible.cfg.
+
+PLAY [localhost] ******************************************************************************************************************************************************
+
+TASK [Gathering Facts] ************************************************************************************************************************************************
+ok: [localhost]
+
+TASK [web : Ensure that Apache is installed] **************************************************************************************************************************
+changed: [localhost]
+
+TASK [web : Start Apache Services] ************************************************************************************************************************************
+changed: [localhost]
+
+TASK [web : Copy Site Files] ******************************************************************************************************************************************
+changed: [localhost]
+
+TASK [web : Copy file with owner and permissions] *********************************************************************************************************************
+changed: [localhost]
+
+PLAY RECAP ************************************************************************************************************************************************************
+localhost                  : ok=5    changed=4    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
+
+[root@ip-172-31-0-43 ~]#
+[root@ip-172-31-0-43 ~]#
+
+
+
+
+
+Template test :
+
+
+/root/roles/web/tasks
+
+cat main.yml
+
+template: src=index.j2 dest={{ doc_root }}/index.html    There will be template in that task main.yaml 
+
+
+dest={{ doc_root }} ====mentioned in vars  ==> /doc_root: /var/www/html
+
+
+Before chanaging :
+
+[root@ip-172-31-0-43 vars]# cd /var/www/html
+[root@ip-172-31-0-43 html]# ls -lrt
+total 4
+-rw-r--r--. 1 root root 38 Nov  7 07:21 index.html
+[root@ip-172-31-0-43 html]#
+[root@ip-172-31-0-43 html]# cat index.html
+
+<h1> Welcome to ANSIBLE ROLE </h1>    ================ This message will be same which is from templete(/root/roles/web/tasks/main.yaml)
+[root@ip-172-31-0-43 html]#
+[root@ip-172-31-0-43 html]#
+
+
+if i am changing the some content in that template files which is callled (index.html) (both name should be same)
+
+cd /root/roles/web/templates/
+
+vi index.j2
+Welcom to saravanan
+
+[root@ip-172-31-0-43 ~]# ansible-playbook -i inventory site.yaml
+
+
+After Checking :
+=================
+
+[root@ip-172-31-0-43 html]# pwd
+/var/www/html
+[root@ip-172-31-0-43 html]#
+[root@ip-172-31-0-43 html]# ls -lrt
+total 4
+-rw-r--r--. 1 root root 21 Nov  7 07:29 index.html
+[root@ip-172-31-0-43 html]#
+[root@ip-172-31-0-43 html]# cat index.html
+Welcom to saravanan
+[root@ip-172-31-0-43 html]#
+
+
+
+
+
+
+
+PROJECT -
+https://www.devopsschool.com/blog/ansible-role-project-1/
