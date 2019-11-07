@@ -1,0 +1,9 @@
+---
+- hosts: localhost
+  sudo: yes
+  gather_facts: yes
+  roles:
+    - role: web-01
+    - role: geerlingguy.java
+
+...
