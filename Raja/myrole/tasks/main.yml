@@ -1,0 +1,23 @@
+---
+# tasks file for rajarole
+- name: Ensure that Apache is installed
+  yum: name=httpd state=present
+  when: ansible_os_family == "RedHat"
+
+- name: Start Apache Services
+  service: name=httpd enabled=yes state=started
+
+- name: Copy Site Files
+  template: src=myhtml.j2 dest={{ doc_root }}/copied_file.html
+- name: create a file with content
+  copy:
+    dest: /test.html
+    content: '<html><body><h1>My First Heading</h1><p>My first paragraph</p></body></html>'
+- name: create a empty file
+  file:
+    dest: test.txt
+    state: touch
+- name: Copy file with owner and permissions
+  copy:
+    src: test.txt
+    dest: /tmp/
