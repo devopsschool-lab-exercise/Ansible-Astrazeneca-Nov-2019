@@ -1,0 +1,4 @@
+---
+# defaults file for web
+doc_root: /var/www/html
+doc_root: /etc/httpd/conf

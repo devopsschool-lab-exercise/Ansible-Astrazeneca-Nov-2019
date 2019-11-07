@@ -1,0 +1,31 @@
+[ec2-user@ip-172-31-1-125 test]$ ansible-playbook kannatest.yml
+ [WARNING]: provided hosts list is empty, only localhost is available. Note that the implicit localhost does not match 'all'
+
+
+PLAY [localhost] ********************************************************************************************************************************************
+
+TASK [Gathering Facts] **************************************************************************************************************************************
+ok: [localhost]
+
+TASK [web : Ensure that Apache is installed] ****************************************************************************************************************
+ok: [localhost]
+
+TASK [web : Start Apache Services] **************************************************************************************************************************
+ok: [localhost]
+
+TASK [web : Copy Site Files] ********************************************************************************************************************************
+ok: [localhost]
+
+TASK [web : Copy file with owner and permissions] ***********************************************************************************************************
+changed: [localhost]
+
+PLAY RECAP **************************************************************************************************************************************************
+localhost                  : ok=5    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
+
+[ec2-user@ip-172-31-1-125 test]$ cd
+[ec2-user@ip-172-31-1-125 ~]$ cd /tmp/
+[ec2-user@ip-172-31-1-125 tmp]$ ls
+hsperfdata_root  systemd-private-4d540950676a43d29357955aec6dcd53-chronyd.service-xlrviO
+kanna.txt        systemd-private-4d540950676a43d29357955aec6dcd53-httpd.service-zCufQg
+rajesh.txt
+[ec2-user@ip-172-31-1-125 tmp]$
