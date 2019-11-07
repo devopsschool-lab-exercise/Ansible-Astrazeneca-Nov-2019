@@ -776,5 +776,53 @@ LAST DAY
 20 13.127.36.7
 21 13.126.14.121
 
-PROJECT -
-https://www.devopsschool.com/blog/ansible-role-project-1/
+========================
+What is Tower 
+        - GUI based tool to manage
+                - USERS - GROUP - permission
+                - ORG
+                        Inventory
+                        Roles
+                        keys
+                        certi
+                - Notification
+                        email   
+                        Chat
+                - Dashboarding
+                - LDAP
+                - Cloud 
+Arch of Tower   
+        WEB - nginx
+        DB - Postgres
+        QUEUE - rabbitmq
+        Written in Python - Flask...
+
+How to install it?
+        UB
+        RHEL
+
+13.233.173.231
+===========WORKING WITH TOWER===============
+Step 1 - Create a ORG   
+                keys
+                inventory
+                playbooks
+                users
+                group
+
+
+Step 2 - Add a KEY
+
+
+Step 3  - Add a inventory
+
+
+Step 4 - Add a Playbook AKA PROJECT
+https://github.com/devops-school/ansible-hello-world-role
+
+
+Step 5 - RUN IT. AKA TEMPLATE
+
+https://13.232.128.64/
+admin
+admin123
